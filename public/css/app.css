@@ -10561,12 +10561,24 @@ textarea.form-control-lg {
 
     display: flex;
     height: 100%;
+    color: #fff;
 }
 .guest-content {
     margin: auto;
     max-width: 450px;
     padding: 15px;
     width: 100%;
+}
+.guest .card {
+    background-color: rgba(46, 210, 204, .9);
+}
+.guest input,
+.guest input:focus {
+    background-color: rgb(0 125 142);
+    border-color: rgb(0 125 142);
+}
+.guest label {
+    color: #fff;
 }
 body, html, #app {
     height: 100%;

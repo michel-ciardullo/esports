@@ -35,7 +35,7 @@ export default function Login() {
                 noValidate
             >
 
-                <h1>Connecte-toi !</h1>
+                <h1>Inscris-toi !</h1>
 
                 <Form.FloatingLabel
                     controlId="name"
@@ -125,7 +125,7 @@ export default function Login() {
             </form>
 
             <div className="text-center">
-                <p className="mt-3 mb-1 text-muted">© 2021–2022</p>
+                <p className="mt-3 mb-1 text-white">© 2021–2022</p>
             </div>
         </Guest>
     );
