@@ -22,6 +22,7 @@ Route::resource('/games', 'App\\Http\\Controllers\\GameController')
     ->only(['index', 'show']);
 
 Route::get('/profile', 'App\\Http\\Controllers\\Profile\\ProfileController@index')
+    ->middleware('auth')
     ->name('profile');
 
 Route::get('/profile/tickets', 'App\\Http\\Controllers\\Profile\\ProfileController@tickets')
