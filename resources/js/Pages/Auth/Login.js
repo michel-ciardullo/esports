@@ -10,11 +10,11 @@ export default function Login() {
         remember_me: '',
     });
 
-    const onHandleChange = (event) => {
+    const onHandleChange = event => {
         setData(event.target.name, event.target.value);
     };
 
-    const onHandleChangeCheck = (event) => {
+    const onHandleChangeCheck = event => {
         setData(event.target.name, event.target.value === 'on' ? 'off' : 'on');
     };
 
@@ -24,15 +24,14 @@ export default function Login() {
     };
 
     return (
-        <Guest>
+        <Guest title="Connect-toi !">
             <Head title="Se connecter" />
 
             <form
                 onSubmit={submit}
-                className="card card-body needs-validation"
+                className="needs-validation"
                 noValidate
             >
-                <h1>Connecte-toi !</h1>
 
                 <Form.FloatingLabel
                     controlId="email"
@@ -73,10 +72,9 @@ export default function Login() {
                     value={data.remember_me}
                     checked={data.remember_me === 'on' ?? false}
                     onChange={onHandleChangeCheck}
-                    label="Rester connecter"
+                    label="Se souvenir de moi ?"
                     isInvalid={'remember_me' in errors}
-                    feedback={errors.remember_me}
-                    id="remember_me"
+                    feedback={errors.agree}
                     name="remember_me"
                     type="checkbox"
                     required
@@ -86,10 +84,6 @@ export default function Login() {
                     Se connecter
                 </button>
             </form>
-
-            <div className="text-center">
-                <p className="mt-3 mb-1 text-white">© 2021–2022</p>
-            </div>
         </Guest>
     );
 }

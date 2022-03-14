@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,5 +20,11 @@ Route::get('/', fn () => Inertia::render('Home'))
 
 Route::resource('/games', 'App\\Http\\Controllers\\GameController')
     ->only(['index', 'show']);
+
+Route::get('/profile', 'App\\Http\\Controllers\\Profile\\ProfileController@index')
+    ->name('profile');
+
+Route::get('/profile/tickets', 'App\\Http\\Controllers\\Profile\\ProfileController@tickets')
+    ->name('profile.tickets');
 
 require __DIR__.'/auth.php';

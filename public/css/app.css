@@ -11297,13 +11297,13 @@ textarea.form-control-lg {
 }
 
 .guest .card {
-  background-color: rgba(46, 210, 204, 0.9);
+  background-color: rgba(46, 210, 204, 0.9) !important;
 }
 
 .guest input,
 .guest input:focus {
-  background-color: #007d8e;
-  border-color: #007d8e;
+  background-color: #007d8e !important;
+  border-color: #007d8e !important;
 }
 
 .guest label {

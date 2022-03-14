@@ -8,7 +8,7 @@ export default function Login() {
         name: '',
         email: '',
         password: '',
-        confirm_password: '',
+        password_confirmation: '',
         agree: '',
     });
 
@@ -26,16 +26,14 @@ export default function Login() {
     };
 
     return (
-        <Guest>
+        <Guest title="Inscris-toi !">
             <Head title="Se connecter" />
 
             <form
                 onSubmit={submit}
-                className="card card-body needs-validation"
+                className="needs-validation"
                 noValidate
             >
-
-                <h1>Inscris-toi !</h1>
 
                 <Form.FloatingLabel
                     controlId="name"
@@ -44,7 +42,6 @@ export default function Login() {
                 >
                     <Form.Control
                         type="text"
-                        id="name"
                         name="name"
                         value={data.name}
                         onChange={onHandleChange}
@@ -96,11 +93,11 @@ export default function Login() {
                 >
                     <Form.Control
                         type="password"
-                        name="confirm_password"
-                        value={data.confirm_password}
+                        name="password_confirmation"
+                        value={data.password_confirmation}
                         onChange={onHandleChange}
                         placeholder="Confirmer le mot de passe"
-                        isInvalid={'confirm_password' in errors}
+                        isInvalid={'password_confirmation' in errors}
                         required
                     />
                 </Form.FloatingLabel>
@@ -113,7 +110,6 @@ export default function Login() {
                     label="J'accepte les termes et conditions"
                     isInvalid={'agree' in errors}
                     feedback={errors.agree}
-                    id="agree"
                     name="agree"
                     type="checkbox"
                     required
@@ -124,9 +120,6 @@ export default function Login() {
                 </button>
             </form>
 
-            <div className="text-center">
-                <p className="mt-3 mb-1 text-white">© 2021–2022</p>
-            </div>
         </Guest>
     );
 }

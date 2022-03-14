@@ -3,12 +3,51 @@ import {
     Container,
     Nav,
     Navbar,
-    NavDropdown
+    NavDropdown,
+    Badge
 } from 'react-bootstrap';
 import {Link} from "@inertiajs/inertia-react";
 
-export default function AppLayout({ children, games })
-{
+function Profile({ user }) {
+    return (
+        <>
+            <li className="nav-item">
+                <Link className="nav-link" href="#">
+                    <Badge bg="warning" pill className="text-dark">0€</Badge>
+                </Link>
+            </li>
+            <NavDropdown title={user.name} id="basic-nav-dropdown">
+                <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
+                <Link
+                    href={route('profile.tickets')}
+                    className="dropdown-item"
+                >
+                    Mes tiquets
+                </Link>
+                <NavDropdown.Divider />
+                <Link
+                    href={route('logout')}
+                    className="dropdown-item"
+                    method="post"
+                    as="button"
+                >
+                    Déconnexion
+                </Link>
+            </NavDropdown>
+        </>
+    )
+}
+
+function NotAuth() {
+    return (
+        <>
+            <Link className="nav-link" href={route('login')}>Se connecter</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
+        </>
+    )
+}
+
+export default function AppLayout({ auth, children, games }) {
     return (
         <>
             {/* Navbar */}
@@ -33,8 +72,7 @@ export default function AppLayout({ children, games })
                             <Nav.Link href="#home">Contact</Nav.Link>
                         </Nav>
                         <Nav className="ms-auto">
-                            <Link className="nav-link" href={route('login')}>Se connecter</Link>
-                            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
+                            {auth.user ? <Profile user={auth.user}/> : <NotAuth />}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
