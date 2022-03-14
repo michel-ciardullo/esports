@@ -1,6 +1,0 @@
-@import 'bootstrap';
-@import './guest.css';
-
-body, html, #app {
-    height: 100%;
-}

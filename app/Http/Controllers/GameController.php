@@ -16,7 +16,6 @@ class GameController extends Controller
      */
     public function index()
     {
-        // games
         return Inertia::render('Game/Index');
     }
 
@@ -28,11 +27,9 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        $game           = Game::findOrFail($id);
-        $tournaments    = $game->tournaments;
-        foreach ($tournaments as $tournament)
-            $tournament->matches;
+        $game           = Game::findOrFail($id)->with('tournaments')->get();
+        dd($game);
 
-        return Inertia::render('Game/Show', compact('game', 'tournaments'));
+        return Inertia::render('Game/Show', compact('game'));
     }
 }

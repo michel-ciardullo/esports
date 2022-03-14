@@ -17,8 +17,8 @@ export default function Home(props) {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fuga illo non perspiciatis voluptas! Accusamus animi atque consequatur, cum deleniti distinctio ea eligendi excepturi facilis nesciunt non nostrum, quod vitae.
                     </p>
                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+                        <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Voir les tournois</button>
+                        <button type="button" className="btn btn-outline-primary btn-lg px-4">Nous-contactez</button>
                     </div>
                 </div>
             </div>

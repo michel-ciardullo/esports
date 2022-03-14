@@ -61,7 +61,7 @@ class ESportCommand extends Command
         $this->comment($url);
 
         // fetch request with curl
-        $ch = curl_init('http://localhost:8000/api/test');
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);

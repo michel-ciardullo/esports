@@ -14,12 +14,12 @@ export default function AppLayout({ children, games })
             {/* Navbar */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Navbar.Brand href="#home">GE</Navbar.Brand>
+                    <Link className="navbar-brand" href={route('home')}>GE</Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Nav.Link href="#home">Accueil</Nav.Link>
-                            <NavDropdown title="Jeux">
+                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>Accueil</Link>
+                            <NavDropdown title="Jeux" active={route().current('games.*')}>
                                 {games.map(({id, name}, i) =>
                                     <Link key={i} className="dropdown-item" href={route('games.show', id)}>{name}</Link>
                                 )}
@@ -33,8 +33,8 @@ export default function AppLayout({ children, games })
                             <Nav.Link href="#home">Contact</Nav.Link>
                         </Nav>
                         <Nav className="ms-auto">
-                            <Link className="btn btn-outline-success" href={route('login')}>Se connecter</Link>
-                            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-success" href={route('register')}>S'inscrire</Link>
+                            <Link className="nav-link" href={route('login')}>Se connecter</Link>
+                            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
