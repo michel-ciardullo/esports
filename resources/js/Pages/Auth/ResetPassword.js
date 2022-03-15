@@ -28,8 +28,8 @@ export default function ResetPassword({ token, email }) {
     };
 
     return (
-        <Guest title="Reset Password">
-            <Head title="Reset Password" />
+        <Guest title="Réinitialiser le mot de passe">
+            <Head title="Réinitialiser le mot de passe" />
 
             <form
                 onSubmit={submit}
@@ -92,7 +92,7 @@ export default function ResetPassword({ token, email }) {
                 </Form.FloatingLabel>
 
                 <button className="w-100 btn btn-lg btn-primary" type="submit">
-                    Reset Password
+                    Réinitialiser le mot de passe
                 </button>
             </form>
         </Guest>

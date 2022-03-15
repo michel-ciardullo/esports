@@ -1,12 +1,22 @@
 @use '~bootstrap/scss/bootstrap' with (
-    $primary: #007d8e
+    $primary: #082fbe,
+    $secondary: #A226EE,
 );
+@import "./fonts";
+
 @import './guest';
 
 body, html, #app {
     height: 100%;
+    background-color:#0D0C28;
 }
 
 .navbar {
-    background-color: #007d8e !important;
+    background-color: #0E2164 !important;
+}
+
+.btn-outline-secondary {
+    &:hover {   
+        color: #FFF !important;
+    }
 }

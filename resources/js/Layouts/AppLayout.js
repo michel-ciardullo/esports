@@ -7,6 +7,7 @@ import {
     Badge
 } from 'react-bootstrap';
 import {Link} from '@inertiajs/inertia-react';
+import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
 
 function Profile({ user }) {
     return (
@@ -19,7 +20,7 @@ function Profile({ user }) {
             <NavDropdown title={user.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
                 <Link
-                    href="#"
+                    href="/ticket"
                     className="dropdown-item"
                 >
                     Mes tiquets
@@ -42,7 +43,7 @@ function NotAuth() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-secondary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }
@@ -53,7 +54,9 @@ export default function AppLayout({ auth, children, games }) {
             {/* Navbar */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Link className="navbar-brand" href={route('home')}>GE</Link>
+                    <Link className="navbar-brand" href={route('home')}>
+                        <ApplicationLogoLong height="60px"/>
+                    </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>

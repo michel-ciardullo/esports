@@ -1,10 +1,23 @@
 .guest {
-    background-image: url(/img/guest_background.jpg);
-    background-size: cover;
+    background-color: #0D0C28;
 
     display: flex;
     height: 100%;
     color: #fff;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active{
+        background-color: #353740 !important;
+        border-color: #C4C4C4 !important;
+        color: #FFF;
+        font-family: 'YoutubeSansSemibold';
+        box-shadow: 0 0 0 30px #576D7B inset;
+        -webkit-box-shadow: 0 0 0 30px #353740 inset;
+        -webkit-text-fill-color: azure;
+        background:#353740;
+    }
 }
 
 .guest-content {
@@ -15,15 +28,45 @@
 }
 
 .guest .card {
-    background-color: rgba(46, 210, 204, .9) !important;
+    background-color: #353740 !important;
+    border-radius: 24px !important;
 }
 
 .guest input,
 .guest input:focus {
-    background-color: rgb(0 125 142) !important;
-    border-color: rgb(0 125 142) !important;
+    background-color: #353740 !important;
+    border-color: #C4C4C4 !important;
+    color: #FFF;
+    font-family: 'YoutubeSansSemibold';
 }
+
 
 .guest label {
     color: #fff;
+}
+
+.guest {
+    button {
+        font-family: 'YoutubeSansSemibold';
+        background-color:#8E8E8E !important;
+        border-color: #C4C4C4 !important;
+    }
+    button:hover {
+        background-color:#494949 !important;
+        border-color: #C4C4C4 !important;
+    }
+
+}
+
+.forgot-text {
+    p {
+        font-family: YoutubeSansMedium;
+        color: #fff !important;
+    }
+}
+
+.card {
+    h1 {
+        font-family: 'YoutubeSansBold';
+    }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Head, Link} from '@inertiajs/inertia-react';
 import AppLayout from '@/Layouts/AppLayout';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Home(props) {
     return (
@@ -9,9 +10,9 @@ export default function Home(props) {
 
             <div className="px-4 py-5 my-5 text-center">
                 <Link className="text-center d-block" href="/">
-                    <img className="d-block mx-auto mb-4" width="72" height="62" src="https://cdn.discordapp.com/attachments/948877800130113576/950420974069772339/GambleEsport_logo_no_Bg.png" alt="Guest logo"/>
+                    <ApplicationLogo height="80" className="mb-4"/>
                 </Link>
-                <h1 className="display-5 fw-bold">RI7 E-Sport</h1>
+                <h1 className="display-5 fw-bold">RiBet</h1>
                 <div className="col-lg-6 mx-auto">
                     <p className="lead mb-4">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fuga illo non perspiciatis voluptas! Accusamus animi atque consequatur, cum deleniti distinctio ea eligendi excepturi facilis nesciunt non nostrum, quod vitae.
