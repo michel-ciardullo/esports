@@ -1,10 +1,28 @@
 import React from 'react';
-import { Head } from '@inertiajs/inertia-react';
-import {Container, Form, Row, Col, Button, FloatingLabel} from 'react-bootstrap';
+import {Head, useForm} from '@inertiajs/inertia-react';
+import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 
 import AppLayout from '@/Layouts/AppLayout';
+import FlashStatus from '@/Components/FlashStatus';
 
 export default function ContactIndex(props) {
+    const { post, errors, data, setData, reset } = useForm({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
+
+    const onHandleChange = event => {
+        setData(event.target.name, event.target.value);
+    };
+
+    const submit = e => {
+        e.preventDefault();
+        post(route('contact.send'), {
+            onFinish: reset
+        });
+    };
 
     return (
         <AppLayout {...props}>
@@ -15,47 +33,88 @@ export default function ContactIndex(props) {
                 <h1 className="mb-0">Contactez-nous</h1>
                 <hr className="my-4"/>
 
-                <Form className="card card-body shadow">
+                <FlashStatus {...props.flash}/>
+
+                <Form
+                    className="card card-body shadow needs-validation"
+                    onSubmit={submit}
+                    noValidate
+                >
                     <Row className="mb-3 g-3">
                         <Col>
-                            <FloatingLabel
+                            <Form.FloatingLabel
                                 controlId="name"
                                 label="Nom"
+                                className="mb-3"
                             >
-                                <Form.Control type="text" placeholder="Nom" />
-                            </FloatingLabel>
+                                <Form.Control
+                                    type="text"
+                                    name="name"
+                                    value={data.name}
+                                    onChange={onHandleChange}
+                                    placeholder="Nom"
+                                    isInvalid={'name' in errors}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid" children={errors.name} />
+                            </Form.FloatingLabel>
                         </Col>
 
                         <Col>
-                            <FloatingLabel
+                            <Form.FloatingLabel
                                 controlId="email"
                                 label="Adresse mail"
+                                className="mb-3"
                             >
-                                <Form.Control type="email" placeholder="Adresse mail" />
-                            </FloatingLabel>
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    value={data.email}
+                                    onChange={onHandleChange}
+                                    placeholder="name@example.com"
+                                    isInvalid={'email' in errors}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid" children={errors.email} />
+                            </Form.FloatingLabel>
                         </Col>
                     </Row>
 
-                    <FloatingLabel
-                        className="mb-3"
+                    <Form.FloatingLabel
                         controlId="subject"
-                        label="Sujet"
-                    >
-                        <Form.Control type="text" placeholder="Sujet" />
-                    </FloatingLabel>
-
-                    <FloatingLabel
+                        label="Subject"
                         className="mb-3"
-                        controlId="message"
-                        label="Message"
                     >
                         <Form.Control
                             type="text"
+                            name="subject"
+                            value={data.subject}
+                            onChange={onHandleChange}
+                            placeholder="Subject"
+                            isInvalid={'subject' in errors}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid" children={errors.subject} />
+                    </Form.FloatingLabel>
+
+                    <Form.FloatingLabel
+                        controlId="message"
+                        label="Message"
+                        className="mb-3"
+                    >
+                        <Form.Control
+                            type="text"
+                            name="message"
+                            value={data.message}
+                            onChange={onHandleChange}
                             placeholder="Message"
+                            isInvalid={'message' in errors}
                             as="textarea"
                             style={{ height: '100px' }}
+                            required
                         />
-                    </FloatingLabel>
+                        <Form.Control.Feedback type="invalid" children={errors.message} />
+                    </Form.FloatingLabel>
 
                     <div>
                         <Button variant="outline-primary" type="submit">

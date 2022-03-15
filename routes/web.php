@@ -22,6 +22,8 @@ Route::resource('/games', 'App\\Http\\Controllers\\Game\\GameController')
 
 Route::get('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@index')
     ->name('contact');
+Route::post('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@send')
+    ->name('contact.send');
 
 Route::get('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@index')
     ->name('faq');
