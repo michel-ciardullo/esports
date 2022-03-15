@@ -12,7 +12,7 @@ class ProfileUpdateInformationRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return Auth::guard('web')->check();
     }
@@ -20,7 +20,7 @@ class ProfileUpdateInformationRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return string[][]
      */
     public function rules()
     {

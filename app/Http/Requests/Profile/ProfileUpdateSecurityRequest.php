@@ -14,7 +14,7 @@ class ProfileUpdateSecurityRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return Auth::guard('web')->check();
     }
@@ -22,9 +22,9 @@ class ProfileUpdateSecurityRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return string[][]
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'current_password'  => ['required', 'string', new MatchOldPassword],
