@@ -19,7 +19,7 @@ function Profile({ user }) {
             <NavDropdown title={user.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
                 <Link
-                    href={route('profile.tickets')}
+                    href="#"
                     className="dropdown-item"
                 >
                     Mes tiquets

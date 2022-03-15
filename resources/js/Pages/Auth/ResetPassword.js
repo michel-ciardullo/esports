@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import Button from '@/Components/Button';
 import Guest from '@/Layouts/Guest';
-import Input from '@/Components/Input';
-import Label from '@/Components/Label';
-import ValidationErrors from '@/Components/ValidationErrors';
-import { Head, useForm } from '@inertiajs/inertia-react';
+import {Head, useForm} from '@inertiajs/inertia-react';
+import {Form} from "react-bootstrap";
 
 export default function ResetPassword({ token, email }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset } = useForm({
         token: token,
         email: email,
         password: '',
@@ -20,7 +17,7 @@ export default function ResetPassword({ token, email }) {
         };
     }, []);
 
-    const onHandleChange = (event) => {
+    const onHandleChange = event => {
         setData(event.target.name, event.target.value);
     };
 
@@ -31,57 +28,72 @@ export default function ResetPassword({ token, email }) {
     };
 
     return (
-        <Guest>
+        <Guest title="Reset Password">
             <Head title="Reset Password" />
 
-            <ValidationErrors errors={errors} />
+            <form
+                onSubmit={submit}
+                className="needs-validation"
+                noValidate
+            >
 
-            <form onSubmit={submit}>
-                <div>
-                    <Label forInput="email" value="Email" />
-
-                    <Input
+                <Form.FloatingLabel
+                    controlId="email"
+                    label="Adresse mail"
+                    className="mb-3"
+                >
+                    <Form.Control
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        onChange={onHandleChange}
                         autoComplete="username"
-                        handleChange={onHandleChange}
+                        placeholder="name@example.com"
+                        isInvalid={'email' in errors}
+                        required
                     />
-                </div>
+                    <Form.Control.Feedback type="invalid" children={errors.email} />
+                </Form.FloatingLabel>
 
-                <div className="mt-4">
-                    <Label forInput="password" value="Password" />
-
-                    <Input
+                <Form.FloatingLabel
+                    controlId="password"
+                    label="Mot de passe"
+                    className="mb-3"
+                >
+                    <Form.Control
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        onChange={onHandleChange}
+                        placeholder="Mot de passe"
                         autoComplete="new-password"
-                        isFocused={true}
-                        handleChange={onHandleChange}
+                        isInvalid={'password' in errors}
+                        required
                     />
-                </div>
+                    <Form.Control.Feedback type="invalid" children={errors.password} />
+                </Form.FloatingLabel>
 
-                <div className="mt-4">
-                    <Label forInput="password_confirmation" value="Confirm Password" />
-
-                    <Input
+                <Form.FloatingLabel
+                    controlId="password_confirmation"
+                    label="Confirm Password"
+                    className="mb-3"
+                >
+                    <Form.Control
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        onChange={onHandleChange}
+                        placeholder="Confirm Password"
                         autoComplete="new-password"
-                        handleChange={onHandleChange}
+                        isInvalid={'password_confirmation' in errors}
+                        required
                     />
-                </div>
+                    <Form.Control.Feedback type="invalid" children={errors.password_confirmation} />
+                </Form.FloatingLabel>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Button className="ml-4" processing={processing}>
-                        Reset Password
-                    </Button>
-                </div>
+                <button className="w-100 btn btn-lg btn-primary" type="submit">
+                    Reset Password
+                </button>
             </form>
         </Guest>
     );

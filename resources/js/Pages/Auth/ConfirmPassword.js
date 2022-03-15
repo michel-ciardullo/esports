@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Guest from '@/Layouts/Guest';
-import ValidationErrors from '@/Components/ValidationErrors';
 import { Head, useForm } from '@inertiajs/inertia-react';
-import {Form} from "react-bootstrap";
+import {Form, Button} from 'react-bootstrap';
 
 export default function ConfirmPassword() {
     const { data, setData, post, errors, reset } = useForm({
@@ -29,11 +28,9 @@ export default function ConfirmPassword() {
         <Guest>
             <Head title="Confirmer le mot de passe" />
 
-            <ValidationErrors errors={errors} />
-
             <form
                 onSubmit={submit}
-                className="card card-body needs-validation"
+                className="needs-validation"
                 noValidate
             >
                 <p className="text-sm text-muted">
@@ -56,9 +53,9 @@ export default function ConfirmPassword() {
                     <Form.Control.Feedback type="invalid" children={errors.password} />
                 </Form.FloatingLabel>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">
+                <Button variant="primary" className="w-100 btn" type="submit">
                     Confirmer
-                </button>
+                </Button>
             </form>
         </Guest>
     );

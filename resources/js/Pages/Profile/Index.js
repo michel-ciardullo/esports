@@ -1,9 +1,12 @@
 import React from 'react';
-import {Head, useForm} from '@inertiajs/inertia-react';
+import { Head, useForm } from '@inertiajs/inertia-react';
 import AppLayout from '@/Layouts/AppLayout';
-import {Button, Container, Form} from "react-bootstrap";
+import { Button, Container, Form } from 'react-bootstrap';
+import ProfileSection from '@/Pages/Profile/Partials/ProfileSection';
+import UpdateInformations from '@/Pages/Profile/Partials/UpdateInformations';
+import FlashStatus from "@/Components/FlashStatus";
 
-export default function Home(props) {
+export default function ProfileIndex(props) {
 
     const { errors, data, setData } = useForm({
         name: props.auth.user.name,
@@ -23,98 +26,88 @@ export default function Home(props) {
                 <h1 className="mb-0">Profile page</h1>
                 <hr className="my-4"/>
 
-                <div className="row">
-                    <div className="col-lg-4 mb-2 mb-lg-0">
-                        <h2 className="h3">
-                            Informations sur le profil
-                        </h2>
-                        <p>
-                            Mettez à jour les informations du profil et l'adresse électronique de votre compte.
-                        </p>
-                    </div>
-                    <div className="col-lg-8">
-                        <div className="card card-body shadow">
+                <FlashStatus status={props.flash.status} message={props.flash.message}/>
 
-                            <form action="#">
+                <UpdateInformations user={props.auth.user}/>
 
-                                <Form.FloatingLabel
-                                    controlId="name"
-                                    label="Nom"
-                                    className="mb-3"
-                                >
-                                    <Form.Control
-                                        type="text"
-                                        name="name"
-                                        value={data.name}
-                                        onChange={onHandleChange}
-                                        placeholder="Name"
-                                        isInvalid={'name' in errors}
-                                        required
-                                    />
-                                    <Form.Control.Feedback type="invalid" children={errors.name} />
-                                </Form.FloatingLabel>
+                <hr/>
 
-                                <Form.FloatingLabel
-                                    controlId="email"
-                                    label="Adresse mail"
-                                    className="mb-3"
-                                >
-                                    <Form.Control
-                                        type="email"
-                                        name="email"
-                                        value={data.email}
-                                        onChange={onHandleChange}
-                                        placeholder="name@example.com"
-                                        isInvalid={'email' in errors}
-                                        required
-                                    />
-                                    <Form.Control.Feedback type="invalid" children={errors.email} />
-                                </Form.FloatingLabel>
+                <ProfileSection
+                    title="Mettre à jour le mot de passe"
+                    description="Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé."
+                >
+                    <form action="#">
 
-                                <Button variant="outline-primary" type="submit">Enregistrer</Button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                        <Form.FloatingLabel
+                            controlId="current_password"
+                            label="Mot de passe actuel"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="password"
+                                name="current_password"
+                                value={data.current_password}
+                                onChange={onHandleChange}
+                                placeholder="Mot de passe actuel"
+                                isInvalid={'current_password' in errors}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid" children={errors.current_password} />
+                        </Form.FloatingLabel>
 
-                <div className="row mt-4">
-                    <div className="col-lg-4 mb-2 mb-lg-0">
-                        <h2 className="h3">
-                            Mettre à jour le mot de passe
-                        </h2>
-                        <p>
-                            Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.
-                        </p>
-                    </div>
-                    <div className="col-lg-8">
-                        <div className="card card-body shadow">
-                            a
-                        </div>
-                    </div>
-                </div>
+                        <Form.FloatingLabel
+                            controlId="new_password"
+                            label="Nouveau mot de passe"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="password"
+                                name="new_password"
+                                value={data.new_password}
+                                onChange={onHandleChange}
+                                placeholder="Nouveau mot de passe"
+                                isInvalid={'new_password' in errors}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid" children={errors.new_password} />
+                        </Form.FloatingLabel>
 
-                <div className="row mt-4">
-                    <div className="col-lg-4 mb-2 mb-lg-0">
-                        <h2 className="h3">
-                            Supprimer le compte
-                        </h2>
-                        <p>
-                            Supprimer définitivement votre compte.
-                        </p>
-                    </div>
-                    <div className="col-lg-8">
-                        <div className="card card-body border-danger shadow">
-                            <p className="mb-0 text-sm text-gray">
-                                Une fois votre compte supprimé, toutes ses ressources et données seront définitivement effacées.
-                                Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
-                                souhaitez conserver.
-                            </p>
-                            <form className="mt-3" action="#">
-                                <Button variant="outline-danger">Supprimer le compte</Button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                        <Form.FloatingLabel
+                            controlId="password_confirmation"
+                            label="Confirmer le mot de passe"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="password"
+                                name="password_confirmation"
+                                value={data.password_confirmation}
+                                onChange={onHandleChange}
+                                placeholder="Confirmer le mot de passe"
+                                isInvalid={'password_confirmation' in errors}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid" children={errors.password_confirmation} />
+                        </Form.FloatingLabel>
+
+                        <Button variant="outline-primary" type="submit">Enregistrer</Button>
+                    </form>
+                </ProfileSection>
+
+                <hr/>
+
+                <ProfileSection
+                    title="Supprimer le compte"
+                    description="Supprimer définitivement votre compte."
+                >
+                    <p className="mb-0 text-sm text-gray">
+                        Une fois votre compte supprimé, toutes ses ressources et données seront définitivement effacées.
+                        Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
+                        souhaitez conserver.
+                    </p>
+                    <form className="mt-3" action="#">
+                        <Button variant="outline-danger">Supprimer le compte</Button>
+                    </form>
+                </ProfileSection>
 
             </Container>
         </AppLayout>

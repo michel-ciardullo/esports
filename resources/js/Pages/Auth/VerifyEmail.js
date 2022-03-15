@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '@/Components/Button';
 import Guest from '@/Layouts/Guest';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import {Button} from 'react-bootstrap';
 
 export default function VerifyEmail({ status }) {
     const { post, processing } = useForm();
@@ -29,7 +29,7 @@ export default function VerifyEmail({ status }) {
 
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <Button processing={processing}>Resend Verification Email</Button>
+                    <Button variant="success" processing={processing}>Resend Verification Email</Button>
 
                     <Link
                         href={route('logout')}

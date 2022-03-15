@@ -18,7 +18,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return string|null
      */
     public function version(Request $request)
@@ -29,18 +29,19 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
     public function share(Request $request)
     {
-        $games = Game::all();
+        $user   = $request->user();
+        $flash  = $request->session()->get('flash', []);
+        $games  = Game::all();
 
         return array_merge(parent::share($request), [
-            'auth' => [
-                'user' => $request->user(),
-            ],
-            'games' => $games
+            'auth' => ['user' => $user],
+            'flash' => $flash,
+            'games' => $games,
         ]);
     }
 }
