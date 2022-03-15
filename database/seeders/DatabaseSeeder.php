@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Database\{
+    Eloquent\Factories\Sequence,
+    Seeder
+};
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory()
+            ->count(3)
+            ->state(new Sequence(
+                ['name' => 'toto', 'email' => 'toto@local.dev'],
+                ['name' => 'vince', 'email' => 'vince@local.dev'],
+                ['name' => 'slava', 'email' => 'slava@local.dev'],
+            ))
+            ->create();
     }
 }
