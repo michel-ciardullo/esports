@@ -13,4 +13,8 @@ Route::group([
 
     $route->post('/profile/update/security', 'App\\Http\\Controllers\\Profile\\ProfileController@updateSecurity')
         ->name('profile.update.security');
+
+    $route->delete('/profile/delete', 'App\\Http\\Controllers\\Profile\\ProfileController@destroy')
+        ->middleware(['password.confirm'])
+        ->name('profile.delete');
 });

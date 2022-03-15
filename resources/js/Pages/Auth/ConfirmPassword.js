@@ -34,7 +34,7 @@ export default function ConfirmPassword() {
                 noValidate
             >
                 <p className="text-sm text-muted">
-                    This is a secure area of the application. Please confirm your password before continuing.
+                    Il s'agit d'une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.
                 </p>
 
                 <Form.FloatingLabel

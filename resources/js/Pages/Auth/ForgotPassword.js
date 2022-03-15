@@ -1,7 +1,7 @@
 import React from 'react';
 import Guest from '@/Layouts/Guest';
 import { Head, useForm } from '@inertiajs/inertia-react';
-import {Alert, Form} from "react-bootstrap";
+import {Alert, Form} from 'react-bootstrap';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, errors }   = useForm({ email: '' });
