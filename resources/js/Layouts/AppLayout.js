@@ -19,7 +19,13 @@ function Profile({ user }) {
             <NavDropdown title={user.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
                 <Link
-                    href="#"
+                    href={route('wallet.index')}
+                    className="dropdown-item"
+                >
+                    Mon Portefeuille
+                </Link>
+                <Link
+                    href="#tickets"
                     className="dropdown-item"
                 >
                     Mes tiquets
@@ -57,19 +63,21 @@ export default function AppLayout({ auth, children, games }) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>Accueil</Link>
+                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>
+                                Accueil
+                            </Link>
                             <NavDropdown title="Jeux" active={route().current('games.*')}>
                                 {games.map(({id, name}, i) =>
                                     <Link key={i} className="dropdown-item" href={route('games.show', id)}>{name}</Link>
                                 )}
                             </NavDropdown>
-                            <NavDropdown title="Tournois">
-                                <NavDropdown.Item href="#">Tournoi 1</NavDropdown.Item>
-                                <NavDropdown.Item href="#">Tournoi 2</NavDropdown.Item>
-                                <NavDropdown.Item href="#">Tournoi 3</NavDropdown.Item>
-                            </NavDropdown>
                             <Nav.Link href="#home">À propos</Nav.Link>
-                            <Nav.Link href="#home">Contact</Nav.Link>
+                            <Link className={'nav-link' + (route().current('contact') ? ' active' : '')} href={route('contact')}>
+                                Contact
+                            </Link>
+                            <Link className={'nav-link' + (route().current('faq') ? ' active' : '')} href={route('faq')}>
+                                FAQ
+                            </Link>
                         </Nav>
                         <Nav className="ms-auto">
                             {auth.user ? <Profile user={auth.user}/> : <NotAuth />}

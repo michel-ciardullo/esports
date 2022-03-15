@@ -20,5 +20,12 @@ Route::get('/', fn () => Inertia::render('Home'))
 Route::resource('/games', 'App\\Http\\Controllers\\Game\\GameController')
     ->only(['index', 'show']);
 
+Route::get('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@index')
+    ->name('contact');
+
+Route::get('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@index')
+    ->name('faq');
+
 require __DIR__.'/auth.php';
 require __DIR__.'/profile.php';
+require __DIR__.'/wallet.php';
