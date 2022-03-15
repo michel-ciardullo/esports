@@ -15,7 +15,7 @@ export default function UpdateInformations({ user }) {
 
     const submit = e => {
         e.preventDefault();
-        post(route('profile.updateInformations'));
+        post(route('profile.update.informations'));
     };
 
     return (

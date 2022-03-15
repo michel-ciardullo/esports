@@ -21,10 +21,10 @@ export default function ForgotPassword({ status }) {
 
             <form
                 onSubmit={submit}
-                className="card card-body needs-validation"
+                className="needs-validation"
                 noValidate
             >
-                <div className="text-sm text-muted">
+                <div className="text-sm text-dark">
                     <p>
                         Vous avez oublié votre mot de passe ? Aucun problème.
                     </p>

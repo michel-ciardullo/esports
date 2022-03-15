@@ -6,7 +6,7 @@ import {
     NavDropdown,
     Badge
 } from 'react-bootstrap';
-import {Link} from "@inertiajs/inertia-react";
+import {Link} from '@inertiajs/inertia-react';
 
 function Profile({ user }) {
     return (
@@ -79,7 +79,7 @@ export default function AppLayout({ auth, children, games }) {
             </Navbar>
 
             {/* Content */}
-            <main>
+            <main className="pb-3">
                 {children}
             </main>
         </>

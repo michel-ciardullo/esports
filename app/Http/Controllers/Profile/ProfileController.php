@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileUpdateInformationRequest;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\Profile\ProfileUpdateSecurityRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +20,11 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Index');
     }
 
-    public function updateInformations(ProfileUpdateInformationRequest $request)
+    /**
+     * @param ProfileUpdateInformationRequest $request
+     * @return RedirectResponse
+     */
+    public function updateInformations(ProfileUpdateInformationRequest $request) : RedirectResponse
     {
         $request->user()
             ->forceFill($request->all())
@@ -29,6 +34,25 @@ class ProfileController extends Controller
             ->with('flash', [
                 'status'    => 'success',
                 'message'   => __('Les informations du profil on bien été mise à jour...')
+            ]);
+    }
+
+    /**
+     * @param ProfileUpdateSecurityRequest $request
+     * @return RedirectResponse
+     */
+    public function updateSecurity(ProfileUpdateSecurityRequest $request) : RedirectResponse
+    {
+        $request->user()
+            ->forceFill([
+                'password' => Hash::make($request->input('password'))
+            ])
+            ->save();
+
+        return back(303)
+            ->with('flash', [
+                'status'    => 'success',
+                'message'   => __('Le mot de passe à bien été mise à jour...')
             ]);
     }
 }

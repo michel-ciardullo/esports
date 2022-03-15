@@ -1,6 +1,6 @@
 import React from 'react';
 import Guest from '@/Layouts/Guest';
-import {Head, useForm} from '@inertiajs/inertia-react';
+import {Head, Link, useForm} from '@inertiajs/inertia-react';
 import {Form} from "react-bootstrap";
 
 export default function Login() {
@@ -68,7 +68,7 @@ export default function Login() {
                 </Form.FloatingLabel>
 
                 <Form.Check
-                    className="mb-3"
+                    className="mb-1"
                     value={data.remember_me}
                     checked={data.remember_me === 'on' ?? false}
                     onChange={onHandleChangeCheck}
@@ -79,6 +79,10 @@ export default function Login() {
                     type="checkbox"
                     required
                 />
+
+                <Link className="d-block mb-3" href={route('password.request')}>
+                    Mot de passe oublié ?
+                </Link>
 
                 <button className="w-100 btn btn-lg btn-primary" type="submit">
                     Se connecter
