@@ -24,7 +24,7 @@ export default function ForgotPassword({ status }) {
                 className="needs-validation"
                 noValidate
             >
-                <div className="text-sm text-dark">
+                <div className="text-sm">
                     <p>
                         Vous avez oublié votre mot de passe ? Aucun problème.
                     </p>
