@@ -9,24 +9,39 @@ import {
 import {Link} from '@inertiajs/inertia-react';
 import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
 
+function NavItems ({ text, src }) {
+    return (
+        <div className="d-flex justify-content-start align-items-center">
+            <img 
+                className="thumbnail-image" 
+                src={src} 
+                alt="user pic"
+            />
+            <span className="ms-3 text-white">{text}</span> 
+        </div>
+    )
+}
+
 function Profile({ user }) {
     return (
         <>
-            <li className="nav-item">
+            <li className="nav-item d-flex justify-content-center align-items-center">
                 <Link className="nav-link" href="#">
-                    <Badge bg="warning" pill className="text-dark">0€</Badge>
+                    <Badge bg="secondary" className="text-white me-4">0€</Badge>
                 </Link>
             </li>
             <NavDropdown 
-            title={user.name} 
-            id="basic-nav-dropdown"
+                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg"/> } 
+                id="basic-nav-dropdown"
             >
-                <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
+                <NavDropdown.Item href={route('profile')}>
+                    <NavItems text="mon profil" src="/img/fakeprofile.svg" />
+                </NavDropdown.Item>
                 <Link
-                    href="/ticket"
+                    href="/tickets"
                     className="dropdown-item"
                 >
-                    Mes tiquets
+                    <NavItems text="mes tickets" src="/img/logo-paris.svg" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -35,7 +50,7 @@ function Profile({ user }) {
                     method="post"
                     as="button"
                 >
-                    Déconnexion
+                    <NavItems text="déconnexion" src="/img/logo-disconnect.svg" />
                 </Link>
             </NavDropdown>
         </>

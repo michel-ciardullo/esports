@@ -1,7 +1,7 @@
-@use '~bootstrap/scss/bootstrap' with (
-    $primary: #082fbe,
-    $secondary: #A226EE,
-);
+@import './variables';
+
+@import '~bootstrap/scss/bootstrap';
+
 @import "./fonts";
 
 @import './guest';

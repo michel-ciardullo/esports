@@ -8,17 +8,17 @@ h1 {
         color: #fff !important;
     }
     .profileCard {
-        background-color: #344ead !important;
+        background-color: $blue-200 !important;
     }
 }
 .profileCard input
 {
-    background-color: #344ead !important;
-    border-color: #a5a5a5 !important;
+    background-color: $blue-100 !important;
+    border-color: $blue-100 !important;
     color: #fff;
     box-shadow: 0 0 0 30px #576d7b inset;
-    -webkit-box-shadow: 0 0 0 30px #35498E inset;
-    background: #35498E;
+    -webkit-box-shadow: 0 0 0 30px $blue-100 inset;
+    background: $blue-100;
     color: #fff !important;
 }
 
@@ -28,3 +28,22 @@ h1 {
 hr {
     color: #fff !important;
 }
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.thumbnail-image {
+    height: 35px;
+    width: auto;
+}
+
+.dropdown-menu {
+    background-color: $third !important;
+    border-radius: 10px;
+    color: #fff !important;
+}
+
+.dropdown-item:hover{
+    background-color:darken($third, 10%) !important;
+} 

@@ -1,0 +1,28 @@
+$blue-100:   #001540;
+$blue-200:   #001C57;
+$blue-300:   #00316E;
+$blue-400:   #00224B;
+$blue-500:   #001B3A;
+
+$primary:    #254ee2;
+$secondary:  #A226EE;
+$third:      #35498E;
+
+$success:    #198754;
+$info:       #0dcaf0;
+$warning:    #ffc107;
+$danger:     #dc3545;
+$light:      #f8f9fa;
+$dark:       #212529;
+
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "third":      $third,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+);
