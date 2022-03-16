@@ -9,9 +9,9 @@ import {
 import {Link} from '@inertiajs/inertia-react';
 import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
 
-function NavItems ({ text, src }) {
+function NavItems ({ text, src , justify}) {
     return (
-        <div className="d-flex justify-content-start align-items-center">
+        <div className={`d-flex justify-content-${justify} align-items-center`}>
             <img 
                 className="thumbnail-image" 
                 src={src} 
@@ -27,21 +27,23 @@ function Profile({ user }) {
         <>
             <li className="nav-item d-flex justify-content-center align-items-center">
                 <Link className="nav-link" href="#">
-                    <Badge bg="secondary" className="text-white me-4">0€</Badge>
+                    {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
+                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">500€</div>
                 </Link>
             </li>
+            <div class="vl me-3 d-none d-md-block"></div>
             <NavDropdown 
-                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg"/> } 
+                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg" justify="center"/> } 
                 id="basic-nav-dropdown"
             >
                 <NavDropdown.Item href={route('profile')}>
-                    <NavItems text="mon profil" src="/img/fakeprofile.svg" />
+                    <NavItems text="Mon Profil" src="/img/person-circle.svg" justify="start" />
                 </NavDropdown.Item>
                 <Link
                     href="/tickets"
                     className="dropdown-item"
                 >
-                    <NavItems text="mes tickets" src="/img/logo-paris.svg" />
+                    <NavItems text="Mes Tickets" src="/img/logo-paris.svg" justify="start" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -50,7 +52,7 @@ function Profile({ user }) {
                     method="post"
                     as="button"
                 >
-                    <NavItems text="déconnexion" src="/img/logo-disconnect.svg" />
+                    <NavItems text="Déconnexion" src="/img/logo-disconnect.svg" justify="start" />
                 </Link>
             </NavDropdown>
         </>

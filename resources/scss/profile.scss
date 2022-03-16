@@ -46,4 +46,9 @@ hr {
 
 .dropdown-item:hover{
     background-color:darken($third, 10%) !important;
-} 
+}
+
+.dropdown-item:focus{
+    background-color:darken($third, 15%) !important;
+}
+
