@@ -22,13 +22,13 @@ export default function Home(props) {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fuga illo non perspiciatis voluptas! Accusamus animi atque consequatur, cum deleniti distinctio ea eligendi excepturi facilis nesciunt non nostrum, quod vitae.
                     </p>
                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <button type="button" className="btn btn-light btn-lg px-4 gap-3">Voir les tournois</button>
-                        <button type="button" className="btn btn-outline-light btn-lg px-4">Nous-contactez</button>
+                        <button type="button" className="btn btn-secondary btn-lg px-4 gap-3">Voir les tournois</button>
+                        <button type="button" className="btn btn-dark btn-lg px-4">Nous-contactez</button>
                     </div>
                 </div>
             </div>
 
-            <Container className="px-4 py-5" id="featured-3">
+            <Container className="px-4 py-5 text-light" id="featured-3">
                 <div className="text-center">
                     <h2 className="pb-5 border-bottom">Fonctionnalités</h2>
                 </div>
@@ -37,7 +37,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link">
+                        <a href="#" className="icon-link text-secondary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />
@@ -48,7 +48,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link">
+                        <a href="#" className="icon-link text-secondary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />
@@ -59,7 +59,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link">
+                        <a href="#" className="icon-link text-secondary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />

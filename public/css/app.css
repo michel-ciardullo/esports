@@ -11383,8 +11383,7 @@ textarea.form-control-lg {
   }
 }
 .guest {
-  background-image: url(/img/guest_background.jpg);
-  background-size: cover;
+  background-color: #35498E;
   display: flex;
   height: 100%;
   color: #fff;
@@ -11395,21 +11394,6 @@ textarea.form-control-lg {
   max-width: 450px;
   padding: 15px;
   width: 100%;
-}
-
-.guest .card {
-  background-color: #254ee2 !important;
-}
-.guest .card input:-webkit-autofill,
-.guest .card input:-webkit-autofill:hover,
-.guest .card input:-webkit-autofill:focus,
-.guest .card input:-webkit-autofill:active {
-  background-color: #35498E !important;
-  border-color: #35498E !important;
-  color: #FFF;
-  box-shadow: 0 0 0 30px #576D7B inset;
-  -webkit-box-shadow: 0 0 0 30px #353740 inset;
-  -webkit-text-fill-color: azure;
 }
 
 .guest label {
@@ -11464,9 +11448,31 @@ textarea.form-control-lg {
 }
 
 body, html, #app {
+  background-color: #0D0C28;
+  color: #f8f9fa;
   height: 100%;
 }
 
-.navbar {
+input,
+textarea {
   background-color: #35498E !important;
+  border-color: #35498E !important;
+  color: #f8f9fa;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill,
+input:-webkit-autofill:hover, textarea:-webkit-autofill:hover,
+input:-webkit-autofill:focus, textarea:-webkit-autofill:focus,
+input:-webkit-autofill:active, textarea:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px #35498E inset;
+  -webkit-box-shadow: 0 0 0 30px #35498E inset;
+  -webkit-text-fill-color: azure;
+}
+
+.card {
+  background-color: #001C57 !important;
+}
+
+.navbar {
+  background-color: #001C57 !important;
 }

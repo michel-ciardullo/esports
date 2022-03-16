@@ -43,22 +43,90 @@ export default function GameShow(props) {
 
             <Container className="mt-4">
 
-                <h1 className="mb-0">Jeux</h1>
+                <h1 className="mb-0">Liste des tournois du jeu</h1>
                 <hr className="my-4"/>
 
-                <div className="card">
-                    <div className="card-header bg-primary text-light">
-                        <h2>Jeux</h2>
-                    </div>
-                    body
-                </div>
+                <article className="card mb-3">
+                    <header className="d-flex">
+                        <div className="d-flex justify-content-start align-items-top p-3" style={{ flex: '.3' }}>
+                            <span className="rounded-circle bg-success" style={{
+                                width: '34px',
+                                height: '34px'
+                            }} />
+                            <div className="ms-3 d-flex flex-column">
+                                <span>Live now</span>
+                                <em>Time</em>
+                            </div>
+                        </div>
+                        <div style={{
+                            flex: '3',
+                            clipPath: 'polygon(3% 0, 100% 0, 100% 100%, 0% 100%)'
+                        }}>
+                            <div
+                                className="bg-dark w-100 p-3"
+                                style={{
+                                    backgroundImage: 'url(https://images.ctfassets.net/j95d1p8hsuun/29qUXMV0WBycRYM3YQCzzl/a214b2faf007454eae0b7719bea6bf37/1920x720-NWcom2-keyart.jpg)',
+                                    height: '150px'
+                                }}
+                            />
+                        </div>
+                    </header>
+                    <section className="p-3">
+                        <table className="table text-light">
+                            <thead>
+                            <tr>
+                                <th scope="col">See all game</th>
+                                <th scope="col">1</th>
+                                <th scope="col">X</th>
+                                <th scope="col">2</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Live now</th>
+                                <td>
+                                    <span className="bg-dark p-1">14.0</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">12.5</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">100.0</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Live now</th>
+                                <td>
+                                    <span className="bg-dark p-1">14.0</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">12.5</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">100.0</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Live now</th>
+                                <td>
+                                    <span className="bg-dark p-1">14.0</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">12.5</span>
+                                </td>
+                                <td>
+                                    <span className="bg-dark p-1">100.0</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </article>
 
-            </Container>
-
-            <Container className="mt-3 mt-md-4 mt-lg-5">
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     {tournaments}
                 </div>
+
             </Container>
         </AppLayout>
     );

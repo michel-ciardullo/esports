@@ -115,7 +115,7 @@ export default function Login() {
                     required
                 />
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">
+                <button className="w-100 btn btn-lg btn-third" type="submit">
                     S'inscrire
                 </button>
             </form>

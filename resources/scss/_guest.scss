@@ -1,6 +1,7 @@
 .guest {
-    background-image: url(/img/guest_background.jpg);
-    background-size: cover;
+    background-color: $third;
+    // background-image: url(/img/guest_background.jpg);
+    // background-size: cover;
 
     display: flex;
     height: 100%;
@@ -15,19 +16,7 @@
 }
 
 .guest .card {
-    background-color: $primary !important;
-
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-        background-color: $third !important;
-        border-color: $third !important;
-        color: #FFF;
-        box-shadow: 0 0 0 30px #576D7B inset;
-        -webkit-box-shadow: 0 0 0 30px #353740 inset;
-        -webkit-text-fill-color: azure;
-    }
+   // background-color: $primary !important;
 }
 
 .guest label {
