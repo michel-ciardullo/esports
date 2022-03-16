@@ -1,12 +1,12 @@
-@use '~bootstrap/scss/bootstrap' with (
-    $primary: #007d8e
-);
+@import './variables';
+@import '~bootstrap/scss/bootstrap';
 @import './guest';
+@import './features';
 
 body, html, #app {
     height: 100%;
 }
 
 .navbar {
-    background-color: #036572 !important;
+    background-color: $third !important;
 }

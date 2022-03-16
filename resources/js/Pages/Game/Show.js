@@ -2,6 +2,10 @@ import React from 'react';
 import { Head } from '@inertiajs/inertia-react';
 import AppLayout from '@/Layouts/AppLayout';
 import {Container} from 'react-bootstrap';
+import FlashStatus from "@/Components/FlashStatus";
+import UpdateInformations from "@/Pages/Profile/Partials/UpdateInformations";
+import UpdateSecurity from "@/Pages/Profile/Partials/UpdateSecurity";
+import DeleteAccount from "@/Pages/Profile/Partials/DeleteAccount";
 
 function Tournament(props) {
     return (
@@ -37,8 +41,21 @@ export default function GameShow(props) {
         <AppLayout {...props}>
             <Head title={props.game.name} />
 
-            <Container className="mt-3 mt-md-4 mt-lg-5">
+            <Container className="mt-4">
 
+                <h1 className="mb-0">Jeux</h1>
+                <hr className="my-4"/>
+
+                <div className="card">
+                    <div className="card-header bg-primary text-light">
+                        <h2>Jeux</h2>
+                    </div>
+                    body
+                </div>
+
+            </Container>
+
+            <Container className="mt-3 mt-md-4 mt-lg-5">
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     {tournaments}
                 </div>
