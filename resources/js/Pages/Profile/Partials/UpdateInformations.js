@@ -63,7 +63,7 @@ export default function UpdateInformations({ user }) {
                     <Form.Control.Feedback type="invalid" children={errors.email} />
                 </Form.FloatingLabel>
 
-                <Button variant="outline-primary" type="submit">Enregistrer</Button>
+                <Button variant="secondary" type="submit">Enregistrer</Button>
             </form>
         </ProfileSection>
     );

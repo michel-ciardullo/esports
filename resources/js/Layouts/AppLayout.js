@@ -17,7 +17,10 @@ function Profile({ user }) {
                     <Badge bg="warning" pill className="text-dark">0€</Badge>
                 </Link>
             </li>
-            <NavDropdown title={user.name} id="basic-nav-dropdown">
+            <NavDropdown 
+            title={user.name} 
+            id="basic-nav-dropdown"
+            >
                 <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
                 <Link
                     href="/ticket"
@@ -43,7 +46,7 @@ function NotAuth() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-secondary" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-secondary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }
