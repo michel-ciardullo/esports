@@ -3,9 +3,6 @@ import { Head } from '@inertiajs/inertia-react';
 import AppLayout from '@/Layouts/AppLayout';
 import {Container} from 'react-bootstrap';
 import FlashStatus from "@/Components/FlashStatus";
-import UpdateInformations from "@/Pages/Profile/Partials/UpdateInformations";
-import UpdateSecurity from "@/Pages/Profile/Partials/UpdateSecurity";
-import DeleteAccount from "@/Pages/Profile/Partials/DeleteAccount";
 
 function Tournament(props) {
     return (

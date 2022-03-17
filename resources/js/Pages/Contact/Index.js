@@ -117,7 +117,7 @@ export default function ContactIndex(props) {
                     </Form.FloatingLabel>
 
                     <div>
-                        <Button variant="outline-primary" type="submit">
+                        <Button variant="fourth" type="submit">
                             Envoyer
                         </Button>
                     </div>

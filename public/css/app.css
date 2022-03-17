@@ -11672,6 +11672,41 @@ body, html, #app {
   background-color: #0D0C28;
 }
 
+input,
+textarea {
+  background-color: #35498E !important;
+  border-color: #35498E !important;
+  color: #f8f9fa;
+}
+
+.card {
+  background-color: #001C57 !important;
+}
+
+.accordion-button {
+  background-color: #001C57 !important;
+  color: #fff !important;
+}
+
+.accordion-body {
+  background-color: #35498E !important;
+}
+
+.accordion-item {
+  border: 0px;
+  border-radius: 40px;
+  background-color: #001C57;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill,
+input:-webkit-autofill:hover, textarea:-webkit-autofill:hover,
+input:-webkit-autofill:focus, textarea:-webkit-autofill:focus,
+input:-webkit-autofill:active, textarea:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px #35498E inset;
+  -webkit-box-shadow: 0 0 0 30px #35498E inset;
+  -webkit-text-fill-color: azure;
+}
+
 .navbar {
   background-color: #0E2164 !important;
 }
