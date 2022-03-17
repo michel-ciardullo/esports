@@ -1,8 +1,4 @@
 .guest {
-    background-color: $third;
-    // background-image: url(/img/guest_background.jpg);
-    // background-size: cover;
-
     display: flex;
     height: 100%;
     color: #fff;
@@ -13,12 +9,4 @@
     max-width: 450px;
     padding: 15px;
     width: 100%;
-}
-
-.guest .card {
-   // background-color: $primary !important;
-}
-
-.guest label {
-    color: #fff;
 }

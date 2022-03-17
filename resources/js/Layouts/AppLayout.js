@@ -6,16 +6,16 @@ import {
     NavDropdown,
     Badge
 } from 'react-bootstrap';
-import {Link} from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/inertia-react';
 
 function Profile({ user }) {
     return (
         <>
-            <li className="nav-item">
-                <Link className="nav-link" href="#">
-                    <Badge bg="warning" pill className="text-dark">0€</Badge>
-                </Link>
-            </li>
+            <Link className="nav-link" href="#">
+                <div>
+                    <Badge className="p-2" variant="outline-primary">{user.wallet.balance}€</Badge>
+                </div>
+            </Link>
             <NavDropdown title={user.name} id="basic-nav-dropdown">
                 <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
                 <Link
@@ -48,7 +48,7 @@ function NotAuth() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }

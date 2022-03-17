@@ -54,7 +54,7 @@ export default function ForgotPassword({ status }) {
                     <Form.Control.Feedback type="invalid" children={errors.email} />
                 </Form.FloatingLabel>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">
+                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
                     Réinitialisation le mot de passe
                 </button>
             </form>

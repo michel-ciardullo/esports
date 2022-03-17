@@ -91,7 +91,7 @@ export default function ResetPassword({ token, email }) {
                     <Form.Control.Feedback type="invalid" children={errors.password_confirmation} />
                 </Form.FloatingLabel>
 
-                <button className="w-100 btn btn-lg btn-primary" type="submit">
+                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
                     Réinitialiser le mot de passe
                 </button>
             </form>

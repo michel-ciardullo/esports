@@ -84,7 +84,7 @@ export default function Login() {
                     Mot de passe oublié ?
                 </Link>
 
-                <button className="w-100 btn btn-lg btn-third" type="submit">
+                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
                     Se connecter
                 </button>
             </form>
