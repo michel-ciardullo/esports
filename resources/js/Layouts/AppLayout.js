@@ -28,7 +28,7 @@ function Profile({ user }) {
             <li className="nav-item d-flex justify-content-center align-items-center">
                 <Link className="nav-link" href="#">
                     {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
-                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">500€</div>
+                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
             </li>
             <div class="vl me-3 d-none d-md-block"></div>
@@ -69,7 +69,7 @@ function NotAuth() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-secondary" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }

@@ -11,25 +11,32 @@
 @import './profile';
 
 body, html, #app {
-    background-color: #0D0C28;
+    background-color: #121212;
     color: $light;
     height: 100%;
-    background-color:#0D0C28;
 }
 
-input,
-textarea {
-    background-color: $third !important;
-    border-color: $third !important;
+.form-control {
+    background-color: #373737 !important;
+    border-color: #373737 !important;
     color: $light;
-}
 
-.card {
-    background-color: #001C57 !important;
+    &:focus {
+        color: $light;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        box-shadow: 0 0 0 30px #373737 inset;
+        -webkit-box-shadow: 0 0 0 30px #373737 inset;
+        -webkit-text-fill-color: azure;
+    }
 }
 
 .accordion-button {
-    background-color: #001C57 !important;
+    background-color: #212121 !important;
     color: #fff !important;
 }
 
@@ -40,21 +47,17 @@ textarea {
 .accordion-item {
     border: 0px;
     border-radius: 40px;
-    background-color: #001C57;
+    background-color: #212121;
 }
 
-input:-webkit-autofill, textarea:-webkit-autofill,
-input:-webkit-autofill:hover, textarea:-webkit-autofill:hover,
-input:-webkit-autofill:focus, textarea:-webkit-autofill:focus,
-input:-webkit-autofill:active, textarea:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px $third inset;
-    -webkit-box-shadow: 0 0 0 30px $third inset;
-    -webkit-text-fill-color: azure;
-}
-
-.navbar {
-    background-color: #0E2164 !important;
-}
+// input:-webkit-autofill, textarea:-webkit-autofill,
+// input:-webkit-autofill:hover, textarea:-webkit-autofill:hover,
+// input:-webkit-autofill:focus, textarea:-webkit-autofill:focus,
+// input:-webkit-autofill:active, textarea:-webkit-autofill:active {
+//     box-shadow: 0 0 0 30px $third inset;
+//     -webkit-box-shadow: 0 0 0 30px $third inset;
+//     -webkit-text-fill-color: azure;
+// }
 
 .btn-outline-secondary {
     &:hover {   
@@ -74,4 +77,43 @@ input:-webkit-autofill:active, textarea:-webkit-autofill:active {
 .money {
     font-size: 1.4em;
     font-family: YoutubeSansMedium;
+}
+
+
+
+.list-group-item {
+    background-color: #373737 !important;
+
+    &.active {
+        background-color: $primary !important;
+        border-color: $primary !important;
+    }
+}
+
+.dropdown-menu {
+    background-color: #373737 !important;
+    border-color: $primary !important;
+
+    > .dropdown-item {
+        color: $light;
+
+        &:hover, &:focus {
+            background-color: $primary;
+            color: $light;
+        }
+    }
+}
+
+.card {
+    background-color: #212121 !important;
+    border-color: #212121 !important;
+}
+
+.navbar {
+    background-color: #212121 !important;
+
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
 }

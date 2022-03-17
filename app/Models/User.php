@@ -46,6 +46,22 @@ class User extends AuthUserModel
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['wallet'];
+
+    public static function booted()
+    {
+        static::created(function($model) {
+            $model->wallet()->forceCreate([
+                'user_id' => $model->id
+            ]);
+        });
+    }
+
+    /**
      * Get the wallet associated with the user.
      *
      * @return HasOne

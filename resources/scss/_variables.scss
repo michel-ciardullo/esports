@@ -4,15 +4,20 @@ $blue-300:   #00316E;
 $blue-400:   #00224B;
 $blue-500:   #001B3A;
 
-$primary:    #254ee2;
-$secondary:  #A226EE;
-$third:      #35498E;
+// $primary:    #254ee2;
+// $secondary:  #A226EE;
+// $third:      #35498E;
 $fourth:     lighten($blue-200, 20%);
+
+$primary:    #35498E;
+$secondary:  #35498E;
+$third:      #6d28d9;
 
 $success:    #198754;
 $info:       #0dcaf0;
 $warning:    #ffc107;
 $danger:     #dc3545;
+
 $light:      #f8f9fa;
 $dark:       #212529;
 
