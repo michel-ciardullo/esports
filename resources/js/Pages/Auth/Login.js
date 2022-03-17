@@ -24,7 +24,7 @@ export default function Login() {
     };
 
     return (
-        <Guest title="Connect-toi !">
+        <Guest className="text-justify" title="Connecte-toi !">
             <Head title="Se connecter" />
 
             <form
@@ -84,9 +84,14 @@ export default function Login() {
                     Mot de passe oublié ?
                 </Link>
 
-                <button className="w-100 btn btn-lg btn-third" type="submit">
+                <button className="w-100 btn btn-lg btn-primary mb-3" type="submit">
                     Se connecter
                 </button>
+
+                <p className="text-center mb-3">
+                   Vous n'avez pas encore de compte ? <Link href={route('register')}>S'inscrire</Link>
+                </p>
+                
             </form>
         </Guest>
     );

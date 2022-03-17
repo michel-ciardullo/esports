@@ -14,11 +14,11 @@ export default function Home(props) {
                 backgroundSize: 'cover'
             }}>
                 <Link className="text-center d-block" href="/">
-                    <ApplicationLogo />
+                    <ApplicationLogo height="80" className="mb-4"/>
                 </Link>
-                <h1 className="display-5 fw-bold">RI7 E-Sport</h1>
+                <h1 className="display-5 fw-bold">RiBet</h1>
                 <div className="col-lg-6 mx-auto">
-                    <p className="lead mb-4">
+                    <p className="lead mb-4 text-white">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fuga illo non perspiciatis voluptas! Accusamus animi atque consequatur, cum deleniti distinctio ea eligendi excepturi facilis nesciunt non nostrum, quod vitae.
                     </p>
                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">

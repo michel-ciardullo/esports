@@ -31,6 +31,7 @@
   --bs-primary: #254ee2;
   --bs-secondary: #A226EE;
   --bs-third: #35498E;
+  --bs-fourth: #003dbd;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
@@ -40,6 +41,7 @@
   --bs-primary-rgb: 37, 78, 226;
   --bs-secondary-rgb: 162, 38, 238;
   --bs-third-rgb: 53, 73, 142;
+  --bs-fourth-rgb: 0, 61, 189;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
   --bs-warning-rgb: 255, 193, 7;
@@ -3115,6 +3117,36 @@ textarea.form-control-lg {
   border-color: #35498E;
 }
 
+.btn-fourth {
+  color: #fff;
+  background-color: #003dbd;
+  border-color: #003dbd;
+}
+.btn-fourth:hover {
+  color: #fff;
+  background-color: #0034a1;
+  border-color: #003197;
+}
+.btn-check:focus + .btn-fourth, .btn-fourth:focus {
+  color: #fff;
+  background-color: #0034a1;
+  border-color: #003197;
+  box-shadow: 0 0 0 0.25rem rgba(38, 90, 199, 0.5);
+}
+.btn-check:checked + .btn-fourth, .btn-check:active + .btn-fourth, .btn-fourth:active, .btn-fourth.active, .show > .btn-fourth.dropdown-toggle {
+  color: #fff;
+  background-color: #003197;
+  border-color: #002e8e;
+}
+.btn-check:checked + .btn-fourth:focus, .btn-check:active + .btn-fourth:focus, .btn-fourth:active:focus, .btn-fourth.active:focus, .show > .btn-fourth.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(38, 90, 199, 0.5);
+}
+.btn-fourth:disabled, .btn-fourth.disabled {
+  color: #fff;
+  background-color: #003dbd;
+  border-color: #003dbd;
+}
+
 .btn-success {
   color: #fff;
   background-color: #198754;
@@ -3367,6 +3399,31 @@ textarea.form-control-lg {
 }
 .btn-outline-third:disabled, .btn-outline-third.disabled {
   color: #35498E;
+  background-color: transparent;
+}
+
+.btn-outline-fourth {
+  color: #003dbd;
+  border-color: #003dbd;
+}
+.btn-outline-fourth:hover {
+  color: #fff;
+  background-color: #003dbd;
+  border-color: #003dbd;
+}
+.btn-check:focus + .btn-outline-fourth, .btn-outline-fourth:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 61, 189, 0.5);
+}
+.btn-check:checked + .btn-outline-fourth, .btn-check:active + .btn-outline-fourth, .btn-outline-fourth:active, .btn-outline-fourth.active, .btn-outline-fourth.dropdown-toggle.show {
+  color: #fff;
+  background-color: #003dbd;
+  border-color: #003dbd;
+}
+.btn-check:checked + .btn-outline-fourth:focus, .btn-check:active + .btn-outline-fourth:focus, .btn-outline-fourth:active:focus, .btn-outline-fourth.active:focus, .btn-outline-fourth.dropdown-toggle.show:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 61, 189, 0.5);
+}
+.btn-outline-fourth:disabled, .btn-outline-fourth.disabled {
+  color: #003dbd;
   background-color: transparent;
 }
 
@@ -5010,6 +5067,15 @@ textarea.form-control-lg {
   color: #1a2344;
 }
 
+.alert-fourth {
+  color: #002571;
+  background-color: #ccd8f2;
+  border-color: #b3c5eb;
+}
+.alert-fourth .alert-link {
+  color: #001e5a;
+}
+
 .alert-success {
   color: #0f5132;
   background-color: #d1e7dd;
@@ -5379,6 +5445,20 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #202c55;
   border-color: #202c55;
+}
+
+.list-group-item-fourth {
+  color: #002571;
+  background-color: #ccd8f2;
+}
+.list-group-item-fourth.list-group-item-action:hover, .list-group-item-fourth.list-group-item-action:focus {
+  color: #002571;
+  background-color: #b8c2da;
+}
+.list-group-item-fourth.list-group-item-action.active {
+  color: #fff;
+  background-color: #002571;
+  border-color: #002571;
 }
 
 .list-group-item-success {
@@ -6528,6 +6608,13 @@ textarea.form-control-lg {
   color: #2a3a72;
 }
 
+.link-fourth {
+  color: #003dbd;
+}
+.link-fourth:hover, .link-fourth:focus {
+  color: #003197;
+}
+
 .link-success {
   color: #198754;
 }
@@ -6977,6 +7064,10 @@ textarea.form-control-lg {
 
 .border-third {
   border-color: #35498E !important;
+}
+
+.border-fourth {
+  border-color: #003dbd !important;
 }
 
 .border-success {
@@ -7815,6 +7906,11 @@ textarea.form-control-lg {
   color: rgba(var(--bs-third-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-fourth {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-fourth-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-success {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-success-rgb), var(--bs-text-opacity)) !important;
@@ -7909,6 +8005,11 @@ textarea.form-control-lg {
 .bg-third {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-third-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-fourth {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-fourth-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-success {
@@ -11382,11 +11483,49 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@font-face {
+  font-family: "YoutubeSansBlack";
+  src: url(/fonts/YoutubeSansBlack.otf);
+  weight: 900;
+}
+@font-face {
+  font-family: "YoutubeSansBold";
+  src: url(/fonts/YoutubeSansBold.otf);
+  weight: 800;
+}
+@font-face {
+  font-family: "YoutubeSansSemibold";
+  src: url(/fonts/YoutubeSansSemibold.otf);
+  weight: 700;
+}
+@font-face {
+  font-family: "YoutubeSansMedium";
+  src: url(/fonts/YoutubeSansMedium.otf);
+  weight: 500;
+}
+@font-face {
+  font-family: "YoutubeSansRegular";
+  src: url(/fonts/YoutubeSansRegular.otf);
+  weight: 600;
+}
 .guest {
-  background-color: #35498E;
+  background-color: #0D0C28;
   display: flex;
   height: 100%;
   color: #fff;
+}
+.guest input:-webkit-autofill,
+.guest input:-webkit-autofill:hover,
+.guest input:-webkit-autofill:focus,
+.guest input:-webkit-autofill:active {
+  background-color: #353740 !important;
+  border-color: #C4C4C4 !important;
+  color: #FFF;
+  font-family: "YoutubeSansSemibold";
+  box-shadow: 0 0 0 30px #576D7B inset;
+  -webkit-box-shadow: 0 0 0 30px #353740 inset;
+  -webkit-text-fill-color: azure;
+  background: #353740;
 }
 
 .guest-content {
@@ -11396,8 +11535,34 @@ textarea.form-control-lg {
   width: 100%;
 }
 
+.guest .card {
+  background-color: #353740 !important;
+  border-radius: 24px !important;
+}
+
+.guest input,
+.guest input:focus {
+  background-color: #353740 !important;
+  border-color: #C4C4C4 !important;
+  color: #FFF;
+  font-family: "YoutubeSansSemibold";
+}
+
 .guest label {
   color: #fff;
+}
+
+.guest button {
+  font-family: "YoutubeSansSemibold";
+}
+
+.forgot-text p {
+  font-family: YoutubeSansMedium;
+  color: #fff !important;
+}
+
+.card h1, .card .h1 {
+  font-family: "YoutubeSansBold";
 }
 
 .bi {
@@ -11447,32 +11612,84 @@ textarea.form-control-lg {
   background-size: cover;
 }
 
+h1, .h1 {
+  color: #fff !important;
+}
+
+.profileSection h2, .profileSection .h2,
+.profileSection p {
+  color: #fff !important;
+}
+.profileSection .profileCard {
+  background-color: #001C57 !important;
+}
+
+.profileCard input {
+  background-color: #001540 !important;
+  border-color: #001540 !important;
+  color: #fff;
+  box-shadow: 0 0 0 30px #576d7b inset;
+  -webkit-box-shadow: 0 0 0 30px #001540 inset;
+  background: #001540;
+  color: #fff !important;
+}
+
+.profileCard label {
+  color: #fff !important;
+}
+
+hr {
+  color: #fff !important;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.thumbnail-image {
+  height: 35px;
+  width: auto;
+}
+
+.dropdown-menu {
+  background-color: #35498E !important;
+  border-radius: 10px;
+  color: #fff !important;
+}
+
+.dropdown-item:hover {
+  background-color: #273669 !important;
+}
+
+.dropdown-item:focus {
+  background-color: #202c56 !important;
+}
+
 body, html, #app {
   background-color: #0D0C28;
   color: #f8f9fa;
   height: 100%;
-}
-
-input,
-textarea {
-  background-color: #35498E !important;
-  border-color: #35498E !important;
-  color: #f8f9fa;
-}
-
-input:-webkit-autofill, textarea:-webkit-autofill,
-input:-webkit-autofill:hover, textarea:-webkit-autofill:hover,
-input:-webkit-autofill:focus, textarea:-webkit-autofill:focus,
-input:-webkit-autofill:active, textarea:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px #35498E inset;
-  -webkit-box-shadow: 0 0 0 30px #35498E inset;
-  -webkit-text-fill-color: azure;
-}
-
-.card {
-  background-color: #001C57 !important;
+  background-color: #0D0C28;
 }
 
 .navbar {
-  background-color: #001C57 !important;
+  background-color: #0E2164 !important;
+}
+
+.btn-outline-secondary:hover {
+  color: #FFF !important;
+}
+
+.dropdown-item {
+  color: #FFF !important;
+}
+
+.vl {
+  border-left: 1px solid #d4d4d4;
+  height: 50px;
+}
+
+.money {
+  font-size: 1.4em;
+  font-family: YoutubeSansMedium;
 }

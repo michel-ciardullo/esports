@@ -18,7 +18,7 @@ export default function DeleteAccount({ auth }) {
             title="Supprimer le compte"
             description="Supprimer définitivement votre compte."
         >
-            <p className="mb-0 text-sm">
+            <p className="mb-0 text-sm text-gray deleteAccount">
                 Une fois votre compte supprimé, toutes ses ressources et données seront définitivement effacées.
                 Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
                 souhaitez conserver.
@@ -28,7 +28,7 @@ export default function DeleteAccount({ auth }) {
                 className="needs-validation mt-3"
                 noValidate
             >
-                <Button variant="outline-danger" type="submit">
+                <Button variant="danger" type="submit">
                     Supprimer le compte
                 </Button>
             </form>

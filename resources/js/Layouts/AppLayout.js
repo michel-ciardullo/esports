@@ -7,17 +7,38 @@ import {
     Badge
 } from 'react-bootstrap';
 import {Link} from '@inertiajs/inertia-react';
+import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
+
+function NavItems ({ text, src , justify}) {
+    return (
+        <div className={`d-flex justify-content-${justify} align-items-center`}>
+            <img 
+                className="thumbnail-image" 
+                src={src} 
+                alt="user pic"
+            />
+            <span className="ms-3 text-white">{text}</span> 
+        </div>
+    )
+}
 
 function Profile({ user }) {
     return (
         <>
-            <li className="nav-item">
+            <li className="nav-item d-flex justify-content-center align-items-center">
                 <Link className="nav-link" href="#">
-                    <Badge bg="warning" pill className="text-dark">0€</Badge>
+                    {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
+                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">500€</div>
                 </Link>
             </li>
-            <NavDropdown title={user.name} id="basic-nav-dropdown">
-                <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
+            <div class="vl me-3 d-none d-md-block"></div>
+            <NavDropdown 
+                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg" justify="center"/> } 
+                id="basic-nav-dropdown"
+            >
+                <NavDropdown.Item href={route('profile')}>
+                    <NavItems text="Mon Profil" src="/img/person-circle.svg" justify="start" />
+                </NavDropdown.Item>
                 <Link
                     href={route('wallet.index')}
                     className="dropdown-item"
@@ -28,7 +49,7 @@ function Profile({ user }) {
                     href="#tickets"
                     className="dropdown-item"
                 >
-                    Mes tiquets
+                    <NavItems text="Mes Tickets" src="/img/logo-paris.svg" justify="start" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -37,7 +58,7 @@ function Profile({ user }) {
                     method="post"
                     as="button"
                 >
-                    Déconnexion
+                    <NavItems text="Déconnexion" src="/img/logo-disconnect.svg" justify="start" />
                 </Link>
             </NavDropdown>
         </>
@@ -48,7 +69,7 @@ function NotAuth() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-warning" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-secondary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }
@@ -59,7 +80,9 @@ export default function AppLayout({ auth, children, games }) {
             {/* Navbar */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Link className="navbar-brand" href={route('home')}>GE</Link>
+                    <Link className="navbar-brand" href={route('home')}>
+                        <ApplicationLogoLong height="60px"/>
+                    </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>

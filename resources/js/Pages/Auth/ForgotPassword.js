@@ -24,11 +24,11 @@ export default function ForgotPassword({ status }) {
                 className="needs-validation"
                 noValidate
             >
-                <div className="text-sm">
+                <div className="text-sm text-dark forgot-text">
                     <p>
                         Vous avez oublié votre mot de passe ? Aucun problème.
                     </p>
-                    <p>
+                    <p className="mb-5">
                         Il suffit de nous communiquer votre adresse
                         électronique et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra
                         d'en choisir un nouveau.
@@ -55,7 +55,7 @@ export default function ForgotPassword({ status }) {
                 </Form.FloatingLabel>
 
                 <button className="w-100 btn btn-lg btn-primary" type="submit">
-                    Réinitialisation le mot de passe
+                    Réinitialiser le mot de passe
                 </button>
             </form>
         </Guest>

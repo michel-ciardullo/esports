@@ -90,7 +90,7 @@ export default function UpdateSecurity() {
                     <Form.Control.Feedback type="invalid" children={errors.password_confirmation} />
                 </Form.FloatingLabel>
 
-                <Button variant="outline-primary" type="submit">Enregistrer</Button>
+                <Button variant="fourth" type="submit">Enregistrer</Button>
             </form>
         </ProfileSection>
     );
