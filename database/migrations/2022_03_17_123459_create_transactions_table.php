@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('wallet_id')->index();
-            $table->foreignId('ticket_id')->index();
+            $table->foreignId('ticket_id')->index()->nullable();
             $table->enum('type', ['deposit', 'withdraw', 'gain', 'loss']);
             $table->integer('amount');
             $table->timestamps();

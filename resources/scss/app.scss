@@ -4,32 +4,20 @@
 @import './features';
 
 body, html, #app {
-    background-color: #121212;
-    color: $light;
     height: 100%;
 }
 
-.form-control {
-    background-color: #373737 !important;
-    border-color: #373737 !important;
-    color: $light;
-
-    &:focus {
-        color: $light;
-    }
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-        box-shadow: 0 0 0 30px #373737 inset;
-        -webkit-box-shadow: 0 0 0 30px #373737 inset;
-        -webkit-text-fill-color: azure;
-    }
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px #373737 inset;
+    -webkit-box-shadow: 0 0 0 30px #373737 inset;
+    -webkit-text-fill-color: azure;
 }
 
 .list-group-item {
-    background-color: #373737 !important;
+    // background-color: #373737 !important;
 
     &.active {
         background-color: $primary !important;
