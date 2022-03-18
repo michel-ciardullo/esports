@@ -33,6 +33,15 @@ class GameController extends Controller
     {
         $game = Game::with('tournaments')->findOrFail($id);
 
+        $tournament     = $game->tournaments[0];
+        $confrontation  = $tournament->confrontations[0];
+
+        dd(
+            $game->toArray(),
+            $tournament->toArray(),
+            $confrontation->toArray()
+        );
+
         return Inertia::render('Game/Show', compact('game'));
     }
 }

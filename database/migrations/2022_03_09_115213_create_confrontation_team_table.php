@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('confrontation_id');
             $table->foreignId('team_id');
-            $table->string('bet');
+            $table->unsignedInteger('position');
+            $table->string('rating');
             $table->string('result');
             $table->timestamps();
 

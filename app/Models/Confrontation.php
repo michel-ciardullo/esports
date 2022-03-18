@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Confrontation extends Model
@@ -41,8 +42,12 @@ class Confrontation extends Model
         return $this->hasOne(Tournament::class);
     }
 
-    public function teams()
+    /**
+     * @return BelongsToMany
+     */
+    public function teams() : BelongsToMany
     {
-        return $this->hasMany(ConfrontationTeam::class);
+        return $this->belongsToMany(Team::class)
+            ->withPivot(['position', 'rating', 'result']);
     }
 }

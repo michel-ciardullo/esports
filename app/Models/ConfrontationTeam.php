@@ -14,7 +14,8 @@ class ConfrontationTeam extends Pivot
     protected $fillable = [
         'confrontation_id',
         'team_id',
-        'bet',
+        'position',
+        'rating',
         'result'
     ];
 }
