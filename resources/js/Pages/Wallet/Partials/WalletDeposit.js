@@ -46,7 +46,7 @@ export default function WalletDeposit() {
             </Form.FloatingLabel>
 
             <div>
-                <Button variant="outline-primary" type="submit">Déposer</Button>
+                <Button variant="primary" type="submit">Déposer</Button>
             </div>
         </form>
     );

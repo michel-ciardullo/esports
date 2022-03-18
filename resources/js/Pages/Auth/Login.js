@@ -80,15 +80,15 @@ export default function Login() {
                     required
                 />
 
-                <Link className="d-block mb-3 text-light" href={route('password.request')}>
+                <Link className="d-block mb-3" href={route('password.request')}>
                     Mot de passe oublié ?
                 </Link>
 
-                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
+                <button className="w-100 btn btn-lg btn-primary" type="submit">
                     Se connecter
                 </button>
 
-                <p className="text-center mb-3">
+                <p className="text-center mb-2 mt-2">
                    Vous n'avez pas encore de compte ? <Link href={route('register')}>S'inscrire</Link>
                 </p>
                 

@@ -16,6 +16,10 @@ body, html, #app {
     height: 100%;
 }
 
+.margin-main {
+    margin-top: 9vh;
+}
+
 .form-control {
     background-color: #373737 !important;
     border-color: #373737 !important;
@@ -41,7 +45,7 @@ body, html, #app {
 }
 
 .accordion-body {
-    background-color: $third !important;
+    background-color: darken($primary, 10%) !important;
 }
 
 .accordion-item {
@@ -71,7 +75,7 @@ body, html, #app {
 
 .vl {
     border-left: 1px solid rgb(212, 212, 212);
-    height: 50px;
+    height: 55px;
 }
 
 .money {
@@ -92,7 +96,6 @@ body, html, #app {
 
 .dropdown-menu {
     background-color: #373737 !important;
-    border-color: $primary !important;
 
     > .dropdown-item {
         color: $light;
@@ -115,5 +118,31 @@ body, html, #app {
     .dropdown-menu {
         right: 0;
         left: auto;
+        border-radius: 10px;
+        color: #fff !important;
+    }
+}
+
+hr {
+    color: #fff !important;
+}
+
+.thumbnail-image {
+    height: 24px;
+    width: auto;
+}
+
+
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-item{
+    &:hover{
+        background-color: $primary !important;
+    }
+    &:focus{
+        background-color:darken($primary, 10%) !important;
     }
 }

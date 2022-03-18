@@ -47,7 +47,7 @@ export default function WalletWithdrawal({ wallet }) {
             </Form.FloatingLabel>
 
             <div>
-                <Button variant="outline-primary" type="submit">Retirer</Button>
+                <Button variant="primary" type="submit">Retirer</Button>
             </div>
         </form>
     );

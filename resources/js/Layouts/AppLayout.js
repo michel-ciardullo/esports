@@ -31,25 +31,26 @@ function Profile({ user }) {
                     <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
             </li>
-            <div class="vl me-3 d-none d-md-block"></div>
+            <div class="vl me-3 d-none d-md-flex"></div>
             <NavDropdown 
-                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg" justify="center"/> } 
+                title={ <NavItems text={ user.name } src="/img/person-circle.svg" justify="center"/> } 
                 id="basic-nav-dropdown"
+                className="d-block d-md-flex justify-content-center align-items-center"
             >
                 <NavDropdown.Item href={route('profile')}>
-                    <NavItems text="Mon Profil" src="/img/person-circle.svg" justify="start" />
+                    <NavItems text="Profil" src="/img/person-circle.svg" justify="start" />
                 </NavDropdown.Item>
                 <Link
                     href={route('wallet.index')}
                     className="dropdown-item"
                 >
-                    Mon Portefeuille
+                    <NavItems text="Portefeuille" src="/img/wallet2.svg" justify="start" />
                 </Link>
                 <Link
                     href="#tickets"
                     className="dropdown-item"
                 >
-                    <NavItems text="Mes Tickets" src="/img/logo-paris.svg" justify="start" />
+                    <NavItems text="Tickets" src="/img/logo-paris.svg" justify="start" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -78,7 +79,7 @@ export default function AppLayout({ auth, children, games }) {
     return (
         <>
             {/* Navbar */}
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow">
                 <Container>
                     <Link className="navbar-brand" href={route('home')}>
                         <ApplicationLogoLong height="60px"/>
@@ -110,7 +111,7 @@ export default function AppLayout({ auth, children, games }) {
             </Navbar>
 
             {/* Content */}
-            <main className="pb-3">
+            <main className="margin-main pb-3">
                 {children}
             </main>
         </>

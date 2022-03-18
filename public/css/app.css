@@ -11509,7 +11509,7 @@ textarea.form-control-lg {
   weight: 600;
 }
 .guest {
-  background-color: #0D0C28;
+  background-color: #121212;
   display: flex;
   height: 100%;
   color: #fff;
@@ -11616,22 +11616,8 @@ h1, .h1 {
   color: #fff !important;
 }
 
-.profileSection h2, .profileSection .h2,
-.profileSection p {
-  color: #fff !important;
-}
-.profileSection .profileCard {
-  background-color: #001C57 !important;
-}
-
-.profileCard input {
-  background-color: #001540 !important;
-  border-color: #001540 !important;
-  color: #fff;
-  box-shadow: 0 0 0 30px #576d7b inset;
-  -webkit-box-shadow: 0 0 0 30px #001540 inset;
-  background: #001540;
-  color: #fff !important;
+.profileCard {
+  border-radius: 8px;
 }
 
 .profileCard label {
@@ -11646,29 +11632,14 @@ hr {
   display: none;
 }
 
-.thumbnail-image {
-  height: 35px;
-  width: auto;
-}
-
-.dropdown-menu {
-  background-color: #6d28d9 !important;
-  border-radius: 10px;
-  color: #fff !important;
-}
-
-.dropdown-item:hover {
-  background-color: #571faf !important;
-}
-
-.dropdown-item:focus {
-  background-color: #4c1b99 !important;
-}
-
 body, html, #app {
   background-color: #121212;
   color: #f8f9fa;
   height: 100%;
+}
+
+.margin-main {
+  margin-top: 9vh;
 }
 
 .form-control {
@@ -11691,7 +11662,7 @@ body, html, #app {
 }
 
 .accordion-body {
-  background-color: #6d28d9 !important;
+  background-color: #273669 !important;
 }
 
 .accordion-item {
@@ -11710,7 +11681,7 @@ body, html, #app {
 
 .vl {
   border-left: 1px solid #d4d4d4;
-  height: 50px;
+  height: 55px;
 }
 
 .money {
@@ -11728,7 +11699,6 @@ body, html, #app {
 
 .dropdown-menu {
   background-color: #373737 !important;
-  border-color: #35498E !important;
 }
 .dropdown-menu > .dropdown-item {
   color: #f8f9fa;
@@ -11749,4 +11719,26 @@ body, html, #app {
 .navbar .dropdown-menu {
   right: 0;
   left: auto;
+  border-radius: 10px;
+  color: #fff !important;
+}
+
+hr {
+  color: #fff !important;
+}
+
+.thumbnail-image {
+  height: 24px;
+  width: auto;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-item:hover {
+  background-color: #35498E !important;
+}
+.dropdown-item:focus {
+  background-color: #273669 !important;
 }

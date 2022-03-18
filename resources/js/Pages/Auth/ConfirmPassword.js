@@ -53,7 +53,7 @@ export default function ConfirmPassword() {
                     <Form.Control.Feedback type="invalid" children={errors.password} />
                 </Form.FloatingLabel>
 
-                <Button variant="outline-primary" className="w-100 btn" type="submit">
+                <Button variant="primary" className="w-100 btn" type="submit">
                     Confirmer
                 </Button>
             </form>
