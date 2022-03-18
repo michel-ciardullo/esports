@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use App\Models\{
     Game,
     Team,
@@ -42,6 +43,7 @@ class ESportCommand extends Command
      * Execute the console command.
      *
      * @return int
+     * @throws Exception
      */
     public function handle() : int
     {
@@ -75,44 +77,6 @@ class ESportCommand extends Command
         return $response ? json_decode($response) : [];
     }
 
-    public function createTournaments(array $tournaments)
-    {
-        foreach ($tournaments as $tournament)
-        {
-            $this->comment($tournament->toJson());
-
-            try {
-                $this->createTournament($tournament);
-                DB::commit();
-            }
-            catch(\Exception $e)
-            {
-                DB::rollBack();
-                throw $e;
-            }
-        }
-    }
-
-    public function createTournament(object $tournament)
-    {
-        $tournamentName     = $tournament->tournament;
-        $tournamentFormat   = $tournament->format;
-
-        $tournament     = Tournament::where('name' , '=', $tournamentName)
-            // ->where('game_id' , '=', $gameId)
-            ->where('format', '=', $tournamentFormat)
-            ->first();
-
-        if (!$tournament)
-        {
-            $tournament = Tournament::create([
-                //'game_id'   => $gameId,
-                'format'    => $tournamentFormat,
-                'name'      => $tournamentName
-            ]);
-        }
-    }
-
     private function saveDataApi(array $tournaments)
     {
         foreach ($tournaments as $data)
@@ -141,11 +105,11 @@ class ESportCommand extends Command
                 $this->comment($confrontation->toJson());
 
                 // Team 1
-                $tournamentTeam1 = $this->GetOrCreateTeam($data->opponent1, $tournament->id, $data->bet1, $data->result1);
+                $tournamentTeam1 = $this->GetOrCreateTeam($confrontation, $data->opponent1, $data->bet1, $data->result1, 1);
                 $this->comment($tournamentTeam1);
 
                 // Team 2
-                $tournamentTea2 = $this->GetOrCreateTeam($data->opponent2, $tournament->id, $data->bet2, $data->result2);
+                $tournamentTea2 = $this->GetOrCreateTeam($confrontation, $data->opponent2, $data->bet2, $data->result2, 2);
                 $this->comment($tournamentTea2);
 
                 $this->comment(PHP_EOL);
@@ -153,57 +117,77 @@ class ESportCommand extends Command
         }
     }
 
-    private function GetOrCreateGameIfNotExist(string $name) {
+    private function GetOrCreateGameIfNotExist(string $name)
+    {
         $game = Game::where('name' , '=', $name)->first();
         if (!$game)
+        {
             $game = Game::create(['name' => $name]);
+        }
         return $game;
     }
 
-    private function GetOrCreateTournamentIfNotExist(int $gameId, string $name, string $format) {
-        $tournament = Tournament::where('name' , '=', $name)->where('game_id' , '=', $gameId)->first();
+    private function GetOrCreateTournamentIfNotExist(int $gameId, string $name, string $format)
+    {
+        $tournament = Tournament::where('name' , '=', $name)
+            ->where('game_id' , '=', $gameId)
+            ->first();
+
         if (!$tournament)
+        {
             $tournament = Tournament::create([
                 'game_id' => $gameId,
                 'format' => $format,
                 'name' => $name
             ]);
+        }
+
         return $tournament;
     }
 
-    private function GetOrCreateConfrontationIfNotExist(array $data) {
+    private function GetOrCreateConfrontationIfNotExist(array $data)
+    {
         $match = Confrontation::where('external_id' , '=', $data['external_id'])->first();
         if (!$match)
+        {
             $match = Confrontation::create($data);
+        }
         return $match;
     }
 
-    private function GetOrCreateTeamIfNotExist(string $name) {
-        $team = Team::where('name' , '=', $name)->first();
-        if (!$team)
-            $team = Team::create(['name' => $name]);
-        return $team;
-    }
-
-    private function GetOrCreateConfrontationTeamIfNotExist(array $data) {
-        $team = ConfrontationTeam::where('confrontation_id' , '=', $data['confrontation_id'])
-            ->where('team_id' , '=', $data['team_id'])
-            ->first();
-        if (!$team)
-            $team = ConfrontationTeam::create($data);
-        return $team;
-    }
-
-    private function GetOrCreateTeam(string $name, int $tournamentId, string $bet, string $result) {
-        // Team
+    private function GetOrCreateTeam(Confrontation $confrontation, string $name, string $bet, string $result, int $position)
+    {
         $team = $this->GetOrCreateTeamIfNotExist($name);
         $this->comment($team);
 
         return $this->GetOrCreateConfrontationTeamIfNotExist([
-            'confrontation_id' => $tournamentId,
-            'team_id'       => $team->id,
-            'bet'           => $bet,
-            'result'        => $result
+            'confrontation_id'  => $confrontation->id,
+            'team_id'           => $team->id,
+            'position'          => $position,
+            'rating'            => $bet,
+            'result'            => $result
         ]);
+    }
+
+    private function GetOrCreateTeamIfNotExist(string $name)
+    {
+        $team = Team::where('name', '=', $name)->first();
+        if (!$team)
+        {
+            $team = Team::create(['name' => $name]);
+        }
+        return $team;
+    }
+
+    private function GetOrCreateConfrontationTeamIfNotExist(array $data)
+    {
+        $team = ConfrontationTeam::where('confrontation_id' , '=', $data['confrontation_id'])
+            ->where('team_id' , '=', $data['team_id'])
+            ->first();
+        if (!$team)
+        {
+            $team = ConfrontationTeam::create($data);
+        }
+        return $team;
     }
 }
