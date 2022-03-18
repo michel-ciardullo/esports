@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'e_sport' => [
+        'endpoint' => env('E_SPORT_ENDPOINT'),
+        'token' => env('E_SPORT_SECRET_ACCESS_TOKEN'),
+    ],
+
 ];

@@ -2,12 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Game;
-use App\Models\Team;
-use App\Models\Tournament;
-use App\Models\TournamentMatch;
-use App\Models\TournamentTeam;
+use App\Models\{
+    Game,
+    Team,
+    Tournament,
+    Confrontation,
+    ConfrontationTeam
+};
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class ESportCommand extends Command
 {
@@ -40,24 +43,27 @@ class ESportCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle() : int
     {
-        $response = $this->fetchApi();
-        if ($response)
-            $this->callbaclApi($response);
+        $tournaments = $this->fetchApi();
+        if (count($tournaments) > 0)
+            $this->saveDataApi($tournaments);
         return 0;
     }
 
-    private function fetchApi(array $data = [])
+    /**
+     * @param array $tournaments
+     * @return array
+     */
+    private function fetchApi(array $tournaments = []) : array
     {
         // Build url with query params
-        $url    = 'https://esport-api.com/api/v2/';
-        $params = array_merge([
-            'token' => 'jtu2hPhuCOyqFt7HeteQ1mItSFvjnIxw'
-        ], $data);
+        $queryParams = array_merge([
+            'token' => config('services.e_sport.token')
+        ], $tournaments);
 
-        $query = http_build_query($params);
-        $url = sprintf('%s?%s', $url, $query);
+        $query  = http_build_query($queryParams);
+        $url    = sprintf('%s?%s', config('services.e_sport.endpoint'), $query);
         $this->comment($url);
 
         // fetch request with curl
@@ -66,42 +72,84 @@ class ESportCommand extends Command
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
 
-        return $response ? json_decode($response) : false;
+        return $response ? json_decode($response) : [];
     }
 
-    private function callbaclApi(array $response)
+    public function createTournaments(array $tournaments)
     {
-        foreach ($response as $data) {
-            // Game
-            $game = $this->GetOrCreateGameIfNotExist($data->game);
-            $this->comment($game->toJson());
-
-            // Tournament
-            $tournament = $this->GetOrCreateTournamentIfNotExist($game->id, $data->tournament, $data->format);
+        foreach ($tournaments as $tournament)
+        {
             $this->comment($tournament->toJson());
 
-            // Match
-            $match = $this->GetOrCreateMatchIfNotExist([
-                'external_id'   => $data->id,
-                'tournament_id' => $tournament->id,
-                'streamer'      => $data->streamer ?? null,
-                'streamer_link' => $data->streamer_link ?? null,
-                'date'          => $data->date,
-                'time'          => $data->time,
-                'timezone'      => $data->timezone,
-                'status'        => $data->status
+            try {
+                $this->createTournament($tournament);
+                DB::commit();
+            }
+            catch(\Exception $e)
+            {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+    }
+
+    public function createTournament(object $tournament)
+    {
+        $tournamentName     = $tournament->tournament;
+        $tournamentFormat   = $tournament->format;
+
+        $tournament     = Tournament::where('name' , '=', $tournamentName)
+            // ->where('game_id' , '=', $gameId)
+            ->where('format', '=', $tournamentFormat)
+            ->first();
+
+        if (!$tournament)
+        {
+            $tournament = Tournament::create([
+                //'game_id'   => $gameId,
+                'format'    => $tournamentFormat,
+                'name'      => $tournamentName
             ]);
-            $this->comment($match->toJson());
+        }
+    }
 
-            // Team 1
-            $tournamentTeam1 = $this->GetOrCreateTeam($data->opponent1, $tournament->id, $data->bet1, $data->result1);
-            $this->comment($tournamentTeam1);
+    private function saveDataApi(array $tournaments)
+    {
+        foreach ($tournaments as $data)
+        {
+            DB::transaction(function () use ($data)
+            {
+                // Game
+                $game = $this->GetOrCreateGameIfNotExist($data->game);
+                $this->comment($game->toJson());
 
-            // Team 2
-            $tournamentTea2 = $this->GetOrCreateTeam($data->opponent2, $tournament->id, $data->bet2, $data->result2);
-            $this->comment($tournamentTea2);
+                // Tournament
+                $tournament = $this->GetOrCreateTournamentIfNotExist($game->id, $data->tournament, $data->format);
+                $this->comment($tournament->toJson());
 
-            $this->comment(PHP_EOL);
+                // Confrontation
+                $confrontation = $this->GetOrCreateConfrontationIfNotExist([
+                    'external_id'   => $data->id,
+                    'tournament_id' => $tournament->id,
+                    'streamer'      => $data->streamer ?? null,
+                    'streamer_link' => $data->streamer_link ?? null,
+                    'date'          => $data->date,
+                    'time'          => $data->time,
+                    'timezone'      => $data->timezone,
+                    'status'        => $data->status
+                ]);
+                $this->comment($confrontation->toJson());
+
+                // Team 1
+                $tournamentTeam1 = $this->GetOrCreateTeam($data->opponent1, $tournament->id, $data->bet1, $data->result1);
+                $this->comment($tournamentTeam1);
+
+                // Team 2
+                $tournamentTea2 = $this->GetOrCreateTeam($data->opponent2, $tournament->id, $data->bet2, $data->result2);
+                $this->comment($tournamentTea2);
+
+                $this->comment(PHP_EOL);
+            });
         }
     }
 
@@ -123,10 +171,10 @@ class ESportCommand extends Command
         return $tournament;
     }
 
-    private function GetOrCreateMatchIfNotExist(array $data) {
-        $match = TournamentMatch::where('external_id' , '=', $data['external_id'])->first();
+    private function GetOrCreateConfrontationIfNotExist(array $data) {
+        $match = Confrontation::where('external_id' , '=', $data['external_id'])->first();
         if (!$match)
-            $match = TournamentMatch::create($data);
+            $match = Confrontation::create($data);
         return $match;
     }
 
@@ -137,13 +185,12 @@ class ESportCommand extends Command
         return $team;
     }
 
-    private function GetOrCreateTournamentTeamIfNotExist(array $data) {
-        $team = TournamentTeam::where('tournament_id' , '=', $data['tournament_id'])
+    private function GetOrCreateConfrontationTeamIfNotExist(array $data) {
+        $team = ConfrontationTeam::where('confrontation_id' , '=', $data['confrontation_id'])
             ->where('team_id' , '=', $data['team_id'])
             ->first();
-
         if (!$team)
-            $team = TournamentTeam::create($data);
+            $team = ConfrontationTeam::create($data);
         return $team;
     }
 
@@ -152,8 +199,8 @@ class ESportCommand extends Command
         $team = $this->GetOrCreateTeamIfNotExist($name);
         $this->comment($team);
 
-        return $this->GetOrCreateTournamentTeamIfNotExist([
-            'tournament_id' => $tournamentId,
+        return $this->GetOrCreateConfrontationTeamIfNotExist([
+            'confrontation_id' => $tournamentId,
             'team_id'       => $team->id,
             'bet'           => $bet,
             'result'        => $result

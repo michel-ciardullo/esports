@@ -1,11 +1,8 @@
 import React from 'react';
 import { Head } from '@inertiajs/inertia-react';
+import { Container } from 'react-bootstrap';
+
 import AppLayout from '@/Layouts/AppLayout';
-import {Container} from 'react-bootstrap';
-import FlashStatus from "@/Components/FlashStatus";
-import UpdateInformations from "@/Pages/Profile/Partials/UpdateInformations";
-import UpdateSecurity from "@/Pages/Profile/Partials/UpdateSecurity";
-import DeleteAccount from "@/Pages/Profile/Partials/DeleteAccount";
 
 function Tournament(props) {
     return (
@@ -32,6 +29,67 @@ function Tournament(props) {
     )
 }
 
+function TournamentArticle({ tournament }) {
+    const confrontations = tournament.confrontations.map((confrontation, i) =>
+        <tr className="border-top border-primary" key={i}>
+            <th scope="row">Live now</th>
+            <td>
+                <a href="#" className="d-block bg-dark text-center p-1 text-light">14.0</a>
+            </td>
+            <td>
+                <a href="#" className="d-block bg-dark text-center p-1 text-light">100.0</a>
+            </td>
+        </tr>
+    )
+
+    return (
+        <article className="card mb-3">
+            <header className="d-lg-flex">
+                <div className="d-flex justify-content-start align-items-top p-3" style={{ flex: '.3' }}>
+                            <span className="rounded-circle bg-success" style={{
+                                width: '34px',
+                                height: '34px'
+                            }} />
+                    <div className="ms-3 d-flex flex-column">
+                        <span>Live now</span>
+                        <em>Time</em>
+                    </div>
+                </div>
+                <div style={{
+                    flex: '3',
+                    clipPath: 'polygon(3% 0, 100% 0, 100% 100%, 0% 100%)'
+                }}>
+                    <div
+                        className="bg-dark w-100 p-3"
+                        style={{
+                            backgroundImage: 'url(https://images.ctfassets.net/j95d1p8hsuun/29qUXMV0WBycRYM3YQCzzl/a214b2faf007454eae0b7719bea6bf37/1920x720-NWcom2-keyart.jpg)',
+                            height: '150px'
+                        }}
+                    />
+                </div>
+            </header>
+            <section className="p-3">
+                <table className="table table-borderless text-light mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">See all game</th>
+                        <th scope="col">
+                            <span className="d-block text-center">1</span>
+                        </th>
+                        <th scope="col">
+                            <span className="d-block text-center">2</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {confrontations}
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    )
+}
+
 export default function GameShow(props) {
     const tournaments = props.game.tournaments
         ? props.game.tournaments.map((tournament, i) => <Tournament key={i} {...tournament} />)
@@ -46,82 +104,7 @@ export default function GameShow(props) {
                 <h1 className="mb-0">Liste des tournois du jeu</h1>
                 <hr className="my-4"/>
 
-                <article className="card mb-3">
-                    <header className="d-flex">
-                        <div className="d-flex justify-content-start align-items-top p-3" style={{ flex: '.3' }}>
-                            <span className="rounded-circle bg-success" style={{
-                                width: '34px',
-                                height: '34px'
-                            }} />
-                            <div className="ms-3 d-flex flex-column">
-                                <span>Live now</span>
-                                <em>Time</em>
-                            </div>
-                        </div>
-                        <div style={{
-                            flex: '3',
-                            clipPath: 'polygon(3% 0, 100% 0, 100% 100%, 0% 100%)'
-                        }}>
-                            <div
-                                className="bg-dark w-100 p-3"
-                                style={{
-                                    backgroundImage: 'url(https://images.ctfassets.net/j95d1p8hsuun/29qUXMV0WBycRYM3YQCzzl/a214b2faf007454eae0b7719bea6bf37/1920x720-NWcom2-keyart.jpg)',
-                                    height: '150px'
-                                }}
-                            />
-                        </div>
-                    </header>
-                    <section className="p-3">
-                        <table className="table text-light">
-                            <thead>
-                            <tr>
-                                <th scope="col">See all game</th>
-                                <th scope="col">1</th>
-                                <th scope="col">X</th>
-                                <th scope="col">2</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">Live now</th>
-                                <td>
-                                    <span className="bg-dark p-1">14.0</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">12.5</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">100.0</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Live now</th>
-                                <td>
-                                    <span className="bg-dark p-1">14.0</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">12.5</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">100.0</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Live now</th>
-                                <td>
-                                    <span className="bg-dark p-1">14.0</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">12.5</span>
-                                </td>
-                                <td>
-                                    <span className="bg-dark p-1">100.0</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                </article>
+                <TournamentArticle tournament={props.game.tournaments[0]} />
 
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                     {tournaments}
