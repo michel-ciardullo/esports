@@ -11,8 +11,6 @@
 @import './profile';
 
 body, html, #app {
-    background-color: #121212;
-    color: $light;
     height: 100%;
 }
 
@@ -86,7 +84,7 @@ body, html, #app {
 
 
 .list-group-item {
-    background-color: #373737 !important;
+    // background-color: #373737 !important;
 
     &.active {
         background-color: $primary !important;
