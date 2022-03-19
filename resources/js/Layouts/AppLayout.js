@@ -7,28 +7,28 @@ import {
     Badge
 } from 'react-bootstrap';
 import { Link } from '@inertiajs/inertia-react';
+import ApplicationLogo from "@/Components/ApplicationLogo";
 
-function Profile({ user }) {
+function Authenticate({ user }) {
     return (
         <>
-            <Link className="nav-link" href="#">
+            <Link className="nav-link" href={route('wallet.index')}>
                 <div>
                     <Badge className="p-2" variant="outline-primary">{user.wallet.balance}€</Badge>
                 </div>
             </Link>
             <NavDropdown title={user.name} id="basic-nav-dropdown">
-                <NavDropdown.Item href={route('profile')}>Profile</NavDropdown.Item>
+                <Link
+                    href={route('profile')}
+                    className="dropdown-item"
+                >
+                    Mon Profil
+                </Link>
                 <Link
                     href={route('wallet.index')}
                     className="dropdown-item"
                 >
                     Mon Portefeuille
-                </Link>
-                <Link
-                    href="#tickets"
-                    className="dropdown-item"
-                >
-                    Mes tiquets
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -44,7 +44,7 @@ function Profile({ user }) {
     )
 }
 
-function NotAuth() {
+function NonAuthentication() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
@@ -53,34 +53,37 @@ function NotAuth() {
     )
 }
 
-export default function AppLayout({ auth, children, games }) {
+function NavLink({ label, name }) {
+    const active = route().current(name)
+
+    return (
+        <Link className={'nav-link' + (active ? ' active' : '')} href={route(name)}>
+            <span>{ label }</span>
+            <span className="nav-link-indicator"/>
+        </Link>
+    )
+}
+
+export default function AppLayout({ auth, children }) {
     return (
         <>
             {/* Navbar */}
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Container>
-                    <Link className="navbar-brand" href={route('home')}>GE</Link>
+                    <Link className="navbar-brand" href={route('home')}>
+                        <ApplicationLogo width="36" height="36"/>
+                    </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>
-                                Accueil
-                            </Link>
-                            <NavDropdown title="Jeux" active={route().current('games.*')}>
-                                {games.map(({id, name}, i) =>
-                                    <Link key={i} className="dropdown-item" href={route('games.show', id)}>{name}</Link>
-                                )}
-                            </NavDropdown>
-                            <Nav.Link href="#home">À propos</Nav.Link>
-                            <Link className={'nav-link' + (route().current('contact') ? ' active' : '')} href={route('contact')}>
-                                Contact
-                            </Link>
-                            <Link className={'nav-link' + (route().current('faq') ? ' active' : '')} href={route('faq')}>
-                                FAQ
-                            </Link>
+                            <NavLink name="home" label="Home"/>
+                            <NavLink name="esports.index" label="ESports"/>
+                            <NavLink name="about" label="À propos"/>
+                            <NavLink name="contact" label="Contact"/>
+                            <NavLink name="faq" label="FAQ"/>
                         </Nav>
-                        <Nav className="ms-auto">
-                            {auth.user ? <Profile user={auth.user}/> : <NotAuth />}
+                        <Nav className="ms-auto nav-profile">
+                            {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
+
 import ApplicationLogo from '@/Components/ApplicationLogo';
 
 export default function Guest({ title, children }) {
@@ -7,7 +8,7 @@ export default function Guest({ title, children }) {
         <main className="guest">
             <div className="guest-content">
                 <Link className="text-center d-block" href="/">
-                    <ApplicationLogo width="62" height="62" className="mb-4" />
+                    <ApplicationLogo width="200" height="200" className="mb-4" />
                 </Link>
                 <div className="card card-body">
                     <h1>{ title }</h1>

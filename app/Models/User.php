@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as AuthUserModel;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends AuthUserModel
+class User extends AuthUserModel implements MustVerifyEmail
 {
     use HasApiTokens,
         HasFactory,
