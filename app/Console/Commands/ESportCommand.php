@@ -59,13 +59,23 @@ class ESportCommand extends Command
      */
     private function fetchApi(array $tournaments = []) : array
     {
+        $token = config('services.e_sport.token');
+        $endpoint = config('services.e_sport.endpoint');
+
+        if($token == null) {
+            throw new \Exception('Invalid token');
+        }
+        if($endpoint == null) {
+            throw new \Exception('Invalid token');
+        }
+
         // Build url with query params
         $queryParams = array_merge([
-            'token' => config('services.e_sport.token')
+            'token' => $token
         ], $tournaments);
 
         $query  = http_build_query($queryParams);
-        $url    = sprintf('%s?%s', config('services.e_sport.endpoint'), $query);
+        $url    = sprintf('%s?%s', $endpoint, $query);
         $this->comment($url);
 
         // fetch request with curl

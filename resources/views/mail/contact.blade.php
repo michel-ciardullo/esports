@@ -7,6 +7,6 @@
     subject message: {{ $subjectMessage }}
     message: {{ $message }}
 
-    Thanks,
+    Merci,
     {{ config('app.name') }}
 @endcomponent
