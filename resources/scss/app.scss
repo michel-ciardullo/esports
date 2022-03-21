@@ -70,3 +70,32 @@ body, html, #app {
 .nav-scroller {
     overflow-x: auto;
 }
+
+// Game color and hover bg icons
+
+@mixin icon-game($color) {
+
+    &:hover {
+        background-image: linear-gradient(0deg, $color, transparent);
+    }
+
+    > svg {
+        fill: $color;
+    }
+}
+
+.icon-game-lol {
+    @include icon-game(#42e0e4);
+}
+
+.icon-game-valorant {
+    @include icon-game(#fe4a6d);
+}
+
+.icon-game-csgo {
+    @include icon-game(#a0b757);
+}
+
+.icon-game-cd {
+    @include icon-game(#1aa3a1);
+}

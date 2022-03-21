@@ -11502,3 +11502,31 @@ body, html, #app {
 .nav-scroller {
   overflow-x: auto;
 }
+
+.icon-game-lol:hover {
+  background-image: linear-gradient(0deg, #42e0e4, transparent);
+}
+.icon-game-lol > svg {
+  fill: #42e0e4;
+}
+
+.icon-game-valorant:hover {
+  background-image: linear-gradient(0deg, #fe4a6d, transparent);
+}
+.icon-game-valorant > svg {
+  fill: #fe4a6d;
+}
+
+.icon-game-csgo:hover {
+  background-image: linear-gradient(0deg, #a0b757, transparent);
+}
+.icon-game-csgo > svg {
+  fill: #a0b757;
+}
+
+.icon-game-cd:hover {
+  background-image: linear-gradient(0deg, #1aa3a1, transparent);
+}
+.icon-game-cd > svg {
+  fill: #1aa3a1;
+}

@@ -4,6 +4,19 @@ import {Badge, Container} from 'react-bootstrap';
 
 import AppLayout from '@/Layouts/AppLayout';
 
+function GameIcon({ name, confrontationCount }) {
+    return (
+        <a className={`position-relative p-3 icon-game-${name}`} href="#">
+            <Badge style={{ top: '.3rem', right: '.3rem' }} className="position-absolute" variant="success">
+                {confrontationCount}
+            </Badge>
+            <svg width="100" height="100">
+                <use xlinkHref={`/img/sprite.svg#${name}`}/>
+            </svg>
+        </a>
+    )
+}
+
 export default function ESportIndex(props) {
 
     return (
@@ -15,43 +28,65 @@ export default function ESportIndex(props) {
                 <h1 className="mb-0">ESports</h1>
                 <hr className="my-4"/>
 
-                <div className="card card-body nav-scroller">
+                <div className="card nav-scroller">
                     <div className="d-flex">
-                        <div className="position-relative">
-                            <Badge className="position-absolute top-0 end-0" variant="success">3</Badge>
-                            <svg width="100" height="100" fill="#42e0e4">
-                                <use xlinkHref="/img/sprite.svg#lol"/>
-                            </svg>
-                        </div>
-                        <div className="position-relative ms-3">
-                            <Badge className="position-absolute top-0 end-0" variant="success">3</Badge>
-                            <svg width="100" height="100" fill="#fe4a6d">
-                                <use xlinkHref="/img/sprite.svg#valorant"/>
-                            </svg>
-                        </div>
-                        <div className="position-relative ms-3">
-                            <Badge className="position-absolute top-0 end-0" variant="success">1</Badge>
-                            <svg width="100" height="100" fill="#a0b757">
-                                <use xlinkHref="/img/sprite.svg#csgo"/>
-                            </svg>
-                        </div>
-                        <div className="position-relative ms-3">
-                            <Badge className="position-absolute top-0 end-0" variant="success">1</Badge>
-                            <svg width="100" height="100" fill="#1aa3a1">
-                                <use xlinkHref="/img/sprite.svg#cd"/>
-                            </svg>
-                        </div>
+                        <GameIcon name="lol" confrontationCount={0} />
+                        <GameIcon name="valorant" confrontationCount={0} />
+                        <GameIcon name="csgo" confrontationCount={0} />
+                        <GameIcon name="cd" confrontationCount={0} />
                     </div>
                 </div>
 
                 <div className="card mt-3">
-                    <header style={{height: '200px'}}>
+                    <header style={{height: '200px'}} className="d-flex">
+                        <div className="m-3">
+                            <span>Pinnacle Cup</span>
+                        </div>
                         <img
-                            width="100%"
-                            height="100%"
+                            style={{
+                                backgroundSize: 'cover',
+                                objectFit: 'cover'
+                            }}
+                            className="flex-grow-1"
                             src="https://res.cloudinary.com/betengine/image/fetch/w_750,h_98,o_90,b_rgb:000000,c_fill,g_auto:face,f_webp/https://www.cloudbet.com/sports-data/entity-media/competitor/260198/image/2021-03-08-05-52-46"
-                            alt="csgo"/>
+                            alt="csgo"
+                        />
                     </header>
+                    <table className="table table-borderless mb-0">
+                        <thead>
+                        <tr className="border-bottom border-primary">
+                            <th colSpan={3} scope="col">Teams</th>
+                            <th scope="col" className="text-center">1</th>
+                            <th scope="col" className="text-center">2</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr className="border-bottom border-primary">
+                            <th scope="row" colSpan={3}>
+                                <div>Team 1</div>
+                                <div>Team 2</div>
+                            </th>
+                            <td className="text-center">
+                                <button className="btn btn-dark mt-1">1</button>
+                            </td>
+                            <td className="text-center">
+                                <button className="btn btn-dark mt-1">2</button>
+                            </td>
+                        </tr>
+                        <tr className="border-bottom border-primary">
+                            <th scope="row" colSpan={3}>
+                                <div>Team 1</div>
+                                <div>Team 2</div>
+                            </th>
+                            <td className="text-center">
+                                <button className="btn btn-dark mt-1">1</button>
+                            </td>
+                            <td className="text-center">
+                                <button className="btn btn-dark mt-1">2</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </Container>
         </AppLayout>
