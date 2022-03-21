@@ -1,20 +1,22 @@
+// Color system
 $blue-100:   #001540;
 $blue-200:   #001C57;
 $blue-300:   #00316E;
 $blue-400:   #00224B;
 $blue-500:   #001B3A;
 
-$primary:    #254ee2;
-$secondary:  #A226EE;
-$third:      #35498E;
+$primary:    #BB86FC;
+$secondary:  lighten($primary, 8%);
+$third:      #6d28d9;
 $fourth:     lighten($blue-200, 20%);
 
 $success:    #198754;
 $info:       #0dcaf0;
 $warning:    #ffc107;
 $danger:     #dc3545;
+
 $light:      #f8f9fa;
-$dark:       #212529;
+$dark:       #121212;
 
 $theme-colors: (
     "primary":    $primary,
@@ -28,3 +30,55 @@ $theme-colors: (
     "light":      $light,
     "dark":       $dark
 );
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                   $dark !default;
+$body-color:                $light !default;
+
+// Forms
+//
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+
+$input-bg:                 rgba(#fff, 12%) !default;
+$input-color:              $body-color !default;
+
+$input-border-color:       $input-bg !default;
+$input-focus-color:        $body-color;
+
+$input-focus-border-color: $input-bg;
+$input-box-shadow:         $input-bg !default;
+
+// List group
+
+// $list-group-color:            $gray-900 !default;
+$list-group-bg:                  lighten($dark, 5%) !default;
+
+$list-group-hover-bg:            lighten($dark, 12%) !default;
+
+$list-group-active-color:        $light !default;
+$list-group-active-bg:           $primary !default;
+$list-group-active-border-color: $primary !default;
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-bg:                    lighten($dark, 12%) !default;
+$dropdown-border-color:          $primary !default;
+
+$dropdown-link-color:            $light !default;
+$dropdown-link-hover-color:      $light !default;
+$dropdown-link-hover-bg:         $primary !default;
+
+// Cards
+
+$card-border-color:              lighten($dark, 5%) !default;
+$card-bg:                        lighten($dark, 5%) !default;
+
+// Accordion
+
+$accordion-bg:                    lighten($dark, 5%) !default;
+$accordion-button-active-bg:      lighten($dark, 5%) !default;

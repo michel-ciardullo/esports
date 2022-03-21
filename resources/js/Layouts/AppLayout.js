@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import {Link} from '@inertiajs/inertia-react';
 import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
+import ApplicationLogo from "@/Components/ApplicationLogo";
 
 function NavItems ({ text, src , justify}) {
     return (
@@ -22,28 +23,35 @@ function NavItems ({ text, src , justify}) {
     )
 }
 
-function Profile({ user }) {
+function Authenticate({ user }) {
     return (
         <>
             <li className="nav-item d-flex justify-content-center align-items-center">
                 <Link className="nav-link" href="#">
                     {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
-                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">500€</div>
+                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
             </li>
-            <div class="vl me-3 d-none d-md-block"></div>
+            <div class="vl me-3 d-none d-md-flex"></div>
             <NavDropdown 
-                title={ <NavItems text={ user.name } src="/img/fakeprofile.svg" justify="center"/> } 
+                title={ <NavItems text={ user.name } src="/img/person-circle.svg" justify="center"/> } 
                 id="basic-nav-dropdown"
+                className="d-block d-md-flex justify-content-center align-items-center"
             >
                 <NavDropdown.Item href={route('profile')}>
-                    <NavItems text="Mon Profil" src="/img/person-circle.svg" justify="start" />
+                    <NavItems text="Profil" src="/img/person-circle.svg" justify="start" />
                 </NavDropdown.Item>
                 <Link
-                    href="/tickets"
+                    href={route('wallet.index')}
                     className="dropdown-item"
                 >
-                    <NavItems text="Mes Tickets" src="/img/logo-paris.svg" justify="start" />
+                    <NavItems text="Portefeuille" src="/img/wallet2.svg" justify="start" />
+                </Link>
+                <Link
+                    href="#tickets"
+                    className="dropdown-item"
+                >
+                    <NavItems text="Tickets" src="/img/logo-paris.svg" justify="start" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -59,50 +67,53 @@ function Profile({ user }) {
     )
 }
 
-function NotAuth() {
+function NonAuthentication() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-secondary" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }
 
-export default function AppLayout({ auth, children, games }) {
+function NavLink({ label, name }) {
+    const active = route().current(name)
+
+    return (
+        <Link className={'nav-link' + (active ? ' active' : '')} href={route(name)}>
+            <span>{ label }</span>
+            <span className="nav-link-indicator"/>
+        </Link>
+    )
+}
+
+export default function AppLayout({ auth, children }) {
     return (
         <>
             {/* Navbar */}
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow">
                 <Container>
                     <Link className="navbar-brand" href={route('home')}>
-                        <ApplicationLogoLong height="60px"/>
+                        <ApplicationLogo height="60px" className="me-3"/>
                     </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>Accueil</Link>
-                            <NavDropdown title="Jeux" active={route().current('games.*')}>
-                                {games.map(({id, name}, i) =>
-                                    <Link key={i} className="dropdown-item" href={route('games.show', id)}>{name}</Link>
-                                )}
-                            </NavDropdown>
-                            <NavDropdown title="Tournois">
-                                <NavDropdown.Item href="#">Tournoi 1</NavDropdown.Item>
-                                <NavDropdown.Item href="#">Tournoi 2</NavDropdown.Item>
-                                <NavDropdown.Item href="#">Tournoi 3</NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link href="#home">À propos</Nav.Link>
-                            <Nav.Link href="#home">Contact</Nav.Link>
+                            <NavLink name="home" label="Home"/>
+                            <NavLink name="esports.index" label="ESports"/>
+                            <NavLink name="about" label="À propos"/>
+                            <NavLink name="contact" label="Contact"/>
+                            <NavLink name="faq" label="FAQ"/>
                         </Nav>
-                        <Nav className="ms-auto">
-                            {auth.user ? <Profile user={auth.user}/> : <NotAuth />}
+                        <Nav className="ms-auto nav-profile">
+                            {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
 
             {/* Content */}
-            <main className="pb-3">
+            <main className="margin-main pb-3">
                 {children}
             </main>
         </>
