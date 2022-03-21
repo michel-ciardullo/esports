@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Game;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,12 +35,10 @@ class HandleInertiaRequests extends Middleware
     {
         $user   = $request->user();
         $flash  = $request->session()->get('flash', []);
-        $games  = Game::all();
 
         return array_merge(parent::share($request), [
-            'auth' => ['user' => $user],
-            'flash' => $flash,
-            'games' => $games,
+            'auth'  => ['user' => $user],
+            'flash' => $flash
         ]);
     }
 }
