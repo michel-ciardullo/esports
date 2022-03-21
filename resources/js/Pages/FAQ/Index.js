@@ -15,29 +15,38 @@ export default function FAQIndex(props) {
                 <h1 className="mb-0">FAQ</h1>
                 <hr className="my-4"/>
 
-                <Accordion defaultActiveKey="0">
+                <Accordion defaultActiveKey="13">
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header>Accordion Item #1</Accordion.Header>
+                        <Accordion.Header>Est ce que le site est sécurisé ?</Accordion.Header>
                         <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                            est laborum.
+                        Non ? Oui evidemment, le site est de confiance est votre argent est en sécurité, vous pouvez être sur
+                        que vous aurez votre argent.
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header>Accordion Item #2</Accordion.Header>
+                        <Accordion.Header>Comment obtenir des crédits ?</Accordion.Header>
                         <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                            est laborum.
+                        Vous devez déposer de l'argent sur votre compte grâce aux différents packs de crédits RiCoin en utilisant votre
+                        compte en banque (encore une fois votre argent est en scéurité, ou pas...)
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="2">
+                        <Accordion.Header>Avec quoi puis-je payer des RiCoins ?</Accordion.Header>
+                        <Accordion.Body>
+                        Nous acceptons les virements par Paypal, Mastercard, Visa
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="3">
+                        <Accordion.Header>Est il possible de visionner les matchs en ligne ?</Accordion.Header>
+                        <Accordion.Body>
+                        Malheureusement nous ne pouvons pas actuellement permettre la retransmission des matchs, mais celà
+                        arrivera lors d'une prochaine mise a jour
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="4">
+                        <Accordion.Header>J'ai un problème avec mon compte que faire ?</Accordion.Header>
+                        <Accordion.Body>
+                        Vous pouvez contacter notre service client ici, disponible du lundi au vendredi de 10h a 22h
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
