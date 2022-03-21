@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import AppLayout from '@/Layouts/AppLayout';
 
 import GameScroller from "@/Pages/ESport/Partials/GameScroller";
+import GameShowMatches from "@/Pages/ESport/Partials/GameShowMatches";
 
 export default function ESportIndex(props) {
 
@@ -17,6 +18,7 @@ export default function ESportIndex(props) {
                 <hr className="my-4"/>
 
                 <GameScroller />
+                <GameShowMatches />
 
             </Container>
         </AppLayout>

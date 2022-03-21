@@ -4,7 +4,7 @@ import { Head, useForm } from '@inertiajs/inertia-react';
 import {Alert, Form} from 'react-bootstrap';
 
 export default function ForgotPassword({ status }) {
-    const { data, setData, post, errors }   = useForm({ email: '' });
+    const { data, setData, post, errors }  = useForm({ email: '' });
 
     const onHandleChange = e => {
         setData(e.target.name, e.target.value);
@@ -55,7 +55,7 @@ export default function ForgotPassword({ status }) {
                 </Form.FloatingLabel>
 
                 <button className="w-100 btn btn-lg btn-primary" type="submit">
-                    Réinitialisation le mot de passe
+                    Réinitialiser le mot de passe
                 </button>
             </form>
         </Guest>

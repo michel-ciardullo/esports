@@ -7,7 +7,7 @@ import {
     Badge
 } from 'react-bootstrap';
 import {Link} from '@inertiajs/inertia-react';
-import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
+import NavLink from '@/Components/NavLink';
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
 function NavItems ({ text, src , justify}) {
@@ -25,20 +25,22 @@ function NavItems ({ text, src , justify}) {
 
 function Authenticate({ user }) {
     return (
-        <>
-            <li className="nav-item d-flex justify-content-center align-items-center">
-                <Link className="nav-link" href="#">
+        <div className="authentificate d-flex flex-md-row flex-row-reverse justify-content-between">
+            <div className="nav-item d-flex justify-content-center align-items-md-center">
+                <Link href="#">
                     {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
                     <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
-            </li>
-            <div class="vl me-3 d-none d-md-flex"></div>
+            </div>
+            <div className="vl me-3 d-none d-md-flex"></div>
             <NavDropdown 
-                title={ <NavItems text={ user.name } src="/img/person-circle.svg" justify="center"/> } 
+                title={ <NavItems text={ user.name } src="/img/person-circle.svg" justify="start"/> } 
                 id="basic-nav-dropdown"
                 className="d-block d-md-flex justify-content-center align-items-center"
             >
-                <NavDropdown.Item href={route('profile')}>
+                <NavDropdown.Item 
+                    href={route('profile')}
+                >
                     <NavItems text="Profil" src="/img/person-circle.svg" justify="start" />
                 </NavDropdown.Item>
                 <Link
@@ -63,7 +65,7 @@ function Authenticate({ user }) {
                     <NavItems text="Déconnexion" src="/img/logo-disconnect.svg" justify="start" />
                 </Link>
             </NavDropdown>
-        </>
+        </div>
     )
 }
 
@@ -73,17 +75,6 @@ function NonAuthentication() {
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
             <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
         </>
-    )
-}
-
-function NavLink({ label, name }) {
-    const active = route().current(name)
-
-    return (
-        <Link className={'nav-link' + (active ? ' active' : '')} href={route(name)}>
-            <span>{ label }</span>
-            <span className="nav-link-indicator"/>
-        </Link>
     )
 }
 

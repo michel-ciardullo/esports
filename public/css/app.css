@@ -11522,14 +11522,14 @@ textarea.form-control-lg {
 .guest input:-webkit-autofill:hover,
 .guest input:-webkit-autofill:focus,
 .guest input:-webkit-autofill:active {
-  background-color: #353740 !important;
+  background-color: #1f1f1f !important;
   border-color: #C4C4C4 !important;
   color: #FFF;
   font-family: "YoutubeSansSemibold";
   box-shadow: 0 0 0 30px #576D7B inset;
-  -webkit-box-shadow: 0 0 0 30px #353740 inset;
+  -webkit-box-shadow: 0 0 0 30px #1f1f1f inset;
   -webkit-text-fill-color: azure;
-  background: #353740;
+  background: #1f1f1f;
 }
 
 .guest-content {
@@ -11540,13 +11540,13 @@ textarea.form-control-lg {
 }
 
 .guest .card {
-  background-color: #353740 !important;
+  background-color: #1f1f1f !important;
   border-radius: 24px !important;
 }
 
 .guest input,
 .guest input:focus {
-  background-color: #353740 !important;
+  background-color: #1f1f1f !important;
   border-color: #C4C4C4 !important;
   color: #FFF;
   font-family: "YoutubeSansSemibold";
@@ -11636,12 +11636,47 @@ hr {
   display: none;
 }
 
+.game-scroller {
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.game-scroller-element {
+  position: relative;
+  width: 80;
+  height: 80;
+}
+
+.match-number {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  left: 60px;
+}
+
+.game-show-matches {
+  background-color: #1f1f1f;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.accordion-item-e-sport {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
 body, html, #app {
   height: 100%;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -11674,19 +11709,24 @@ body, html, #app {
   -webkit-text-fill-color: azure;
 }
 
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+
 .accordion-button {
-  background-color: #212121 !important;
+  background-color: #080808 !important;
   color: #fff !important;
 }
 
 .accordion-body {
-  background-color: #9f54fb !important;
+  background-color: #1f1f1f !important;
 }
 
 .accordion-item {
   border: 0px;
   border-radius: 40px;
-  background-color: #212121;
+  background-color: #080808 !important;
 }
 
 .btn-primary {
@@ -11706,7 +11746,7 @@ body, html, #app {
 }
 
 .money {
-  font-size: 1.4em;
+  font-size: 1em;
   font-family: YoutubeSansMedium;
 }
 
@@ -11737,6 +11777,9 @@ body, html, #app {
 }
 .navbar .nav-link > span:first-child {
   padding: 0.5rem 0;
+}
+.navbar #basic-nav-dropdown {
+  padding-top: 0;
 }
 .navbar .nav-link:not(.dropdown-toggle) {
   display: flex;
@@ -11771,10 +11814,6 @@ hr {
 }
 .dropdown-item:focus {
   background-color: #9f54fb !important;
-}
-
-.accordion-body {
-  background-color: #313131;
 }
 
 .form-control:-webkit-autofill,

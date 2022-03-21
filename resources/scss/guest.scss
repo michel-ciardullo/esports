@@ -9,14 +9,14 @@
     input:-webkit-autofill:hover, 
     input:-webkit-autofill:focus, 
     input:-webkit-autofill:active{
-        background-color: #353740 !important;
+        background-color: $card-bg !important;
         border-color: #C4C4C4 !important;
         color: #FFF;
         font-family: 'YoutubeSansSemibold';
         box-shadow: 0 0 0 30px #576D7B inset;
-        -webkit-box-shadow: 0 0 0 30px #353740 inset;
+        -webkit-box-shadow: 0 0 0 30px $card-bg inset;
         -webkit-text-fill-color: azure;
-        background:#353740;
+        background: $card-bg;
     }
 }
 
@@ -28,13 +28,13 @@
 }
 
 .guest .card {
-    background-color: #353740 !important;
+    background-color: $card-bg !important;
     border-radius: 24px !important;
 }
 
 .guest input,
 .guest input:focus {
-    background-color: #353740 !important;
+    background-color: $card-bg !important;
     border-color: #C4C4C4 !important;
     color: #FFF;
     font-family: 'YoutubeSansSemibold';

@@ -10,6 +10,8 @@
 
 @import './profile';
 
+@import './esport';
+
 body, html, #app {
     height: 100%;
 }
@@ -17,6 +19,7 @@ body, html, #app {
 
 ::-webkit-scrollbar {
     width: 8px;
+    height: 4px;
 }
 ::-webkit-scrollbar-track {
     background: $body-bg; 
@@ -51,19 +54,24 @@ body, html, #app {
     }
 }
 
+.accordion {
+    display: flex;
+    flex-direction: column;
+}
+
 .accordion-button {
-    background-color: #212121 !important;
+    background-color: #080808 !important;
     color: #fff !important;
 }
 
 .accordion-body {
-    background-color: darken($primary, 10%) !important;
+    background-color: $card-bg !important;
 }
 
 .accordion-item {
     border: 0px;
     border-radius: 40px;
-    background-color: #212121;
+    background-color: #080808 !important;
 }
 
 // input:-webkit-autofill, textarea:-webkit-autofill,
@@ -92,11 +100,9 @@ body, html, #app {
 }
 
 .money {
-    font-size: 1.4em;
+    font-size: 1em;
     font-family: YoutubeSansMedium;
 }
-
-
 
 .list-group-item {
     // background-color: #373737 !important;
@@ -133,6 +139,10 @@ body, html, #app {
         > span:first-child {
             padding: 0.5rem 0;
         }
+    }
+
+    #basic-nav-dropdown {
+        padding-top: 0;
     }
 
     .nav-link:not(.dropdown-toggle) {
@@ -180,10 +190,6 @@ hr {
     }
 }
 
-.accordion-body {
-    background-color: lighten($dark, 12%);
-}
-
 .form-control:-webkit-autofill,
 .form-control:-webkit-autofill:hover,
 .form-control:-webkit-autofill:focus,
@@ -192,3 +198,4 @@ hr {
     -webkit-box-shadow: 0 0 0 30px lighten($dark, 12%) inset;
     -webkit-text-fill-color: $light;
 }
+
