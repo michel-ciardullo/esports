@@ -3,6 +3,8 @@ import { Head } from '@inertiajs/inertia-react';
 import { Container } from 'react-bootstrap';
 import AppLayout from '@/Layouts/AppLayout';
 
+import GameScroller from "@/Pages/ESport/Partials/GameScroller";
+
 export default function ESportIndex(props) {
 
     return (
@@ -13,6 +15,8 @@ export default function ESportIndex(props) {
 
                 <h1 className="mb-0">ESports</h1>
                 <hr className="my-4"/>
+
+                <GameScroller />
 
             </Container>
         </AppLayout>
