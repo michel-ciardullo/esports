@@ -1,8 +1,9 @@
 import React from 'react';
-import {Head, Link} from '@inertiajs/inertia-react';
+import { Head, Link } from '@inertiajs/inertia-react';
+import { Container } from 'react-bootstrap';
+
 import AppLayout from '@/Layouts/AppLayout';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import {Container} from 'react-bootstrap';
 
 export default function Home(props) {
     return (
@@ -13,8 +14,8 @@ export default function Home(props) {
                 backgroundImage: 'url(https://www.studyrama.com/IMG/arton107792.png)',
                 backgroundSize: 'cover'
             }}>
-                <Link className="text-center d-block" href="/">
-                    <ApplicationLogo height="80" className="mb-4"/>
+                <Link className="text-center" href="/">
+                    <ApplicationLogo width={200} height={200}/>
                 </Link>
                 <h1 className="display-5 fw-bold">RiBet</h1>
                 <div className="col-lg-6 mx-auto">
@@ -22,7 +23,7 @@ export default function Home(props) {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fuga illo non perspiciatis voluptas! Accusamus animi atque consequatur, cum deleniti distinctio ea eligendi excepturi facilis nesciunt non nostrum, quod vitae.
                     </p>
                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <button type="button" className="btn btn-secondary btn-lg px-4 gap-3">Voir les tournois</button>
+                        <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Voir les tournois</button>
                         <button type="button" className="btn btn-dark btn-lg px-4">Nous-contactez</button>
                     </div>
                 </div>
@@ -37,7 +38,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link text-secondary">
+                        <a href="#" className="icon-link text-primary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />
@@ -48,7 +49,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link text-secondary">
+                        <a href="#" className="icon-link text-primary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />
@@ -59,7 +60,7 @@ export default function Home(props) {
                         <h2>Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" className="icon-link text-secondary">
+                        <a href="#" className="icon-link text-primary">
                             Call to action
                             <svg className="bi" width="1em" height="1em">
                                 <use xlinkHref="#chevron-right" />

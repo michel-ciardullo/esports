@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import {Link} from '@inertiajs/inertia-react';
 import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
+import ApplicationLogo from "@/Components/ApplicationLogo";
 
 function NavItems ({ text, src , justify}) {
     return (
@@ -22,7 +23,7 @@ function NavItems ({ text, src , justify}) {
     )
 }
 
-function Profile({ user }) {
+function Authenticate({ user }) {
     return (
         <>
             <li className="nav-item d-flex justify-content-center align-items-center">
@@ -66,7 +67,7 @@ function Profile({ user }) {
     )
 }
 
-function NotAuth() {
+function NonAuthentication() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
@@ -75,36 +76,37 @@ function NotAuth() {
     )
 }
 
-export default function AppLayout({ auth, children, games }) {
+function NavLink({ label, name }) {
+    const active = route().current(name)
+
+    return (
+        <Link className={'nav-link' + (active ? ' active' : '')} href={route(name)}>
+            <span>{ label }</span>
+            <span className="nav-link-indicator"/>
+        </Link>
+    )
+}
+
+export default function AppLayout({ auth, children }) {
     return (
         <>
             {/* Navbar */}
             <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow">
                 <Container>
                     <Link className="navbar-brand" href={route('home')}>
-                        <ApplicationLogoLong height="60px"/>
+                        <ApplicationLogo height="60px" className="me-3"/>
                     </Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <Link className={'nav-link' + (route().current('home') ? ' active' : '')} href={route('home')}>
-                                Accueil
-                            </Link>
-                            <NavDropdown title="Jeux" active={route().current('games.*')}>
-                                {games.map(({id, name}, i) =>
-                                    <Link key={i} className="dropdown-item" href={route('games.show', id)}>{name}</Link>
-                                )}
-                            </NavDropdown>
-                            <Nav.Link href="#home">À propos</Nav.Link>
-                            <Link className={'nav-link' + (route().current('contact') ? ' active' : '')} href={route('contact')}>
-                                Contact
-                            </Link>
-                            <Link className={'nav-link' + (route().current('faq') ? ' active' : '')} href={route('faq')}>
-                                FAQ
-                            </Link>
+                            <NavLink name="home" label="Home"/>
+                            <NavLink name="esports.index" label="ESports"/>
+                            <NavLink name="about" label="À propos"/>
+                            <NavLink name="contact" label="Contact"/>
+                            <NavLink name="faq" label="FAQ"/>
                         </Nav>
-                        <Nav className="ms-auto">
-                            {auth.user ? <Profile user={auth.user}/> : <NotAuth />}
+                        <Nav className="ms-auto nav-profile">
+                            {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

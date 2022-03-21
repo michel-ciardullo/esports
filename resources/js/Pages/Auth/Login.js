@@ -1,7 +1,8 @@
 import React from 'react';
+import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { Form } from 'react-bootstrap';
+
 import Guest from '@/Layouts/Guest';
-import {Head, Link, useForm} from '@inertiajs/inertia-react';
-import {Form} from 'react-bootstrap';
 
 export default function Login() {
     const { post, errors, data, setData } = useForm({
