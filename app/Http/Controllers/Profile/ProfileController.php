@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileUpdateInformationRequest;
 use App\Http\Requests\Profile\ProfileUpdateSecurityRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -53,6 +55,27 @@ class ProfileController extends Controller
             ->with('flash', [
                 'status'    => 'success',
                 'message'   => __('Le mot de passe à bien été mise à jour...')
+            ]);
+    }
+
+    /**
+     * @param ProfileUpdateSecurityRequest $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request) : RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        $request->user()->delete();
+
+        return  redirect('/')
+            ->with('flash', [
+                'status'    => 'success',
+                'message'   => __('Le compte à bien été supprimer')
             ]);
     }
 }

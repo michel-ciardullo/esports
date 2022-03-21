@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function ProfileSection({ title, description, children }) {
-
     return (
         <div className="row profileSection">
             <div className="col-lg-4 mb-2 mb-lg-0">

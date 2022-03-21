@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tournament_team', function (Blueprint $table) {
+        Schema::create('confrontation_team', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tournament_id');
+            $table->foreignId('confrontation_id');
             $table->foreignId('team_id');
-            $table->string('bet');
+            $table->unsignedInteger('position');
+            $table->string('rating');
             $table->string('result');
             $table->timestamps();
 
-            $table->index(['tournament_id', 'team_id']);
+            $table->index(['confrontation_id', 'team_id']);
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tournament_team');
+        Schema::dropIfExists('confrontation_team');
     }
 };

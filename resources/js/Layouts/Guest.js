@@ -8,7 +8,7 @@ export default function Guest({ title, children }) {
             <div className="guest-content">
                 <div className="card card-body rounded">
                     <Link className="text-center d-block" href="/">
-                        <ApplicationLogoLong width="80px" height="auto" className="mb-2" />
+                        <ApplicationLogoLong height className="mb-2" />
                     </Link>
                     <h1 className="text-center mb-4">{ title }</h1>
                     <hr className="mw-100 mb-5"></hr>

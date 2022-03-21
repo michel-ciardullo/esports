@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('confrontations', function (Blueprint $table) {
             $table->id();
             $table->string('external_id');
             $table->foreignId('tournament_id')->index();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matches');
+        Schema::dropIfExists('confrontations');
     }
 };

@@ -115,11 +115,11 @@ export default function Login() {
                     required
                 />
 
-                <button className="w-100 btn btn-lg btn-primary mb-3" type="submit">
+                <button className="w-100 btn btn-lg btn-primary" type="submit">
                     S'inscrire
                 </button>
 
-                <p className="text-center mb-3">
+                <p className="text-center mb-2 mt-2">
                    Vous avez déjà compte ? <Link href={route('login')}>Se connecter</Link>
                 </p>
             </form>

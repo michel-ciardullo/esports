@@ -1,43 +1,47 @@
 import React from 'react';
-import Guest from '@/Layouts/Guest';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import {Button} from 'react-bootstrap';
+import {Alert, Button} from 'react-bootstrap';
+
+import Guest from '@/Layouts/Guest';
 
 export default function VerifyEmail({ status }) {
-    const { post, processing } = useForm();
+    const { post } = useForm();
 
-    const submit = (e) => {
+    const submit = e => {
         e.preventDefault();
-
         post(route('verification.send'));
     };
 
     return (
-        <Guest>
-            <Head title="Email Verification" />
+        <Guest title="Vérification du mail">
+            <Head title="Vérification du mail" />
 
-            <div className="mb-4 text-sm text-gray-600">
-                Thanks for signing up! Before getting started, could you verify your email address by clicking on the
-                link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-            </div>
+            <p className="text-sm">
+                Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le
+                lien que nous venons de vous envoyer par e-mail ? Si vous n'avez pas reçu l'e-mail, nous serons heureux de vous en envoyer un autre.
+            </p>
 
-            {status === 'verification-link-sent' && (
-                <div className="mb-4 font-medium text-sm text-green-600">
-                    A new verification link has been sent to the email address you provided during registration.
+            {status && <Alert variant="success" children={status} />}
+
+            <form
+                onSubmit={submit}
+                className="needs-validation"
+                noValidate
+            >
+                <div>
+                    <Button variant="outline-primary" type="submit">
+                        Renvoyer le courriel de vérification
+                    </Button>
                 </div>
-            )}
 
-            <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <Button variant="success" processing={processing}>Resend Verification Email</Button>
-
+                <div>
                     <Link
                         href={route('logout')}
                         method="post"
                         as="button"
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
+                        className="btn btn-link ps-0"
                     >
-                        Log Out
+                        Déconnexion
                     </Link>
                 </div>
             </form>

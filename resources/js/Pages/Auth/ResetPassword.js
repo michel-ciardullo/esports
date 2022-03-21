@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Guest from '@/Layouts/Guest';
 import {Head, useForm} from '@inertiajs/inertia-react';
-import {Form} from "react-bootstrap";
+import {Form} from 'react-bootstrap';
 
 export default function ResetPassword({ token, email }) {
     const { data, setData, post, errors, reset } = useForm({

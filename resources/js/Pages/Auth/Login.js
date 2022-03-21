@@ -1,7 +1,8 @@
 import React from 'react';
+import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { Form } from 'react-bootstrap';
+
 import Guest from '@/Layouts/Guest';
-import {Head, Link, useForm} from '@inertiajs/inertia-react';
-import {Form} from "react-bootstrap";
 
 export default function Login() {
     const { post, errors, data, setData } = useForm({
@@ -84,11 +85,11 @@ export default function Login() {
                     Mot de passe oublié ?
                 </Link>
 
-                <button className="w-100 btn btn-lg btn-primary mb-3" type="submit">
+                <button className="w-100 btn btn-lg btn-primary" type="submit">
                     Se connecter
                 </button>
 
-                <p className="text-center mb-3">
+                <p className="text-center mb-2 mt-2">
                    Vous n'avez pas encore de compte ? <Link href={route('register')}>S'inscrire</Link>
                 </p>
                 

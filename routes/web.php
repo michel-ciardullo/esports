@@ -14,11 +14,22 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', fn () => Inertia::render('Home'))
-    ->name('home');
+Route::get('/', fn () => Inertia::render('Home'))->name('home');
 
-Route::resource('/games', 'App\\Http\\Controllers\\Game\\GameController')
-    ->only(['index', 'show']);
+Route::get('/about', 'App\\Http\\Controllers\\About\\AboutController@index')->name('about');
+
+Route::get('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@index')->name('contact');
+Route::post('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@send')->name('contact.send');
+
+Route::get('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@index')->name('faq');
+
+Route::resource('/esports', 'App\\Http\\Controllers\\ESport\\ESportController');
 
 require __DIR__.'/auth.php';
-require __DIR__.'/profile.php';
+
+Route::group([
+    'middleware' => ['auth', 'verified']
+], function () {
+    require __DIR__.'/profile.php';
+    require __DIR__.'/wallet.php';
+});

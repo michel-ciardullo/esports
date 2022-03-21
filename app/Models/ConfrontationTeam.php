@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TournamentTeam extends Pivot
+class ConfrontationTeam extends Pivot
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,10 @@ class TournamentTeam extends Pivot
      * @var string[]
      */
     protected $fillable = [
-        'tournament_id',
+        'confrontation_id',
         'team_id',
-        'bet',
+        'position',
+        'rating',
         'result'
     ];
 }

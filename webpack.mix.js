@@ -16,7 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/scss/app.scss', 'public/css')
     .webpackConfig(require('./webpack.config'));
 
-if (mix.inProduction())
-    mix.version();
-else
-    mix.sourceMaps();
+mix.inProduction() ? mix.version() : mix.sourceMaps();

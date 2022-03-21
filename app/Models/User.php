@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as AuthUserModel;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends AuthUserModel
+class User extends AuthUserModel implements MustVerifyEmail
 {
     use HasApiTokens,
         HasFactory,
@@ -44,6 +44,22 @@ class User extends AuthUserModel
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['wallet'];
+
+    public static function booted()
+    {
+        static::created(function($model) {
+            $model->wallet()->forceCreate([
+                'user_id' => $model->id
+            ]);
+        });
+    }
 
     /**
      * Get the wallet associated with the user.

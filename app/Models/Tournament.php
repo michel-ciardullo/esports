@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
+    Model,
+    Relations\HasMany,
+    Relations\HasOne
+};
 
 class Tournament extends Model
 {
@@ -24,23 +25,25 @@ class Tournament extends Model
     ];
 
     /**
-     * The tournaments that belong to the team.
+     * The relations to eager load on every query.
      *
-     * @return BelongsToMany
+     * @var array
      */
-    public function teams() : BelongsToMany
-    {
-        return $this->belongsToMany(Team::class)
-            ->using(TournamentTeam::class);
-    }
+    protected $with = ['confrontations'];
 
-    public function matches() : HasMany
-    {
-        return $this->HasMany(TournamentMatch::class);
-    }
-
+    /**
+     * @return HasOne
+     */
     public function game() : HasOne
     {
         return $this->hasOne(Game::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function confrontations() : HasMany
+    {
+        return $this->HasMany(Confrontation::class);
     }
 }
