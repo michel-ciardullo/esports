@@ -11636,6 +11636,40 @@ hr {
   display: none;
 }
 
+svg {
+  transition: all 0.1s ease;
+}
+svg.csgo {
+  fill: gray;
+}
+svg.csgo:hover {
+  fill: #579e06;
+}
+svg.dota {
+  fill: gray;
+}
+svg.dota:hover {
+  fill: #c80000;
+}
+svg.lol {
+  fill: gray;
+}
+svg.lol:hover {
+  fill: #0b8adf;
+}
+svg.cd {
+  fill: gray;
+}
+svg.cd:hover {
+  fill: #0544a8;
+}
+svg.valorant {
+  fill: gray;
+}
+svg.valorant:hover {
+  fill: #b90a30;
+}
+
 .game-scroller {
   background-color: #1f1f1f;
   border-radius: 10px;
@@ -11644,8 +11678,7 @@ hr {
 
 .game-scroller-element {
   position: relative;
-  width: 80;
-  height: 80;
+  cursor: pointer;
 }
 
 .match-number {
@@ -11668,6 +11701,81 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-self: center;
+  border-radius: 10px;
+}
+
+.card-wrapper {
+  height: 150px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+ul.nav-tabs {
+  position: relative;
+  top: -42px;
+  border-bottom: 0px transparent;
+}
+ul.nav-tabs .nav-link {
+  color: #fff;
+}
+ul.nav-tabs .nav-link.active, ul.nav-tabs .nav-link:hover {
+  color: #BB86FC !important;
+  background-color: transparent !important;
+  border-color: transparent transparent #BB86FC !important;
+}
+
+.arrow {
+  cursor: pointer;
+  height: 20px;
+  transform: translateX(-50%) translateY(-50%);
+  transition: transform 0.1s;
+  width: 10px;
+}
+.arrow-top, .arrow-bottom {
+  background-color: #666;
+  height: 4px;
+  left: -5px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+.arrow-top:after, .arrow-bottom:after {
+  background-color: #fff;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: all 0.15s;
+}
+.arrow-top {
+  transform: rotate(45deg);
+  transform-origin: bottom right;
+}
+.arrow-top:after {
+  left: 100%;
+  right: 0;
+  transition-delay: 0s;
+}
+.arrow-bottom {
+  transform: rotate(-45deg);
+  transform-origin: top right;
+}
+.arrow-bottom:after {
+  left: 0;
+  right: 100%;
+  transition-delay: 0.15s;
+}
+.arrow:hover .arrow-top:after {
+  left: 0;
+  transition-delay: 0.15s;
+}
+.arrow:hover .arrow-bottom:after {
+  right: 0;
+  transition-delay: 0s;
+}
+.arrow:active {
+  transform: translateX(-50%) translateY(-50%) scale(0.9);
 }
 
 body, html, #app {
