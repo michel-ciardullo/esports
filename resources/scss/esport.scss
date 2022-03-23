@@ -34,6 +34,18 @@ svg{
             fill: #b90a30;
         }
     }
+    &.r6{
+        fill: gray;
+        &:hover{
+            fill: #adadad;
+        }
+    }
+    &.rl{
+        fill: gray;
+        &:hover{
+            fill: #0797da;
+        }
+    }
 }
 
 .game-scroller {
@@ -198,4 +210,8 @@ ul.nav-tabs {
     &:active {
       transform: translateX(-50%) translateY(-50%) scale(0.9);
     }
+}
+
+span.text-blue {
+    display: inline-block;
 }

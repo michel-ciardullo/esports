@@ -17,7 +17,7 @@ function CardWrapper({ imgUrl, gameName }) {
     )
 }
 
-function TourneyCard({ eventKey, date, tourney, sprite, team1, team2, rating1, rating2 }) {
+function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, rating2 }) {
     return (
         <Accordion.Item className="accordion-item-e-sport mb-3 shadow" eventKey={eventKey}>
             <Accordion.Header>
@@ -27,19 +27,17 @@ function TourneyCard({ eventKey, date, tourney, sprite, team1, team2, rating1, r
             <Accordion.Body>
                 <div className="tourney-content">
                     <div className="row mb-1 tourney-content-head">
-                        <div className="col-1"></div>
-                        <div className="col-6"></div>
-                        <div className="col-2">
-                            <span className="d-block text-center">1</span>
-                        </div>
-                        <div className="col-2">
-                            <span className="d-block text-center">2</span>
+                        <div className="d-none d-md-flex col-1"></div>
+                        <div className="d-flex flex-column justify-content-center col-5"><span className="text-primary d-md-none d-flex justify-content-center">{label}</span></div>
+                        <div className="d-flex flex-row justify-content-between col-6 col-md-5">
+                            <span className="w-50 d-block text-center">1</span>
+                            <span className="w-50 d-block text-center">2</span>
                         </div>
                         <div className="col-1"></div>
                     </div>
                     <div className="row tourney-content-main">
-                        <div className="d-flex flex-column justify-content-center col-1"><span className="text-blue">{date}</span></div>
-                        <div className="d-flex flex-column justify-content-center col-6">
+                        <div className="d-none d-md-flex flex-column justify-content-center col-1"><span className="text-primary d-flex justify-content-center">{label}</span></div>
+                        <div className="d-flex flex-column justify-content-center col-5">
                             <div>
                                 <Sprites height="15px" width="15px" sprite='csgo' fill='gray' className="me-1" />
                                 {team1}
@@ -49,11 +47,9 @@ function TourneyCard({ eventKey, date, tourney, sprite, team1, team2, rating1, r
                                 {team2}
                             </div>
                         </div>
-                        <div className="d-flex flex-column justify-content-center col-2">
-                            <Button className="w-100" variant="dark" type="submit">{rating1}</Button>
-                        </div>
-                        <div className="d-flex flex-column justify-content-center col-2">
-                            <Button className="w-100" variant="dark" type="submit">{rating2}</Button>
+                        <div className="d-flex flex-row justify-content-between col-6 col-md-5">
+                            <Button className="w-50" variant="dark" type="submit">{rating1}</Button>
+                            <Button className="ms-1 w-50" variant="dark" type="submit">{rating2}</Button>
                         </div>
                         <div className="d-flex flex-column justify-content-center align-items-center col-1">
                             <div className="arrow">
@@ -73,7 +69,7 @@ function TabItem ({ eventKey, date, tourney, sprite, team1, team2, rating1, rati
         <Accordion defaultActiveKey="0" alwaysOpen>
             <TourneyCard
                 eventKey={eventKey}
-                date={date}
+                label={date}
                 tourney={tourney}
                 sprite={sprite}
                 team1={team1}
@@ -90,7 +86,7 @@ export default function GameShowMatches(props) {
     return (
         <div className="game-show-matches">
             <CardWrapper imgUrl="csgowallpaper1.jpg" gameName="Counter-Strike" />
-            <Tabs defaultActiveKey="encours" id="uncontrolled-tab-example" className="mb-3">
+            <Tabs defaultActiveKey="encours" id="uncontrolled-tab-example">
                 <Tab eventKey="encours" title="En Cours">
                     <TabItem
                         eventKey="0"

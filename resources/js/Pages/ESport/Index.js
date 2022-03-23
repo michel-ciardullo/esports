@@ -17,8 +17,9 @@ export default function ESportIndex(props) {
                 <h1 className="mb-0">ESports</h1>
                 <hr className="my-4"/>
 
-                <GameScroller />
+                <GameScroller games={props.games}/>
                 <GameShowMatches />
+                
 
             </Container>
         </AppLayout>
