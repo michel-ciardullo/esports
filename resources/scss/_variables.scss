@@ -6,7 +6,7 @@ $blue-400:   #00224B;
 $blue-500:   #001B3A;
 
 $primary:    #BB86FC;
-$secondary:  lighten($primary, 8%);
+$secondary:  darken($primary, 8%);
 $third:      #6d28d9;
 $fourth:     lighten($blue-200, 20%);
 

@@ -28,7 +28,10 @@ function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, 
                 <div className="tourney-content">
                     <div className="row mb-1 tourney-content-head">
                         <div className="d-none d-md-flex col-1"></div>
-                        <div className="d-flex flex-column justify-content-center col-5"><span className="text-primary d-md-none d-flex justify-content-center">{label}</span></div>
+                        <div className="d-flex flex-row align-items-center col-5">
+                            <span className="circle-animation rounded-circle shadow d-md-none d-flex me-1" />
+                            <span className="text-primary d-md-none d-flex">{label}</span>
+                        </div>
                         <div className="d-flex flex-row justify-content-between col-6 col-md-5">
                             <span className="w-50 d-block text-center">1</span>
                             <span className="w-50 d-block text-center">2</span>
@@ -36,7 +39,10 @@ function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, 
                         <div className="col-1"></div>
                     </div>
                     <div className="row tourney-content-main">
-                        <div className="d-none d-md-flex flex-column justify-content-center col-1"><span className="text-primary d-flex justify-content-center">{label}</span></div>
+                        <div className="d-none d-md-flex flex-row justify-content-center align-items-center col-1">
+                            <span className="rounded-circle circle-animation me-1 shadow" />
+                            <span className="text-primary d-flex justify-content-center">{label}</span>
+                        </div>
                         <div className="d-flex flex-column justify-content-center col-5">
                             <div>
                                 <Sprites height="15px" width="15px" sprite='csgo' fill='gray' className="me-1" />

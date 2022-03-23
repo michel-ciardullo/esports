@@ -4,7 +4,7 @@ import ApplicationLogoLong from "@/Components/ApplicationLogoLong";
 
 export default function Guest({ title, children }) {
     return (
-        <main className="guest">
+        <main className="vh-100 guest">
             <div className="guest-content">
                 <div className="card card-body rounded">
                     <Link className="text-center d-block" href="/">

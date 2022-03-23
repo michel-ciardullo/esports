@@ -38,3 +38,32 @@
     background-position: center center;
     background-size: cover;
 }
+
+@keyframes color-transition {
+    0% {
+        background-color: $third ;
+        border-color: $third ;
+    }
+    33% {
+        background-color: $secondary ;
+        border-color: $secondary;
+    }
+    66% {
+        background-color: $primary;
+        border-color: $primary;
+    }
+    100% {
+        background-color: $third;
+        border-color: $third;
+    }
+}
+
+.circle-animation {
+    height: 18px;
+    width: 18px;
+    animation-name: color-transition;
+    animation-duration: 5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
