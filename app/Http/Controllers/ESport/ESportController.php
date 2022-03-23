@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\ESport;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
+use App\Models\Confrontation;
+use Carbon\Carbon;
 use Inertia\{
     Inertia,
     Response
@@ -16,26 +17,29 @@ class ESportController extends Controller
      */
     public function index() : Response
     {
-        $games = Game::with([
-            'tournaments' => fn ($tournament) => $tournament->with(['confrontations' => fn ($c) => $c->with('teams')])->whereHas('confrontations')
-        ])
-        ->whereHas('tournaments')
-        ->get();
+        $dateNow = Carbon::now();
 
-        return Inertia::render('ESport/Index', compact('games'));
+        $data = Confrontation::with([
+                'tournament' => fn ($t) => $t->with('game'),
+                'teams',
+                'live',
+            ])
+            ->whereDate('confrontations.date', '>=', $dateNow)
+            ->whereTime('confrontations.time', '>=', $dateNow)
+            ->get();
+
+        $games = [];
+
+        foreach ($data as $value)
+        {
+            $game = $value->tournament->game;
+        }
+
+        return Inertia::render('Game/Show', ['games' => $data]);
     }
 
     public function show(string $slug)
     {
-        $game = Game::with([
-            'tournaments' => fn ($tournament) => $tournament->with('confrontations')->whereHas('confrontations')
-        ])
-        ->whereHas('tournaments')
-        ->where('slug', $slug)
-        ->firstOrFail();
-
-        $games = [$game];
-
-        return Inertia::render('ESport/Index', compact('games'));
+        dd($slug);
     }
 }
