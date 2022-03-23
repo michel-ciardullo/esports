@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\{
+    Factories\HasFactory,
+    Model,
+    Relations\BelongsToMany,
+    Relations\HasMany
+};
 
 class Game extends Model
 {
@@ -16,11 +19,17 @@ class Game extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name'
+        'name',
+        'slug'
     ];
 
     public function tournaments() : HasMany
     {
         return $this->hasMany(Tournament::class);
+    }
+
+    public function lives() : BelongsToMany
+    {
+        return $this->belongsToMany(Live::class);
     }
 }

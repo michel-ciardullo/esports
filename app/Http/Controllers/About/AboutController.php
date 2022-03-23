@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\About;
 
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{
+    Inertia,
+    Response
+};
 
 class AboutController extends Controller
 {

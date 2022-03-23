@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('external_id');
             $table->foreignId('tournament_id')->index();
-            $table->string('streamer')->nullable();
-            $table->string('streamer_link')->nullable();
             $table->date('date');
             $table->time('time');
             $table->string('timezone');

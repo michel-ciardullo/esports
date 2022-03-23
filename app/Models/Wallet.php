@@ -20,17 +20,6 @@ class Wallet extends Model
         'balance',
     ];
 
-//    public static function booted()
-//    {
-//        static::updated(function($model) {
-//            $model->transactions()->forceCreate([
-//                'wallet_id' => $model->id,
-//                'type'      => 'deposit',
-//                'amount'    => $amount,
-//            ]);
-//        });
-//    }
-
     /**
      * Get the user that owns the wallet.
      *

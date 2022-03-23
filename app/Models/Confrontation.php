@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Confrontation extends Model
 {
@@ -28,18 +28,11 @@ class Confrontation extends Model
     ];
 
     /**
-     * The relations to eager load on every query.
-     *
-     * @var array
+     * @return BelongsTo
      */
-    protected $with = ['teams'];
-
-    /**
-     * @return HasOne
-     */
-    public function tournament() : HasOne
+    public function tournament() : BelongsTo
     {
-        return $this->hasOne(Tournament::class);
+        return $this->belongsTo(Tournament::class);
     }
 
     /**

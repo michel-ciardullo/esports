@@ -96,7 +96,7 @@ class WalletController extends Controller
         return back(303)
             ->with('flash', [
                 'status' => 'warning',
-                'message' => "Aucune somme est disponible dans votre portefeuille :(."
+                'message' => 'Aucune somme est disponible dans votre portefeuille :(.'
             ]);
     }
 }
