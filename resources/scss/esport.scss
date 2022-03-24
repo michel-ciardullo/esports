@@ -46,6 +46,12 @@ svg{
             fill: #0797da;
         }
     }
+    &.starcraft{
+        fill: gray;
+        &:hover{
+            fill: #02cbfd;
+        }
+    }
 }
 
 .game-scroller {

@@ -18,8 +18,7 @@ export default function ESportIndex(props) {
                 <hr className="my-4"/>
 
                 <GameScroller games={props.games}/>
-                <GameShowMatches />
-                
+                {props.games.map((game, i) => <GameShowMatches key={i} games={game} />)}
 
             </Container>
         </AppLayout>

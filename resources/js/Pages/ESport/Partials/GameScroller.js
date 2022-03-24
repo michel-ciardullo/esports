@@ -11,6 +11,7 @@ function Logos ({height, width, sprite, matchNumber}) {
     else if (sprite == "Call of Duty") icones = "cd"
     else if (sprite == "Rainbow 6") icones = "r6"
     else if (sprite == "Rocket League") icones = "rl"
+    else if (sprite == "StarCraft 2") icones = "starcraft"
 
     return (
         <a className="game-scroller-element me-3" href={`#${icones}`}>

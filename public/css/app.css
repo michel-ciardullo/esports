@@ -11733,6 +11733,12 @@ svg.rl {
 svg.rl:hover {
   fill: #0797da;
 }
+svg.starcraft {
+  fill: gray;
+}
+svg.starcraft:hover {
+  fill: #02cbfd;
+}
 
 .game-scroller {
   background-color: #1f1f1f;
