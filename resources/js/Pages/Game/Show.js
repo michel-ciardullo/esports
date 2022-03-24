@@ -4,56 +4,61 @@ import { Container } from 'react-bootstrap';
 
 import AppLayout from '@/Layouts/AppLayout';
 
-function ConfrontationList({ lives, confrontations })
+function TodayConfrontationList({ tournament_id, data, confrontations })
 {
-    return lives['confrontations'].map(function (confrontation_id) {
+    return data['confrontations'][tournament_id].map(function (confrontation_id)
+    {
         return (
-            <span>
-                {confrontations[confrontation_id].status}
-            </span>
+            <li>
+                <span>{confrontations[confrontation_id].teams[0].name}</span> -
+                <span>{confrontations[confrontation_id].teams[1].name}</span>
+            </li>
         );
     });
 }
 
-function TournamentList({ lives, tournaments, confrontations })
+function TodayTournamentList({ game_id, data, tournaments, confrontations })
 {
-    return lives['tournaments'].map(function (tournament_id)
+    return data['tournaments'][game_id].map(function (tournament_id)
     {
         return (
-            <p>
-                {tournaments[tournament_id].name} :
-                <ConfrontationList
-                    lives={lives}
-                    confrontations={confrontations}
-                />
-            </p>
+            <>
+                <p key={tournament_id}>
+                    {tournaments[tournament_id].name}
+                </p>
+                <ul>
+                    <TodayConfrontationList
+                        data={data}
+                        tournament_id={tournament_id}
+                        confrontations={confrontations}
+                    />
+                </ul>
+            </>
         );
     });
 }
 
-function LiveList({ lives, games, tournaments, confrontations })
+function TodayList({ data, games, tournaments, confrontations })
 {
-    return lives['games'].map(function (game_id)
+    return data['games'].map(function (game_id)
     {
-        const tournaments_lives = lives['tournaments'].map(function (tournament_id)
-        {
-            return <TournamentList
-                lives={lives}
-                tournaments={tournaments}
-                confrontations={confrontations}
-            />;
-        });
-
         return (
-            <div className="card mb-3">
+            <div className="card mb-3" key={game_id}>
                 <div className="card-header bg-primary">{games[game_id].name}</div>
-                <div className="card-body">{tournaments_lives}</div>
+                <div className="card-body">
+                    <TodayTournamentList
+                        data={data}
+                        game_id={game_id}
+                        tournaments={tournaments}
+                        confrontations={confrontations}
+                    />
+                </div>
             </div>
         );
     });
 }
 
-export default function GameShow({ auth, lives, games, tournaments, confrontations }) {
+export default function GameShow({ auth, today, games, tournaments, confrontations }) {
     return (
         <AppLayout auth={auth}>
             <Head title="Game show" />
@@ -63,8 +68,8 @@ export default function GameShow({ auth, lives, games, tournaments, confrontatio
                 <h1 className="mb-0">Game show</h1>
                 <hr className="my-4"/>
 
-                <LiveList
-                    lives={lives}
+                <TodayList
+                    data={today}
                     games={games}
                     tournaments={tournaments}
                     confrontations={confrontations}
@@ -74,3 +79,4 @@ export default function GameShow({ auth, lives, games, tournaments, confrontatio
         </AppLayout>
     );
 }
+
