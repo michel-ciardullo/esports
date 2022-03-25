@@ -18,12 +18,10 @@ function CardWrapper({ imgUrl, gameName }) {
     )
 }
 
-
 function Confrontations(props) {
 
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
-
 
     return (
         <div className="row tourney-content-main">
