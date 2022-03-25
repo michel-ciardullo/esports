@@ -42,7 +42,9 @@ class ESportCommand extends Command
      */
     public function handle() : int
     {
-        $tournaments = $this->fetchApi();
+        $tournaments = $this->fetchApi([
+            'interval' => '30DAY'
+        ]);
         if (count($tournaments) > 0)
             $this->saveDataApi($tournaments);
         return 0;
