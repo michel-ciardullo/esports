@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\FAQ;
 
 use App\Http\Controllers\Controller;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{
+    Inertia,
+    Response
+};
 
 class FAQController extends Controller
 {

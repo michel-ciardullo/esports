@@ -14,6 +14,8 @@ use Inertia\Response;
 class ContactController extends Controller
 {
     /**
+     * Display the contact
+     *
      * @return Response
      */
     public function index() : Response
@@ -22,20 +24,27 @@ class ContactController extends Controller
     }
 
     /**
+     * Send an e-mail
+     *
      * @param ContactSendRequest $request
      * @return RedirectResponse
      */
     public function send(ContactSendRequest $request) : RedirectResponse
     {
+        // Create user sender
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
+        // get all fiels for the message
         $subject = $request->input('subject');
         $message = $request->input('message');
 
-        Mail::to($request->user())->send(new ContactMail($user, $subject, $message));
+        // Send mail from user to contact
+        Mail::to($request->user())
+            ->send(new ContactMail($user, $subject, $message));
 
+        // redirect back page method 'GET'.
         return back(303)
             ->with('flash', [
                 'status' => 'success',

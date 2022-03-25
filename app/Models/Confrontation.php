@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Confrontation extends Model
 {
@@ -26,6 +27,19 @@ class Confrontation extends Model
         'timezone',
         'status'
     ];
+
+    public function game() : HasOne
+    {
+        return $this->hasOne(Game::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function live() : HasOne
+    {
+        return $this->hasOne(Live::class);
+    }
 
     /**
      * @return BelongsTo

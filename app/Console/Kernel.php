@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('e-sports')->hourly();
+        $schedule->command('api:e-sports')->everyMinute();
     }
 
     /**

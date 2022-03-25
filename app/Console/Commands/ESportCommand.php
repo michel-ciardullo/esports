@@ -3,15 +3,10 @@
 namespace App\Console\Commands;
 
 use Exception;
-use App\Models\{
-    Game,
-    Team,
-    Tournament,
-    Confrontation,
-    ConfrontationTeam
-};
+use App\Models\{Game, GameLive, Live, Team, Tournament, Confrontation, ConfrontationTeam};
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Psy\Util\Str;
 
 class ESportCommand extends Command
 {
@@ -104,11 +99,9 @@ class ESportCommand extends Command
                 $this->comment($tournament->toJson());
 
                 // Confrontation
-                $confrontation = $this->GetOrCreateConfrontationIfNotExist([
+                $confrontation = $this->GetOrCreateConfrontationIfNotExist($game->id, [
                     'external_id'   => $data->id,
                     'tournament_id' => $tournament->id,
-                    'streamer'      => $data->streamer ?? null,
-                    'streamer_link' => $data->streamer_link ?? null,
                     'date'          => $data->date,
                     'time'          => $data->time,
                     'timezone'      => $data->timezone,
@@ -116,13 +109,22 @@ class ESportCommand extends Command
                 ]);
                 $this->comment($confrontation->toJson());
 
+                // Live
+                if ($confrontation->status === 'live')
+                {
+                    $this->createLiveOrUpdateIfNotExist($game->id, $confrontation->id, [
+                        'streamer'          => $data->streamer ?? null,
+                        'streamer_link'     => $data->streamlink ?? null,
+                    ]);
+                }
+
                 // Team 1
                 $tournamentTeam1 = $this->GetOrCreateTeam($confrontation, $data->opponent1, $data->bet1, $data->result1, 1);
                 $this->comment($tournamentTeam1);
 
                 // Team 2
-                $tournamentTea2 = $this->GetOrCreateTeam($confrontation, $data->opponent2, $data->bet2, $data->result2, 2);
-                $this->comment($tournamentTea2);
+                $tournamentTeam2 = $this->GetOrCreateTeam($confrontation, $data->opponent2, $data->bet2, $data->result2, 2);
+                $this->comment($tournamentTeam2);
 
                 $this->comment(PHP_EOL);
             });
@@ -134,7 +136,7 @@ class ESportCommand extends Command
         $game = Game::where('name' , '=', $name)->first();
         if (!$game)
         {
-            $game = Game::create(['name' => $name]);
+            $game = Game::create(['name' => $name, 'slug' => \Illuminate\Support\Str::slug($name)]);
         }
         return $game;
     }
@@ -157,14 +159,35 @@ class ESportCommand extends Command
         return $tournament;
     }
 
-    private function GetOrCreateConfrontationIfNotExist(array $data)
+    private function GetOrCreateConfrontationIfNotExist(int $gameId, array $data)
     {
-        $match = Confrontation::where('external_id' , '=', $data['external_id'])->first();
-        if (!$match)
+        $confrontation = Confrontation::where('external_id' , '=', $data['external_id'])->first();
+        if (!$confrontation)
         {
-            $match = Confrontation::create($data);
+            $confrontation = Confrontation::create($data);
         }
-        return $match;
+
+        return $confrontation;
+    }
+
+    private function createLiveOrUpdateIfNotExist(int $gameId, int $confrontationId, array $data)
+    {
+        $live = Live::where('confrontation_id', $confrontationId)->first();
+        if ($live)
+        {
+            $live->update($data);
+        }
+        else {
+
+            $live = Live::create(
+                array_merge(['confrontation_id'  => $confrontationId], $data)
+            );
+
+            GameLive::create([
+                'game_id' => $gameId,
+                'live_id' => $live->id
+            ]);
+        }
     }
 
     private function GetOrCreateTeam(Confrontation $confrontation, string $name, string $bet, string $result, int $position)

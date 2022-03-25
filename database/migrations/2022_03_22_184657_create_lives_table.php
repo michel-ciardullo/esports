@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('confrontations', function (Blueprint $table) {
+        Schema::create('lives', function (Blueprint $table) {
             $table->id();
-            $table->string('external_id');
-            $table->foreignId('tournament_id')->index();
-            $table->date('date');
-            $table->time('time');
-            $table->string('timezone');
-            $table->string('status');
+            $table->foreignId('confrontation_id')->index();
+            $table->string('streamer')->nullable();
+            $table->string('streamer_link')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('confrontations');
+        Schema::dropIfExists('lives');
     }
 };
