@@ -86,34 +86,6 @@ class ESportController extends Controller
         unset($today['prevents']);
         unset($lives['prevents']);
 
-        /*
-        foreach ($lives['games'] as $gameId)
-        {
-            $game           = $games[$gameId];
-            echo $game->name, '<ul>';
-
-            foreach ($lives['tournaments'][$gameId] as $tournamentId)
-            {
-                $tournament = $tournaments[$tournamentId];
-
-                echo '<li>';
-                echo '<div>', $tournament->name, '</div>';
-
-                foreach ($lives['confrontations'][$tournamentId] as $confrontationId)
-                {
-                    echo '<div>';
-                    $confrontation = $confrontations[$confrontationId];
-                    echo '<span>', $confrontation->teams[0]->name, '</span>';
-                    echo '<span>- ', $confrontation->teams[1]->name, '</span>';
-                    echo '</div>';
-                }
-                echo '</li>';
-            }
-
-            echo '</ul>';
-        }
-        */
-
         return Inertia::render('Game/Show', compact('confrontations', 'tournaments', 'games', 'today', 'lives'));
     }
 
