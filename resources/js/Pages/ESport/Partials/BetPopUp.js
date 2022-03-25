@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import {Modal, Button} from 'react-bootstrap';
 
-function BetPopUp(props) {
-    return (
+export default function BetPopUp(props) {
+
+
+    return  (
         <Modal
             {...props}
             size="lg"
@@ -10,20 +13,17 @@ function BetPopUp(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
+                    Placer un paris
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Centered Modal</h4>
-                <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                </p>
+                <h4>Parier sur{props.team}</h4>
+                <p>la cote de l'equipe {props.team} est {props.rating}</p>
+                {props.user ? <p>vous avez {props.user.wallet.balance}$</p> : <h4>connectez-vous pour pouvoir parier</h4> }
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
-    );
+    )
 }

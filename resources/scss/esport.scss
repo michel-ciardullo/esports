@@ -217,3 +217,14 @@ ul.nav-tabs {
       transform: translateX(-50%) translateY(-50%) scale(0.9);
     }
 }
+
+.modal-content {
+    background-color: $card-bg;
+    color: white;
+    .modal-header{
+        border-bottom: 0px;
+    }
+    .modal-footer{
+        border-top: 0px;
+    }
+}

@@ -11848,6 +11848,17 @@ ul.nav-tabs .nav-link.active, ul.nav-tabs .nav-link:hover {
   transform: translateX(-50%) translateY(-50%) scale(0.9);
 }
 
+.modal-content {
+  background-color: #1f1f1f;
+  color: white;
+}
+.modal-content .modal-header {
+  border-bottom: 0px;
+}
+.modal-content .modal-footer {
+  border-top: 0px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 4px;

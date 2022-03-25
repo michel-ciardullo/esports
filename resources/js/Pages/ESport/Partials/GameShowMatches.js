@@ -20,6 +20,11 @@ function CardWrapper({ imgUrl, gameName }) {
 
 
 function Confrontations(props) {
+
+    const [modalShow1, setModalShow1] = useState(false);
+    const [modalShow2, setModalShow2] = useState(false);
+
+
     return (
         <div className="row tourney-content-main">
             <div className="d-none d-md-flex flex-row justify-content-center align-items-center col-1">
@@ -37,8 +42,22 @@ function Confrontations(props) {
                 </div>
             </div>
             <div className="d-flex flex-row justify-content-between col-6 col-md-5">
-                <Button className="w-50" variant="dark" type="submit">{props.rating1}</Button>
-                <Button className="ms-1 w-50" variant="dark" type="submit">{props.rating2}</Button>
+                <Button className="w-50 me-2" variant="dark" onClick={() => setModalShow1(true)}>{props.rating1}</Button>
+                <BetPopUp
+                    user={props.user}
+                    team={props.team1}
+                    rating={props.rating1}
+                    show={modalShow1}
+                    onHide={() => setModalShow1(false)}
+                />
+                <Button className="w-50" variant="dark" onClick={() => setModalShow2(true)}>{props.rating2}</Button>
+                <BetPopUp
+                    user={props.user}
+                    team={props.team2}
+                    rating={props.rating2}
+                    show={modalShow2}
+                    onHide={() => setModalShow2(false)}
+                />
             </div>
             <div className="d-flex flex-column justify-content-center align-items-center col-1">
                 <a className="arrow">
@@ -50,7 +69,7 @@ function Confrontations(props) {
     )
 }
 
-function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, rating2 }) {
+function TourneyCard({ user, eventKey, label, tourney, sprite, team1, team2, rating1, rating2 }) {
     return (
         <Accordion.Item className="accordion-item-e-sport mb-3 shadow" eventKey={eventKey}>
             <Accordion.Header>
@@ -72,6 +91,7 @@ function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, 
                         <div className="col-1"></div>
                     </div>
                     <Confrontations
+                        user={user}
                         sprite={sprite}
                         label={label}
                         team1={team1}
@@ -85,10 +105,11 @@ function TourneyCard({ eventKey, label, tourney, sprite, team1, team2, rating1, 
     )
 }
 
-function TabItem ({ eventKey, date, tourney, sprite, team1, team2, rating1, rating2 }) {
+function TabItem ({ user, eventKey, date, tourney, sprite, team1, team2, rating1, rating2 }) {
     return (
         <Accordion defaultActiveKey="0" alwaysOpen>
             <TourneyCard
+                user={user}
                 eventKey={eventKey}
                 label={date}
                 tourney={tourney}
@@ -120,6 +141,7 @@ export default function GameShowMatches(props) {
             <Tabs defaultActiveKey="encours" id="uncontrolled-tab-example">
                 <Tab eventKey="encours" title="En Cours">
                     <TabItem
+                        user={props.user}
                         eventKey="0"
                         date="Live"
                         tourney="CS:GO - Esl League"
@@ -132,6 +154,7 @@ export default function GameShowMatches(props) {
                 </Tab>
                 <Tab eventKey="aujourd'hui" title="Aujourd'hui">
                     <TabItem
+                        user={props.user}
                         eventKey="0"
                         date="Live"
                         tourney="CS:GO - Esl League"
@@ -144,6 +167,7 @@ export default function GameShowMatches(props) {
                 </Tab>
                 <Tab eventKey="demain" title="Demain">
                     <TabItem
+                        user={props.user}
                         eventKey="0"
                         date="Live"
                         tourney="CS:GO - Esl League"
