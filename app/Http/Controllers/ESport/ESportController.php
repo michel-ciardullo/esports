@@ -20,6 +20,7 @@ class ESportController extends Controller
      */
     public function index() : Response
     {
+        /*
         $eSports = Confrontation::with('teams', 'live')
             ->select([
                 'tournaments.name as tournament_name',
@@ -38,7 +39,8 @@ class ESportController extends Controller
             ->get();
 
         dd($eSports[0]);
-
+        */
+        
         $confrontations = Confrontation::with('teams', 'live')->where('date', '>=', date('Y-m-d'))->get()->keyBy('id');
         $tournaments    = Tournament::whereIn('id', $confrontations->keys())->get()->keyBy('id');
         $games          = Game::whereIn('id', $tournaments->keys())->get()->keyBy('id');
