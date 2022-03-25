@@ -20,7 +20,6 @@ class ESportController extends Controller
      */
     public function index() : Response
     {
-        /*
         $eSports = Confrontation::with('teams', 'live')
             ->select([
                 'tournaments.name as tournament_name',
@@ -38,18 +37,6 @@ class ESportController extends Controller
             })
             ->where('date', '>=', date('Y-m-d'))
             ->get();
-
-        $lives = [];
-        $eSports->each(function ($eSport) use(&$lives)
-        {
-            if ($eSport->confrontation_status === 'live')
-            {
-                $lives[] = $eSport->live;
-            }
-        });
-
-        dd($lives);
-        */
 
         // select * from `confrontations` where `date` >= '2022-03-25'
         $confrontations = Confrontation::with('teams', 'live')->where('date', '>=', date('Y-m-d'))->get()->keyBy('id');
@@ -88,17 +75,18 @@ class ESportController extends Controller
         {
             if ($confrontation->status === 'live')
             {
-                $this->postTreatment2($lives, $confrontation, $tournaments, $games);
+                $this->postTreatment($lives, $confrontation, $tournaments, $games);
             }
             else
             {
-                // $this->postTreatment2($today, $confrontation, $tournaments, $games);
+                $this->postTreatment($today, $confrontation, $tournaments, $games);
             }
         }
 
         unset($today['prevents']);
         unset($lives['prevents']);
 
+        /*
         foreach ($lives['games'] as $gameId)
         {
             $game           = $games[$gameId];
@@ -107,13 +95,24 @@ class ESportController extends Controller
             foreach ($lives['tournaments'][$gameId] as $tournamentId)
             {
                 $tournament = $tournaments[$tournamentId];
-                echo '<li>', $tournament->name, '</li>';
+
+                echo '<li>';
+                echo '<div>', $tournament->name, '</div>';
+
+                foreach ($lives['confrontations'][$tournamentId] as $confrontationId)
+                {
+                    echo '<div>';
+                    $confrontation = $confrontations[$confrontationId];
+                    echo '<span>', $confrontation->teams[0]->name, '</span>';
+                    echo '<span>- ', $confrontation->teams[1]->name, '</span>';
+                    echo '</div>';
+                }
+                echo '</li>';
             }
 
-            die('</ul>');
+            echo '</ul>';
         }
-
-        dd($lives);
+        */
 
         return Inertia::render('Game/Show', compact('confrontations', 'tournaments', 'games', 'today', 'lives'));
     }
@@ -124,42 +123,6 @@ class ESportController extends Controller
     }
 
     private function postTreatment(&$arr, $confrontation, $tournaments, $games)
-    {
-        $tournament = $tournaments[$confrontation->tournament_id];
-        $game       = $games[$tournament->game_id];
-
-        // Initialise game list
-        if (!in_array($game->id, $arr['games'], true))
-        {
-            $arr['games'][] = $game->id;
-        }
-
-        // Initialise tournament list
-        if (!array_key_exists($game->id, $arr['tournaments']))
-        {
-            $arr['tournaments'][$game->id] = [];
-        }
-
-        // Initialise tournament list
-        if (!array_key_exists($tournament->id, $arr['confrontations']))
-        {
-            $arr['confrontations'][$tournament->id] = [];
-        }
-
-        // Initialise tournament list
-        if (!in_array($tournament->id, $arr['tournaments'][$game->id], true))
-        {
-            $arr['tournaments'][$game->id][] = $tournament->id;
-        }
-
-        // Initialise tournament list
-        if (!in_array($confrontation->id, $arr['confrontations'][$tournament->id], true))
-        {
-            $arr['confrontations'][$tournament->id][] = $confrontation->id;
-        }
-    }
-
-    private function postTreatment2(&$arr, $confrontation, $tournaments, $games)
     {
         $tournament = $tournaments[$confrontation->tournament_id];
         $game       = $games[$tournament->game_id];
@@ -179,9 +142,11 @@ class ESportController extends Controller
         if (!array_key_exists($tournament->id, $arr['prevents']['tournaments']))
         {
             $arr['tournaments'][$game->id][]                    = $tournament->id;
+            $arr['confrontations'][$tournament->id]             = [];
             $arr['prevents']['tournaments'][$tournament->id]    = true;
         }
 
         // Initialise confrontation list
+        $arr['confrontations'][$tournament->id][] = $confrontation->id;
     }
 }

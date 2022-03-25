@@ -58,7 +58,7 @@ function TodayList({ data, games, tournaments, confrontations })
     });
 }
 
-export default function GameShow({ auth, today, games, tournaments, confrontations }) {
+export default function GameShow({ auth, lives, games, tournaments, confrontations }) {
     return (
         <AppLayout auth={auth}>
             <Head title="Game show" />
@@ -69,7 +69,7 @@ export default function GameShow({ auth, today, games, tournaments, confrontatio
                 <hr className="my-4"/>
 
                 <TodayList
-                    data={today}
+                    data={lives}
                     games={games}
                     tournaments={tournaments}
                     confrontations={confrontations}
