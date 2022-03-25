@@ -97,6 +97,15 @@ class ESportCommand extends Command
                 ]);
                 $this->comment($confrontation->toJson());
 
+                // Live
+                if ($confrontation->status === 'live')
+                {
+                    $this->createLiveOrUpdateIfNotExist($game->id, $confrontation->id, [
+                        'streamer'          => $data->streamer ?? null,
+                        'streamer_link'     => $data->streamlink ?? null,
+                    ]);
+                }
+
                 // Team 1
                 $tournamentTeam1 = $this->GetOrCreateTeam($confrontation, $data->opponent1, $data->bet1, $data->result1, 1);
                 $this->comment($tournamentTeam1);
@@ -146,31 +155,27 @@ class ESportCommand extends Command
             $confrontation = Confrontation::create($data);
         }
 
-        if ($confrontation->status === 'live')
-        {
-            $live = Live::where('confrontation_id', $confrontation->id)->first();
-            if ($live)
-            {
-                $live->update([
-                    'streamer'          => $data->streamer ?? null,
-                    'streamer_link'     => $data->streamer_link ?? null,
-                ]);
-            }
-            else {
-                $live = Live::create([
-                    'confrontation_id'  => $confrontation->id,
-                    'streamer'          => $data->streamer ?? null,
-                    'streamer_link'     => $data->streamer_link ?? null,
-                ]);
-
-                GameLive::create([
-                    'game_id' => $gameId,
-                    'live_id' => $live->id
-                ]);
-            }
-        }
-
         return $confrontation;
+    }
+
+    private function createLiveOrUpdateIfNotExist(int $gameId, int $confrontationId, array $data)
+    {
+        $live = Live::where('confrontation_id', $confrontationId)->first();
+        if ($live)
+        {
+            $live->update($data);
+        }
+        else {
+
+            $live = Live::create(
+                array_merge(['confrontation_id'  => $confrontationId], $data)
+            );
+
+            GameLive::create([
+                'game_id' => $gameId,
+                'live_id' => $live->id
+            ]);
+        }
     }
 
     private function GetOrCreateTeam(Confrontation $confrontation, string $name, string $bet, string $result, int $position)
