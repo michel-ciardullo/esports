@@ -1,35 +1,37 @@
 import React from 'react';
 import Sprites from "@/Components/Sprites";
 
-function Logos ({height, width, sprite, matchNumber}) {
-
-    let icones;
-    if (sprite == "Counter-Strike") icones = "csgo";
-    else if (sprite == "League of Legends") icones = "lol";
-    else if (sprite == "Dota 2") icones = "dota";
-    else if (sprite == "Valorant") icones = "valorant";
-    else if (sprite == "Call of Duty") icones = "cd"
-    else if (sprite == "Rainbow 6") icones = "r6"
-    else if (sprite == "Rocket League") icones = "rl"
-    else if (sprite == "StarCraft 2") icones = "starcraft"
+function Logo ({ height, width, gameId, lives, games }) {
+    let tab= [];
+    lives['games'].forEach((gameIdx)=> {
+        tab[gameIdx] = 0
+        lives['tournaments'][gameIdx].forEach((tournamentIdx) => {
+            lives.confrontations[tournamentIdx].forEach(() =>
+                tab[gameIdx]++
+            )
+        })
+    })
 
     return (
-        <a className="game-scroller-element me-3" href={`#${icones}`}>
-            <Sprites className={icones} height={height} width={width} sprite={icones} />
-            <div className="match-number bg-secondary rounded text-white text-center money">{matchNumber}</div>
+        <a className="game-scroller-element me-3" href={`#${games[gameId].slug}`}>
+            <Sprites className={games[gameId].slug} height={height} width={width} sprite={games[gameId].slug} />
+            <div className="match-number bg-secondary rounded text-white text-center money">{tab[gameId]}</div>
         </a>
     )
 }
 
-export default function GameScroller({games}) {
+export default function GameScroller({ lives, games }) {
+
     return (
         <div className="game-scroller d-flex py-2 px-2 w-100 mb-3">
-            {games.map((icone, i) =>
-            <Logos key={i}
+            {lives['games'].map((id, i) =>
+            <Logo
+                key={i}
                 height="80"
                 width="80"
-                sprite={icone.name}
-                matchNumber="4"
+                gameId={id}
+                lives={lives}
+                games={games}
             />
             )}
         </div>

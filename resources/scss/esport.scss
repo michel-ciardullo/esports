@@ -4,25 +4,25 @@
 
 svg{
     transition: all 0.1s ease;
-    &.csgo{
+    &.counter-strike{
         fill: gray;
         &:hover{
             fill: #579e06;
         }
     }
-    &.dota{
+    &.dota-2{
         fill: gray;
         &:hover{
             fill: #c80000;
         }
     }
-    &.lol{
+    &.league-of-legends{
         fill: gray;
         &:hover{
             fill: #0b8adf;
         }
     }
-    &.cd{
+    &.call-of-duty{
         fill: gray;
         &:hover{
             fill: #0544a8;
@@ -34,19 +34,19 @@ svg{
             fill: #b90a30;
         }
     }
-    &.r6{
+    &.rainbow-6{
         fill: gray;
         &:hover{
             fill: #adadad;
         }
     }
-    &.rl{
+    &.rocket-league{
         fill: gray;
         &:hover{
             fill: #0797da;
         }
     }
-    &.starcraft{
+    &.starcraft-2{
         fill: gray;
         &:hover{
             fill: #02cbfd;

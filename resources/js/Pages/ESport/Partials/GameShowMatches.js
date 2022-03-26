@@ -18,41 +18,54 @@ function CardWrapper({ imgUrl, gameName }) {
     )
 }
 
-function Confrontations(props) {
+function Confrontations({auth, sprite, date, live, time, teams, confrontationId}) {
 
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
 
+
     return (
-        <div className="row tourney-content-main">
+        <div className="row tourney-content-main mb-1">
             <div className="d-none d-md-flex flex-row justify-content-center align-items-center col-1">
                 <span className="rounded-circle circle-animation me-1 shadow" />
-                <span className="text-primary d-flex justify-content-center">{props.label}</span>
+                <span className="text-primary d-flex justify-content-center">
+                    {(() => {
+                    if (live == null) {
+                        return (
+                            `${date}:${time}`
+                        )
+                    } else {
+                        return (
+                            'Live'
+                        )
+                    }
+                })()}
+                </span>
             </div>
             <div className="d-flex flex-column justify-content-center col-5">
                 <div>
-                    <Sprites height="15px" width="15px" sprite={props.sprite} fill='gray' className="me-1" />
-                    {props.team1}
+                    <Sprites height="15px" width="15px" sprite={sprite} fill='gray' className="me-1" />
+                    {teams[0].name}
                 </div>
                 <div>
-                    <Sprites height="15px" width="15px" sprite={props.sprite} fill='gray' className="me-1" />
-                    {props.team2}
+                    <Sprites height="15px" width="15px" sprite={sprite} fill='gray' className="me-1" />
+                    {teams[1].name}
                 </div>
             </div>
             <div className="d-flex flex-row justify-content-between col-6 col-md-5">
-                <Button className="w-50 me-2" variant="dark" onClick={() => setModalShow1(true)}>{props.rating1}</Button>
+                <Button className="w-50 me-2" variant="dark" onClick={() => setModalShow1(true)}>{teams[0].pivot.rating}</Button>
                 <BetPopUp
-                    user={props.user}
-                    team={props.team1}
-                    rating={props.rating1}
+                    user={auth.user}
+                    team={teams[0].name}
+                    rating={teams[0].pivot.rating}
                     show={modalShow1}
                     onHide={() => setModalShow1(false)}
                 />
-                <Button className="w-50" variant="dark" onClick={() => setModalShow2(true)}>{props.rating2}</Button>
+                <Button className="w-50 me-2" variant="dark" onClick={() => setModalShow2(true)}>{teams[1].pivot.rating}</Button>
                 <BetPopUp
-                    user={props.user}
-                    team={props.team2}
-                    rating={props.rating2}
+                    user={auth.user}
+                    team={teams[1].name}
+                    rating={teams[1].pivot.rating}
                     show={modalShow2}
                     onHide={() => setModalShow2(false)}
                 />
@@ -67,12 +80,12 @@ function Confrontations(props) {
     )
 }
 
-function TourneyCard({ user, eventKey, label, tourney, sprite, team1, team2, rating1, rating2 }) {
+function TourneyCard({ data, auth, eventKey, sprite, tournaments, tournamentId , confrontations}) {
     return (
         <Accordion.Item className="accordion-item-e-sport mb-3 shadow" eventKey={eventKey}>
             <Accordion.Header>
                 <Sprites height="20px" width="20px" sprite={sprite} fill='gray' className="me-2" />
-                {tourney}
+                {tournaments[tournamentId].name}
             </Accordion.Header>
             <Accordion.Body>
                 <div className="tourney-content">
@@ -80,7 +93,7 @@ function TourneyCard({ user, eventKey, label, tourney, sprite, team1, team2, rat
                         <div className="d-none d-md-flex col-1"></div>
                         <div className="d-flex flex-row align-items-center col-5">
                             <span className="circle-animation rounded-circle shadow d-md-none d-flex me-1" />
-                            <span className="text-primary d-md-none d-flex">{label}</span>
+                            <span className="text-primary d-md-none d-flex">live</span>
                         </div>
                         <div className="d-flex flex-row justify-content-between col-6 col-md-5">
                             <span className="w-50 d-block text-center">1</span>
@@ -88,95 +101,92 @@ function TourneyCard({ user, eventKey, label, tourney, sprite, team1, team2, rat
                         </div>
                         <div className="col-1"></div>
                     </div>
-                    <Confrontations
-                        user={user}
-                        sprite={sprite}
-                        label={label}
-                        team1={team1}
-                        team2={team2}
-                        rating1={rating1}
-                        rating2={rating2}
-                    />
+                    {data.confrontations[tournamentId].map((confrontationId,i)=>
+                        <Confrontations
+                            key={i}
+                            confrontationId={confrontationId}
+                            auth={auth}
+                            sprite={sprite}
+                            date={confrontations[confrontationId].date}
+                            time={confrontations[confrontationId].time}
+                            live={confrontations[confrontationId].live}
+                            teams={confrontations[confrontationId].teams}
+                        />
+                    )}
                 </div>
             </Accordion.Body>
         </Accordion.Item>
     )
 }
 
-function TabItem ({ user, eventKey, date, tourney, sprite, team1, team2, rating1, rating2 }) {
-    return (
-        <Accordion defaultActiveKey="0" alwaysOpen>
+function TabItem ({ gameId, auth, data, sprite, games, tournaments, confrontations }) {
+    return data.tournaments[gameId].map((tournamentId, i) => {
+        return (
             <TourneyCard
-                user={user}
-                eventKey={eventKey}
-                label={date}
-                tourney={tourney}
+                key={i}
+                data={data}
+                eventKey={i.toString()}
+                tournamentId={tournamentId}
+                auth={auth}
                 sprite={sprite}
-                team1={team1}
-                team2={team2}
-                rating1={rating1}
-                rating2={rating2}
+                games={games}
+                tournaments={tournaments}
+                confrontations={confrontations}
             />
-        </Accordion>
-    )
+        )
+    })
 }
 
-export default function GameShowMatches(props) {
+export default function GameShowMatches({ gameId, auth, lives, today, tomorrow, games, tournaments, confrontations }) {
 
-    let gameName;
-    if (props.games.name == "Counter-Strike") gameName = "csgo";
-    else if (props.games.name == "League of Legends") gameName = "lol";
-    else if (props.games.name == "Dota 2") gameName = "dota";
-    else if (props.games.name == "Valorant") gameName = "valorant";
-    else if (props.games.name == "Call of Duty") gameName = "cd"
-    else if (props.games.name == "Rainbow 6") gameName = "r6"
-    else if (props.games.name == "Rocket League") gameName = "rl"
-    else if (props.games.name == "StarCraft 2") gameName = "starcraft"
+    let activeKeys = [];
+    for(let key =0; key< 15; key++) activeKeys.push(key.toString());
 
     return (
         <div className="game-show-matches mb-4">
-            <CardWrapper imgUrl={`${gameName}-wallpaper.jpg`} gameName={props.games.name} />
+            <CardWrapper imgUrl={`${games[gameId].slug}-wallpaper.jpg`} gameName={games[gameId].name} />
             <Tabs defaultActiveKey="encours" id="uncontrolled-tab-example">
                 <Tab eventKey="encours" title="En Cours">
-                    <TabItem
-                        user={props.user}
-                        eventKey="0"
-                        date="Live"
-                        tourney="CS:GO - Esl League"
-                        sprite={gameName}
-                        team1="Astralis Team"
-                        team2="Astralis Team"
-                        rating1="1.3"
-                        rating2="2.5"
-                    />
+                    <Accordion defaultActiveKey={activeKeys} alwaysOpen>
+                        <TabItem
+                            gameId={gameId}
+                            auth={auth}
+                            data={lives}
+                            sprite={games[gameId].slug}
+                            games={games}
+                            tournaments={tournaments}
+                            confrontations={confrontations}
+                        />
+                    </Accordion>
                 </Tab>
                 <Tab eventKey="aujourd'hui" title="Aujourd'hui">
-                    <TabItem
-                        user={props.user}
-                        eventKey="0"
-                        date="Live"
-                        tourney="CS:GO - Esl League"
-                        sprite={gameName}
-                        team1="Astralis Team"
-                        team2="Astralis Team"
-                        rating1="1.3"
-                        rating2="2.5"
-                    />
+                    <Accordion defaultActiveKey={activeKeys} alwaysOpen>
+                        <TabItem
+                            gameId={gameId}
+                            auth={auth}
+                            data={today}
+                            sprite={games[gameId].slug}
+                            games={games}
+                            tournaments={tournaments}
+                            confrontations={confrontations}
+                        />
+                    </Accordion>
                 </Tab>
                 <Tab eventKey="demain" title="Demain">
-                    <TabItem
-                        user={props.user}
-                        eventKey="0"
-                        date="Live"
-                        tourney="CS:GO - Esl League"
-                        sprite={gameName}
-                        team1="Astralis Team"
-                        team2="Astralis Team"
-                        rating1="1.3"
-                        rating2="2.5"
-                    />
+                    <Accordion defaultActiveKey={activeKeys} alwaysOpen>
+                        <TabItem
+                            gameId={gameId}
+                            auth={auth}
+                            data={tomorrow}
+                            sprite={games[gameId].slug}
+                            games={games}
+                            tournaments={tournaments}
+                            confrontations={confrontations}
+                        />
+                    </Accordion>
                 </Tab>
             </Tabs>
         </div>
     )
 }
+

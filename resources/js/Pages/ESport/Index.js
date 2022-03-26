@@ -17,8 +17,20 @@ export default function ESportIndex(props) {
                 <h1 className="mb-0">ESports</h1>
                 <hr className="my-4"/>
 
-                <GameScroller games={props.games}/>
-                <GameShowMatches key={i} games={game} user={props.auth.user}/>
+                <GameScroller auth={props.auth} lives={props.lives} today={props.today} tomorrow={props.tomorrow} games={props.games} tournaments={props.tournaments} confrontations={props.confrontations}/>
+                {props.lives.games.map((gameId, i) =>
+                    <GameShowMatches
+                        key={i}
+                        gameId={gameId}
+                        auth={props.auth}
+                        lives={props.lives}
+                        today={props.today}
+                        tomorrow={props.tomorrow}
+                        games={props.games}
+                        tournaments={props.tournaments}
+                        confrontations={props.confrontations}
+                    />
+                )}
 
             </Container>
         </AppLayout>
