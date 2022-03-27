@@ -48,17 +48,15 @@ function NonAuthentication() {
     return (
         <>
             <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 mt-3 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
+            <Link className="ms-lg-3 mt-lg-0 my-3 my-lg-0 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
         </>
     )
 }
 
-function NavLink({ label, name }) {
-    const active = route().current(name)
-
+function NavLink({ href, active, children }) {
     return (
-        <Link className={'nav-link' + (active ? ' active' : '')} href={route(name)}>
-            <span>{ label }</span>
+        <Link className={'nav-link' + (active ? ' active' : '')} href={href}>
+            <span>{ children }</span>
             <span className="nav-link-indicator"/>
         </Link>
     )
@@ -76,11 +74,21 @@ export default function AppLayout({ auth, children }) {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav>
-                            <NavLink name="home" label="Home"/>
-                            <NavLink name="esports.index" label="ESports"/>
-                            <NavLink name="about" label="À propos"/>
-                            <NavLink name="contact" label="Contact"/>
-                            <NavLink name="faq" label="FAQ"/>
+                            <NavLink href={route('home')} active={route().current('home')}>
+                                Accueil
+                            </NavLink>
+                            <NavLink href={route('esports.index')} active={route().current('esports.*')}>
+                                ESports
+                            </NavLink>
+                            <NavLink href={route('about')} active={route().current('about')}>
+                                À propos
+                            </NavLink>
+                            <NavLink href={route('contact')} active={route().current('contact')}>
+                                Nous-contactez
+                            </NavLink>
+                            <NavLink href={route('faq')} active={route().current('faq')}>
+                                FAQ
+                            </NavLink>
                         </Nav>
                         <Nav className="ms-auto nav-profile">
                             {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}

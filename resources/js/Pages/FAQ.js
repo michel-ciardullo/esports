@@ -1,8 +1,8 @@
 import React from 'react';
-import { Head } from '@inertiajs/inertia-react';
-import { Container, Accordion } from 'react-bootstrap';
+import { Head, Link } from '@inertiajs/inertia-react'
+import { Container, Accordion, Breadcrumb } from 'react-bootstrap'
 
-import AppLayout from '@/Layouts/AppLayout';
+import AppLayout from '@/Layouts/AppLayout'
 
 export default function FAQIndex(props) {
 
@@ -12,7 +12,12 @@ export default function FAQIndex(props) {
 
             <Container className="mt-4">
 
-                <h1 className="mb-0">FAQ</h1>
+                <Breadcrumb>
+                    <li className="breadcrumb-item">
+                        <Link href={route('home')} role="button">Accueil</Link>
+                    </li>
+                    <Breadcrumb.Item active>FAQ</Breadcrumb.Item>
+                </Breadcrumb>
                 <hr className="my-4"/>
 
                 <Accordion defaultActiveKey="0">
@@ -44,5 +49,5 @@ export default function FAQIndex(props) {
 
             </Container>
         </AppLayout>
-    );
+    )
 }

@@ -15,6 +15,6 @@ class FAQController extends Controller
      */
     public function index() : Response
     {
-        return Inertia::render('FAQ/Index');
+        return Inertia::render('FAQ');
     }
 }

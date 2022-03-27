@@ -1,57 +1,12 @@
 @import './variables';
 @import '~bootstrap/scss/bootstrap';
+@import './card-game';
 @import './guest';
+@import './navbar';
 @import './features';
 
 body, html, #app {
     height: 100%;
-}
-
-.navbar {
-    background-color: lighten($dark, 5%) !important;
-    padding-top: 0;
-    padding-bottom: 0;
-
-    .navbar-toggler {
-        margin: 0.5rem 0 0.5rem 0.5rem;
-    }
-
-    .nav-link-indicator {
-        margin: 0;
-        display: block;
-        width: 100%;
-        height: 4px;
-    }
-
-    .active > .nav-link-indicator {
-        background-color: $primary;
-    }
-
-    .nav-link {
-        padding: .5rem 0 0 .5rem;
-
-        > span:first-child {
-            padding: 0.5rem 0;
-        }
-    }
-
-    .nav-link:not(.dropdown-toggle) {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .navbar-nav:not(.nav-profile) .nav-link {
-
-        &:not(:last-child) {
-            margin-right: .5rem;
-        }
-    }
-
-    .dropdown-menu {
-        right: 0;
-        left: auto;
-    }
 }
 
 .accordion-body {
@@ -71,120 +26,46 @@ body, html, #app {
     overflow-x: auto;
 }
 
-// Game color and hover bg icons
-
-@mixin icon-game($color) {
-    color: $color;
-
-    &:hover {
-        background-image: linear-gradient(0deg, $color, transparent);
-        color: $light;
-    }
-
-    > svg {
-        fill: $color;
-    }
+.nav-indicator {
+    background-color: rgba($dark, .6);
 }
 
-.icon-game-lol {
-    @include icon-game(#42e0e4);
-}
-
-.icon-game-valorant {
-    @include icon-game(#fe4a6d);
-}
-
-.icon-game-csgo {
-    @include icon-game(#a0b757);
-}
-
-.icon-game-cd {
-    @include icon-game(#1aa3a1);
-}
-
-.icon-game-dota2 {
-    @include icon-game(#ff404e);
-}
-
-.game-header {
-    background: url(https://res.cloudinary.com/betengine/image/fetch/w_750,h_98,o_90,b_rgb:000000,c_fill,g_auto:face,f_webp/https://www.cloudbet.com/sports-data/entity-media/competitor/260198/image/2021-03-08-05-52-46);
-    background-size: cover;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 200px;
-
-    > h2 {
-        padding: 1rem;
-    }
-
-    > .nav {
-        margin-top: auto;
-    }
-}
-
-.nav-link-confrontation {
-    padding: 0;
-    cursor: pointer;
-
-    > span.label {
-        display: block;
-        padding: 0.5rem 1rem;
-    }
-
-    > span.indicator {
-        margin: 0;
-        width: 100%;
-        height: 4px;
-        display: block;
-    }
-}
-
-.nav-pills .nav-link-confrontation.active {
-    background-color: initial;
-
-    > span.indicator {
-        background-color: $primary;
-    }
-}
-
-.nav-pills .nav-link-confrontation:hover {
-    background-color: initial;
-
-    > span.indicator {
-        background-color: rgba(#fff, 12%);
-    }
-}
-
-.tournament-accordion .accordion-button {
-    background-image: linear-gradient(90deg,#6c9931 0,transparent 35%,transparent);
+.nav-indicator .nav-link {
     color: $light;
+    cursor: pointer;
+    padding: 0;
 
-    &:hover, &:focus {
-        box-shadow: 0 0 0 0.25rem rgb(108 153 49 / 25%);
+    span {
+        display: block;
+        width: 100%;
     }
 
-    &:not(.collapsed) {
+    &.active {
         color: $light;
     }
+
+    .indicator {
+        height: 4px;
+    }
 }
 
-.teams-items {
-    background-color: #525252;
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 1px;
 }
 
-.teams-item:hover {
-    background-color: rgba(#fff, 12%);
-    cursor: pointer;
+/* Track */
+::-webkit-scrollbar-track {
+    background: $dark;
 }
 
-.vs {
-    clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%, 15% 50%);
-    background: #1f1f1f;
-    width: 100px;
-    height: 70px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $primary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $primary;
 }

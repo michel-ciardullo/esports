@@ -54,3 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+
+Route::group([
+    'middleware' => ['auth', 'verified']
+], function () {
+    require __DIR__.'/profile.php';
+    require __DIR__.'/wallet.php';
+});
