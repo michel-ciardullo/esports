@@ -122,9 +122,17 @@ function TourneyCard({ data, auth, eventKey, sprite, tournaments, tournamentId ,
 function TabItem ({ gameId, auth, data, sprite, games, tournaments, confrontations }) {
     return data.tournaments[gameId].map((tournamentId, i) => {
         return (
-            <div>
-
-            </div>
+            <TourneyCard
+                key={i}
+                data={data}
+                eventKey={i.toString()}
+                tournamentId={tournamentId}
+                auth={auth}
+                sprite={sprite}
+                games={games}
+                tournaments={tournaments}
+                confrontations={confrontations}
+            />
         )
     })
 }
