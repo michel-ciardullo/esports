@@ -1,9 +1,9 @@
-import React from 'react';
-import {Head, useForm} from '@inertiajs/inertia-react';
-import {Container, Form, Row, Col, Button} from 'react-bootstrap';
+import React from 'react'
+import { Head, Link, useForm } from '@inertiajs/inertia-react'
+import { Container, Form, Row, Col, Button, Breadcrumb } from 'react-bootstrap'
 
-import AppLayout from '@/Layouts/AppLayout';
-import FlashStatus from '@/Components/FlashStatus';
+import AppLayout from '@/Layouts/AppLayout'
+import FlashStatus from '@/Components/FlashStatus'
 
 export default function ContactIndex(props) {
     const { post, errors, data, setData, reset } = useForm({
@@ -11,18 +11,18 @@ export default function ContactIndex(props) {
         email: '',
         subject: '',
         message: '',
-    });
+    })
 
     const onHandleChange = event => {
-        setData(event.target.name, event.target.value);
-    };
+        setData(event.target.name, event.target.value)
+    }
 
     const submit = e => {
-        e.preventDefault();
+        e.preventDefault()
         post(route('contact.send'), {
             onFinish: reset
-        });
-    };
+        })
+    }
 
     return (
         <AppLayout {...props}>
@@ -30,7 +30,12 @@ export default function ContactIndex(props) {
 
             <Container className="mt-4">
 
-                <h1 className="mb-0">Contactez-nous</h1>
+                <Breadcrumb>
+                    <li className="breadcrumb-item">
+                        <Link href={route('home')} role="button">Accueil</Link>
+                    </li>
+                    <Breadcrumb.Item active>Contactez-nous</Breadcrumb.Item>
+                </Breadcrumb>
                 <hr className="my-4"/>
 
                 <FlashStatus {...props.flash}/>
@@ -126,5 +131,5 @@ export default function ContactIndex(props) {
 
             </Container>
         </AppLayout>
-    );
+    )
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import { Head } from '@inertiajs/inertia-react';
-import { Container } from 'react-bootstrap';
+import React from 'react'
+import { Head, Link } from '@inertiajs/inertia-react'
+import { Breadcrumb, Container } from 'react-bootstrap'
 
-import AppLayout from '@/Layouts/AppLayout';
+import AppLayout from '@/Layouts/AppLayout'
 
 export default function About(props) {
 
@@ -12,7 +12,12 @@ export default function About(props) {
 
             <Container className="mt-4">
 
-                <h1 className="mb-0">À propos</h1>
+                <Breadcrumb>
+                    <li className="breadcrumb-item">
+                        <Link href={route('home')} role="button">Accueil</Link>
+                    </li>
+                    <Breadcrumb.Item active>À propos</Breadcrumb.Item>
+                </Breadcrumb>
                 <hr className="my-4" />
 
                 <article>

@@ -13,17 +13,30 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('confrontations', function (Blueprint $table) {
+        Schema::create('esports', function (Blueprint $table) {
             $table->id();
-            $table->string('external_id');
-            $table->foreignId('tournament_id')->index();
-            $table->date('date');
+            $table->string('matchid');
+            $table->dateTime('date');
             $table->time('time');
             $table->string('timezone');
+            $table->string('game');
             $table->string('status');
+
+            $table->string('opponent1');
+            $table->string('opponent2');
+
+            $table->string('tournament');
             $table->string('format');
-            $table->string('streamer')->nullable();
-            $table->string('stream_link')->nullable();
+
+            $table->string('bet1');
+            $table->string('bet2');
+
+            $table->string('result1');
+            $table->string('result2');
+
+            $table->string('streamer');
+            $table->string('streamlink');
+
             $table->timestamps();
         });
     }
@@ -35,6 +48,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('confrontations');
+        Schema::dropIfExists('esports');
     }
 };
