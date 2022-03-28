@@ -10,6 +10,7 @@ function TodayConfrontationList({ tournament_id, data, confrontations })
     {
         return (
             <li>
+                <span>{confrontations[confrontation_id].date}</span> -
                 <span>{confrontations[confrontation_id].teams[0].name}</span> -
                 <span>{confrontations[confrontation_id].teams[1].name}</span>
             </li>
@@ -79,4 +80,3 @@ export default function GameShow({ auth, lives, games, tournaments, confrontatio
         </AppLayout>
     );
 }
-

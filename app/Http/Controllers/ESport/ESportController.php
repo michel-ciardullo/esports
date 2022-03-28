@@ -8,6 +8,7 @@ use App\Models\{
     Game,
     Tournament
 };
+use Illuminate\Support\Carbon;
 use Inertia\{
     Inertia,
     Response
@@ -20,26 +21,12 @@ class ESportController extends Controller
      */
     public function index() : Response
     {
-        $eSports = Confrontation::with('teams', 'live')
-            ->select([
-                'tournaments.name as tournament_name',
-                'games.name as game_name',
-                'confrontations.status as confrontation_status',
-                'confrontations.date as confrontation_date',
-                'confrontations.time as confrontation_time',
-                'confrontations.id as id'
-            ])
-            ->leftJoin('tournaments', function ($join) {
-                $join->on('tournaments.id', '=', 'confrontations.tournament_id');
-            })
-            ->leftJoin('games', function ($join) {
-                $join->on('games.id', '=', 'tournaments.game_id');
-            })
-            ->where('date', '>=', date('Y-m-d'))
-            ->get();
-
         // select * from `confrontations` where `date` >= '2022-03-25'
-        $confrontations = Confrontation::with('teams', 'live')->where('date', '>=', date('Y-m-d'))->get()->keyBy('id');
+        $confrontations = Confrontation::with('teams', 'live')
+            ->whereDate('date', '>=', date('Y-m-d'))
+            ->whereDate('date', '<=', Carbon::tomorrow())
+            ->get()
+            ->keyBy('id');
 
         // select * from tournaments where id in (1, 2, 3, etc...)
         $tournaments    = Tournament::whereIn('id', $confrontations->keys())->get()->keyBy('id');
@@ -47,29 +34,10 @@ class ESportController extends Controller
         // select * from games where id in (1, 2, 3, etc...)
         $games          = Game::whereIn('id', $tournaments->keys())->get()->keyBy('id');
 
-        $today = [
-            'games'             => [],
-            'tournaments'       => [],
-            'confrontations'    => [],
-
-            'prevents'          => [
-                'games'             => [],
-                'tournaments'       => [],
-                'confrontations'    => [],
-            ]
-        ];
-
-        $lives = [
-            'games'             => [],
-            'tournaments'       => [],
-            'confrontations'    => [],
-
-            'prevents'          => [
-                'games'             => [],
-                'tournaments'       => [],
-                'confrontations'    => [],
-            ]
-        ];
+        // Init les filtre des ids
+        $lives      = $this->initIds();
+        $today      = $this->initIds();
+        $tomorrow   = $this->initIds();
 
         foreach ($confrontations as $confrontation)
         {
@@ -77,16 +45,21 @@ class ESportController extends Controller
             {
                 $this->postTreatment($lives, $confrontation, $tournaments, $games);
             }
-            else
+            else if ($confrontation->date === date('Y-m-d'))
             {
                 $this->postTreatment($today, $confrontation, $tournaments, $games);
             }
+            else
+            {
+                $this->postTreatment($tomorrow, $confrontation, $tournaments, $games);
+            }
         }
 
-        unset($today['prevents']);
         unset($lives['prevents']);
+        unset($today['prevents']);
+        unset($tomorrow['prevents']);
 
-        return Inertia::render('Game/Show', compact('confrontations', 'tournaments', 'games', 'today', 'lives'));
+        return Inertia::render('Game/Show', compact('confrontations', 'tournaments', 'games', 'lives', 'today' ,'tomorrow'));
     }
 
     public function show(string $slug)
@@ -120,5 +93,19 @@ class ESportController extends Controller
 
         // Initialise confrontation list
         $arr['confrontations'][$tournament->id][] = $confrontation->id;
+    }
+
+    private function initIds() {
+        return [
+            'games'             => [],
+            'tournaments'       => [],
+            'confrontations'    => [],
+
+            'prevents'          => [
+                'games'             => [],
+                'tournaments'       => [],
+                'confrontations'    => [],
+            ]
+        ];
     }
 }
