@@ -16,10 +16,15 @@ export default function ESportsConfrontation({ auth, esport }) {
 
     // https://twitch.tv/lcs
     // https://player.twitch.tv/?channel=cblol&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213
+    // https://www.twitch.tv/esl_australia
 
     if (/^https:\/\/twitch\.tv\/(.*?)$/.test(streamLink))
     {
-        channel = /^https:\/\/twitch\.tv\/(.*?)$/.exec('https://twitch.tv/lcs')[1]
+        channel = /^https:\/\/twitch\.tv\/(.*?)$/.exec(streamLink)[1]
+    }
+    else if (/^https:\/\/www.twitch.tv\/(.*?)$/.test(streamLink))
+    {
+        channel = /^https:\/\/www.twitch.tv\/(.*?)$/.exec(streamLink)[1]
     }
     else if (/https:\/\/player.twitch.tv\/\?channel=(.*?)&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213/.test(streamLink))
     {

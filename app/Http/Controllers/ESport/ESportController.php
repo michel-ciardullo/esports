@@ -41,6 +41,11 @@ class ESportController extends Controller
 
         foreach ($confrontations as $confrontation)
         {
+            if (empty($confrontation->teams[0]->pivot->rating) || empty($confrontation->teams[1]->pivot->rating))
+            {
+                continue;
+            }
+
             // Add game to indexes
             $gameId = $confrontation->game_id;
             if (!array_key_exists($gameId, $gameIndexes))
@@ -132,6 +137,11 @@ class ESportController extends Controller
 
         foreach ($confrontations as $confrontation)
         {
+            if (empty($confrontation->teams[0]->pivot->rating) || empty($confrontation->teams[1]->pivot->rating))
+            {
+                continue;
+            }
+
             $tournamentDay  = $this->getConfrontationDay($confrontation);
             $tournamentId   = $confrontation->tournament_id;
 
@@ -193,6 +203,11 @@ class ESportController extends Controller
 
         foreach ($confrontations as $confrontation)
         {
+            if (empty($confrontation->teams[0]->pivot->rating) || empty($confrontation->teams[1]->pivot->rating))
+            {
+                continue;
+            }
+
             $tournamentDay  = $this->getConfrontationDay($confrontation);
 
             if (!array_key_exists(0, $esport['tournaments'][$tournamentDay]))
