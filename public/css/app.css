@@ -11691,28 +11691,28 @@ hr {
 svg {
   transition: all 0.1s ease;
 }
-svg.csgo {
+svg.counter-strike {
   fill: gray;
 }
-svg.csgo:hover {
+svg.counter-strike:hover {
   fill: #579e06;
 }
-svg.dota {
+svg.dota-2 {
   fill: gray;
 }
-svg.dota:hover {
+svg.dota-2:hover {
   fill: #c80000;
 }
-svg.lol {
+svg.league-of-legends {
   fill: gray;
 }
-svg.lol:hover {
+svg.league-of-legends:hover {
   fill: #0b8adf;
 }
-svg.cd {
+svg.call-of-duty {
   fill: gray;
 }
-svg.cd:hover {
+svg.call-of-duty:hover {
   fill: #0544a8;
 }
 svg.valorant {
@@ -11721,22 +11721,22 @@ svg.valorant {
 svg.valorant:hover {
   fill: #b90a30;
 }
-svg.r6 {
+svg.rainbow-6 {
   fill: gray;
 }
-svg.r6:hover {
+svg.rainbow-6:hover {
   fill: #adadad;
 }
-svg.rl {
+svg.rocket-league {
   fill: gray;
 }
-svg.rl:hover {
+svg.rocket-league:hover {
   fill: #0797da;
 }
-svg.starcraft {
+svg.starcraft-2 {
   fill: gray;
 }
-svg.starcraft:hover {
+svg.starcraft-2:hover {
   fill: #02cbfd;
 }
 

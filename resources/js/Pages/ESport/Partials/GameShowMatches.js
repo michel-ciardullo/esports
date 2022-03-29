@@ -30,16 +30,16 @@ function Confrontations({auth, sprite, date, live, time, teams, confrontationId}
                 <span className="rounded-circle circle-animation me-1 shadow" />
                 <span className="text-primary d-flex justify-content-center">
                     {(() => {
-                    if (live == null) {
-                        return (
-                            `${date}:${time}`
-                        )
-                    } else {
-                        return (
-                            'Live'
-                        )
-                    }
-                })()}
+                        if (live == null) {
+                            return (
+                                `${date}:${time}`
+                            )
+                        } else {
+                            return (
+                                'Live'
+                            )
+                        }
+                    })()}
                 </span>
             </div>
             <div className="d-flex flex-column justify-content-center col-5">
@@ -140,7 +140,7 @@ function TabItem ({ gameId, auth, data, sprite, games, tournaments, confrontatio
 export default function GameShowMatches({ gameId, auth, lives, today, tomorrow, games, tournaments, confrontations }) {
 
     let activeKeys = [];
-    for(let key =0; key< 15; key++) activeKeys.push(key.toString());
+    for(let key =0; key< 5; key++) activeKeys.push(key.toString());
 
     return (
         <div className="game-show-matches mb-4">
@@ -189,4 +189,3 @@ export default function GameShowMatches({ gameId, auth, lives, today, tomorrow, 
         </div>
     )
 }
-
