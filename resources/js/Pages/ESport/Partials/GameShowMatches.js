@@ -148,41 +148,41 @@ export default function GameShowMatches({ gameId, auth, lives, today, tomorrow, 
             <Tabs defaultActiveKey="encours" id="uncontrolled-tab-example">
                 <Tab eventKey="encours" title="En Cours">
                     <Accordion defaultActiveKey={activeKeys} alwaysOpen>
-                        <TabItem
-                            gameId={gameId}
-                            auth={auth}
-                            data={lives}
-                            sprite={games[gameId].slug}
-                            games={games}
-                            tournaments={tournaments}
-                            confrontations={confrontations}
-                        />
+                        {/*<TabItem*/}
+                        {/*    gameId={gameId}*/}
+                        {/*    auth={auth}*/}
+                        {/*    data={lives}*/}
+                        {/*    sprite={games[gameId].slug}*/}
+                        {/*    games={games}*/}
+                        {/*    tournaments={tournaments}*/}
+                        {/*    confrontations={confrontations}*/}
+                        {/*/>*/}
                     </Accordion>
                 </Tab>
                 <Tab eventKey="aujourd'hui" title="Aujourd'hui">
                     <Accordion defaultActiveKey={activeKeys} alwaysOpen>
-                        <TabItem
-                            gameId={gameId}
-                            auth={auth}
-                            data={today}
-                            sprite={games[gameId].slug}
-                            games={games}
-                            tournaments={tournaments}
-                            confrontations={confrontations}
-                        />
+                        {/*<TabItem*/}
+                        {/*    gameId={gameId}*/}
+                        {/*    auth={auth}*/}
+                        {/*    data={today}*/}
+                        {/*    sprite={games[gameId].slug}*/}
+                        {/*    games={games}*/}
+                        {/*    tournaments={tournaments}*/}
+                        {/*    confrontations={confrontations}*/}
+                        {/*/>*/}
                     </Accordion>
                 </Tab>
                 <Tab eventKey="demain" title="Demain">
                     <Accordion defaultActiveKey={activeKeys} alwaysOpen>
-                        <TabItem
-                            gameId={gameId}
-                            auth={auth}
-                            data={tomorrow}
-                            sprite={games[gameId].slug}
-                            games={games}
-                            tournaments={tournaments}
-                            confrontations={confrontations}
-                        />
+                        {/*<TabItem*/}
+                        {/*    gameId={gameId}*/}
+                        {/*    auth={auth}*/}
+                        {/*    data={tomorrow}*/}
+                        {/*    sprite={games[gameId].slug}*/}
+                        {/*    games={games}*/}
+                        {/*    tournaments={tournaments}*/}
+                        {/*    confrontations={confrontations}*/}
+                        {/*/>*/}
                     </Accordion>
                 </Tab>
             </Tabs>
