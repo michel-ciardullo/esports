@@ -35,4 +35,7 @@ return [
         'token' => env('E_SPORT_SECRET_ACCESS_TOKEN'),
     ],
 
+    'riotgames' => [
+        'token' => env('RIOT_GAMES_SECRET_ACCESS_TOKEN'),
+    ],
 ];

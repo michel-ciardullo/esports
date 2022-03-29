@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/esports', function (Request $request) {
+    file_put_contents(__DIR__ . '/GET.txt', 'GET');
+});
+
+Route::post('/esports', function (Request $request) {
+    file_put_contents(__DIR__ . '/POST.txt', 'POST');
+});
