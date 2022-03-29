@@ -9,10 +9,10 @@ export default function Tournament({ gameSlug, tournament }) {
         <Accordion.Item eventKey={tournament.id.toString()}>
             <Accordion.Header>
                 <Link className="text-light h4 mb-0" href={route('esports.tournament', [gameSlug, tournament.slug])}>
-                    {tournament.name}
+                    <span className="span-overflow">{tournament.name}</span>
                 </Link>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className="p-2">
                 <ConfrontationList confrontations={tournament.confrontations} gameSlug={gameSlug} tournamentSlug={tournament.slug}/>
             </Accordion.Body>
         </Accordion.Item>

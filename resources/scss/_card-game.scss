@@ -69,3 +69,28 @@
         }
     }
 }
+
+// confrontation-item
+.confrontation-item:not(:last-child) {
+    margin-bottom: .5rem;
+}
+.confrontation-team:hover {
+    background-color: lighten($dark, 75%);
+}
+.confrontation-item > div:first-child {
+    white-space: nowrap;
+}
+
+.confrontation-team {
+    width: 0;
+}
+
+@media (max-width: 575.98px) {
+    .span-overflow {
+        width: 240px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+    }
+}

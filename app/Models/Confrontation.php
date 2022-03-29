@@ -68,6 +68,7 @@ class Confrontation extends Model
             ->leftJoin('tournaments', 'tournaments.id', '=', 'confrontations.tournament_id')
             ->whereDate('date', '>=', $yesterdayDateTime->format('Y-m-d'))
             ->whereDate('date', '<=', $tomorrowDateTime->format('Y-m-d'))
+            ->where('status', '!=', 'cancelled')
             ->orderBy('tournaments.name');
     }
 
