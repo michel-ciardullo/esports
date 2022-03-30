@@ -1,106 +1,93 @@
-import React from 'react';
-import {
-    Container,
-    Nav,
-    Navbar,
-    NavDropdown,
-    Badge
-} from 'react-bootstrap';
-import { Link } from '@inertiajs/inertia-react';
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import React, { useState } from 'react'
+import { Nav, Modal, Tab, Button } from 'react-bootstrap'
 
-function Authenticate({ user }) {
-    return (
-        <>
-            <Link className="nav-link" href={route('wallet.index')}>
-                <div>
-                    <Badge className="p-2" variant="outline-primary">{user.wallet.balance}€</Badge>
-                </div>
-            </Link>
-            <NavDropdown title={user.name} id="basic-nav-dropdown">
-                <Link
-                    href={route('profile')}
-                    className="dropdown-item"
-                >
-                    Mon Profil
-                </Link>
-                <Link
-                    href={route('wallet.index')}
-                    className="dropdown-item"
-                >
-                    Mon Portefeuille
-                </Link>
-                <NavDropdown.Divider />
-                <Link
-                    href={route('logout')}
-                    className="dropdown-item"
-                    method="post"
-                    as="button"
-                >
-                    Déconnexion
-                </Link>
-            </NavDropdown>
-        </>
-    )
-}
-
-function NonAuthentication() {
-    return (
-        <>
-            <Link className="nav-link" href={route('login')}>Se connecter</Link>
-            <Link className="ms-lg-3 mt-lg-0 my-3 my-lg-0 btn btn-outline-primary" href={route('register')}>S'inscrire</Link>
-        </>
-    )
-}
-
-function NavLink({ href, active, children }) {
-    return (
-        <Link className={'nav-link' + (active ? ' active' : '')} href={href}>
-            <span>{ children }</span>
-            <span className="nav-link-indicator"/>
-        </Link>
-    )
-}
+import { GlobalContext, modalTickets } from '@/context'
+import Navbar from './Partials/Navbar'
+import OffCanvas from "@/Layouts/Partials/OffCanvas";
 
 export default function AppLayout({ auth, children }) {
-    return (
-        <>
-            {/* Navbar */}
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Container>
-                    <Link className="navbar-brand" href={route('home')}>
-                        <ApplicationLogo width="36" height="36"/>
-                    </Link>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav>
-                            <NavLink href={route('home')} active={route().current('home')}>
-                                Accueil
-                            </NavLink>
-                            <NavLink href={route('esports.index')} active={route().current('esports.*')}>
-                                ESports
-                            </NavLink>
-                            <NavLink href={route('about')} active={route().current('about')}>
-                                À propos
-                            </NavLink>
-                            <NavLink href={route('contact')} active={route().current('contact')}>
-                                Nous-contactez
-                            </NavLink>
-                            <NavLink href={route('faq')} active={route().current('faq')}>
-                                FAQ
-                            </NavLink>
-                        </Nav>
-                        <Nav className="ms-auto nav-profile">
-                            {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+    // State also contains the updater function so it will
+    // be passed down into the context provider
 
-            {/* Content */}
+    // State also contains the updater function so it will
+    // be passed down into the context provider
+    const [state, setState] = useState({
+        modalTickets
+    })
+
+    const handleShow = modalTickets => {
+        console.log(modalTickets)
+
+        setState({
+            modalTickets: {
+                ...modalTickets,
+                show: true
+            },
+        })
+    }
+
+    const handleClose = () => {
+        setState({
+            modalTickets: { show: false },
+        })
+    }
+
+    return (
+        <GlobalContext.Provider value={{...state, handleShow}}>
+            <Navbar auth={auth}/>
+
             <main className="pb-3">
                 {children}
             </main>
-        </>
-    );
+
+            <OffCanvas placement="end" name='name' />
+
+            <Modal show={state.modalTickets.show} onHide={handleClose} className="text-dark" centered>
+
+                <Modal.Header className="border-bottom border-primary" closeButton>
+                    <Modal.Title>Ticket de paris ({state.modalTickets.name}}</Modal.Title>
+                </Modal.Header>
+
+                <Tab.Container defaultActiveKey="simple">
+
+                    <Nav variant="sub" className="border-bottom border-primary">
+                        <Nav.Item>
+                            <Nav.Link eventKey="simple" className="d-flex flex-column p-0">
+                                <span className="p-3">Simple</span>
+                                <span />
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="combined" className="d-flex flex-column p-0">
+                                <span className="p-3">Combiné</span>
+                                <span />
+                            </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+
+                    <Modal.Body>
+                        <Tab.Content>
+                            <Tab.Pane eventKey="simple">
+                                Simple
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="combined">
+                                Combiné
+                            </Tab.Pane>
+                        </Tab.Content>
+                    </Modal.Body>
+
+                </Tab.Container>
+
+                <Modal.Footer className="border-top border-primary">
+                    <Button variant="light" onClick={handleClose}>
+                        Annuler
+                    </Button>
+                    <Button variant="outline-primary">
+                        Jouer
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+        </GlobalContext.Provider>
+    )
 }

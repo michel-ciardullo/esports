@@ -47,13 +47,13 @@ export default function Game({ game }) {
                 <Card.Body>
                     <Tab.Content>
                         <Tab.Pane eventKey="lives">
-                            <TournamentList gameSlug={game.slug} tournaments={game.tournaments.now} message="Aucune confrontation en direct à l'heure actuelle."/>
+                            <TournamentList game={game} tournaments={game.tournaments.now} message="Aucune confrontation en direct à l'heure actuelle."/>
                         </Tab.Pane>
                         <Tab.Pane eventKey="today">
-                            <TournamentList gameSlug={game.slug} tournaments={game.tournaments.today} message="Pas de confrontation pour aujourd'hui."/>
+                            <TournamentList game={game} tournaments={game.tournaments.today} message="Pas de confrontation pour aujourd'hui."/>
                         </Tab.Pane>
                         <Tab.Pane eventKey="tomorrow">
-                            <TournamentList gameSlug={game.slug} tournaments={game.tournaments.tomorrow} message="Pas de confrontation pour demain."/>
+                            <TournamentList game={game} tournaments={game.tournaments.tomorrow} message="Pas de confrontation pour demain."/>
                         </Tab.Pane>
                         <Tab.Pane eventKey="statistiques">
                             <Card.Text>
@@ -65,5 +65,5 @@ export default function Game({ game }) {
 
             </Tab.Container>
         </Card>
-    );
+    )
 }
