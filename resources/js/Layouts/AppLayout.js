@@ -108,7 +108,7 @@ export default function AppLayout({ auth, children }) {
                                 À propos
                             </NavLink>
                             <NavLink href={route('contact')} active={route().current('contact')}>
-                                Nous-contactez
+                                Nous-contacter
                             </NavLink>
                             <NavLink href={route('faq')} active={route().current('faq')}>
                                 FAQ

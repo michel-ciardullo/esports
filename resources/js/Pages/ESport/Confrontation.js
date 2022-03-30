@@ -13,22 +13,37 @@ export default function ESportsConfrontation({ auth, esport }) {
 
     let streamLink = esport.tournaments.now.length ? esport.tournaments.now[0].confrontations[0].stream_link : ''
     let channel = ''
-
     // https://twitch.tv/lcs
     // https://player.twitch.tv/?channel=cblol&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213
     // https://www.twitch.tv/esl_australia
+    // https://player.twitch.tv/?channel=winline_d2cl&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5
+    // https://player.twitch.tv/?channel=esl_csgo&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5
+
 
     if (/^https:\/\/twitch\.tv\/(.*?)$/.test(streamLink))
     {
         channel = /^https:\/\/twitch\.tv\/(.*?)$/.exec(streamLink)[1]
+        console.log("premier")
     }
     else if (/^https:\/\/www.twitch.tv\/(.*?)$/.test(streamLink))
     {
         channel = /^https:\/\/www.twitch.tv\/(.*?)$/.exec(streamLink)[1]
+        console.log("deuxieme")
     }
     else if (/https:\/\/player.twitch.tv\/\?channel=(.*?)&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213/.test(streamLink))
     {
+        console.log("troisieme")
         channel = /https:\/\/player.twitch.tv\/\?channel=(.*?)&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213/.exec(streamLink)[1]
+    }
+    else if (/https:\/\/player.twitch.tv\/?channel=(.*?)&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5/.test(streamLink))
+    {
+        console.log("quatrieme")
+        channel = /https:\/\/player.twitch.tv\/?channel=(.*?)&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5/.exec(streamLink)[1]
+    }
+    else if (/https:\/\/player.twitch.tv\/?channel=(.*?)&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5/.test(streamLink))
+    {
+        console.log("5")
+        channel = /https:\/\/player.twitch.tv\/?channel=(.*?)&enableExtensions=true&muted=true&parent=twitch.tv&player=popout&quality=auto&volume=0.5/.exec(streamLink)[1]
     }
 
     streamLink = `https://player.twitch.tv/?channel=${channel}&parent=localhost`
