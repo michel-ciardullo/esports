@@ -12,7 +12,7 @@ export default function ESportsIndex({ auth, esports }) {
         <AppLayout auth={auth}>
             <Head title="ESports" />
 
-            <Container className="mt-4">
+            <Container className="mt-5">
 
                 <Breadcrumb>
                     <li className="breadcrumb-item">
