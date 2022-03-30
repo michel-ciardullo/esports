@@ -1,7 +1,7 @@
 import React from 'react';
 import Guest from '@/Layouts/Guest';
-import {Head, useForm} from '@inertiajs/inertia-react';
-import {Form} from 'react-bootstrap';
+import {Head, Link, useForm} from '@inertiajs/inertia-react';
+import {Form} from "react-bootstrap";
 
 export default function Login() {
     const { post, errors, data, setData } = useForm({
@@ -26,8 +26,8 @@ export default function Login() {
     };
 
     return (
-        <Guest title="Inscris-toi !">
-            <Head title="Se connecter" />
+        <Guest title="S'inscrire">
+            <Head title="Inscription" />
 
             <form
                 onSubmit={submit}
@@ -115,9 +115,13 @@ export default function Login() {
                     required
                 />
 
-                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
+                <button className="w-100 btn btn-lg btn-primary" type="submit">
                     S'inscrire
                 </button>
+
+                <p className="text-center mb-2 mt-2">
+                   Vous avez déjà compte ? <Link href={route('login')}>Se connecter</Link>
+                </p>
             </form>
 
         </Guest>

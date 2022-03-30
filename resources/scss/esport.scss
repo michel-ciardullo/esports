@@ -1,0 +1,217 @@
+// $duration: .2s;
+// $distance: 8px;
+// $easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+
+svg{
+    transition: all 0.1s ease;
+    &.counter-strike{
+        fill: gray;
+        &:hover{
+            fill: #579e06;
+        }
+    }
+    &.dota-2{
+        fill: gray;
+        &:hover{
+            fill: #c80000;
+        }
+    }
+    &.league-of-legends{
+        fill: gray;
+        &:hover{
+            fill: #0b8adf;
+        }
+    }
+    &.call-of-duty{
+        fill: gray;
+        &:hover{
+            fill: #0544a8;
+        }
+    }
+    &.valorant{
+        fill: gray;
+        &:hover{
+            fill: #b90a30;
+        }
+    }
+    &.rainbow-6{
+        fill: gray;
+        &:hover{
+            fill: #adadad;
+        }
+    }
+    &.rocket-league{
+        fill: gray;
+        &:hover{
+            fill: #0797da;
+        }
+    }
+    &.starcraft-2{
+        fill: gray;
+        &:hover{
+            fill: #02cbfd;
+        }
+    }
+}
+
+.game-scroller {
+    background-color: $card-bg;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.game-scroller-element {
+    position: relative;
+    cursor: pointer;
+}
+
+.match-number {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 0;
+    left: 60px;
+}
+
+.game-show-matches {
+    background-color: $card-bg;
+    width: 100%;
+    border-radius: 10px;
+}
+.accordion-item-e-sport {
+    width: 95%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+}
+.card-wrapper {
+    height: 150px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+ul.nav-tabs {
+    position: relative;
+    top:-42px;
+    border-bottom: 0px transparent;
+    &.nav{
+        display: -webkit-box;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    .nav-link {
+        color:#fff;
+        &.active, &:hover {
+            color: $primary !important;
+            background-color: transparent !important;
+            border-color: transparent transparent $primary !important;
+        }
+    }
+}
+
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    background: none;
+    border: 2px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.arrow {
+    position: relative;
+    top: 8px;
+    cursor: pointer;
+    height: 20px;
+    transform: translateX(-50%) translateY(-50%);
+    transition: transform .1s;
+    width: 10px;
+
+    $transition-time: .15s;
+
+    &-top,
+    &-bottom {
+      background-color: #666;
+      height: 4px;
+      left: -5px;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+
+      &:after {
+        background-color: #fff;
+        content: '';
+        height: 100%;
+        position: absolute;
+        top: 0;
+        transition: all $transition-time;
+      }
+    }
+
+    &-top {
+      transform: rotate(45deg);
+      transform-origin: bottom right;
+
+      &:after {
+        left: 100%;
+        right: 0;
+        transition-delay: 0s;
+      }
+    }
+
+    &-bottom {
+      transform: rotate(-45deg);
+      transform-origin: top right;
+
+      &:after {
+        left: 0;
+        right: 100%;
+        transition-delay: $transition-time;
+      }
+    }
+
+    &:hover & {
+
+      &-top:after {
+        left: 0;
+        transition-delay: $transition-time;
+      }
+
+      &-bottom:after {
+        right: 0;
+        transition-delay: 0s;
+      }
+    }
+
+    &:active {
+      transform: translateX(-50%) translateY(-50%) scale(0.9);
+    }
+}
+
+.modal-content {
+    background-color: $card-bg;
+    color: white;
+    .modal-header{
+        border-bottom: 0px;
+    }
+    .modal-footer{
+        border-top: 0px;
+    }
+}
+
+.team-name {
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

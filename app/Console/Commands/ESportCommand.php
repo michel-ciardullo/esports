@@ -117,7 +117,7 @@ class ESportCommand extends Command
                 }
                 else
                 {
-                    ESport::update($esportData);
+                    $esport->update($esportData);
                 }
 
                 // Game

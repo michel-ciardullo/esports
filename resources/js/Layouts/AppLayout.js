@@ -3,32 +3,56 @@ import {
     Container,
     Nav,
     Navbar,
-    NavDropdown,
-    Badge
+    NavDropdown
 } from 'react-bootstrap';
+
 import { Link } from '@inertiajs/inertia-react';
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
+function NavItems ({ text, src , justify}) {
+    return (
+        <div className={`d-flex justify-content-${justify} align-items-center`}>
+            <img
+                className="thumbnail-image"
+                src={src}
+                alt="user pic"
+            />
+            <span className="ms-3 text-white">{text}</span>
+        </div>
+    )
+}
+
 function Authenticate({ user }) {
     return (
-        <>
-            <Link className="nav-link" href={route('wallet.index')}>
-                <div>
-                    <Badge className="p-2" variant="outline-primary">{user.wallet.balance}€</Badge>
-                </div>
-            </Link>
-            <NavDropdown title={user.name} id="basic-nav-dropdown">
-                <Link
-                    href={route('profile')}
-                    className="dropdown-item"
-                >
-                    Mon Profil
+        <div className="authentificate d-flex flex-md-row flex-row-reverse justify-content-between">
+            <div className="nav-item d-flex justify-content-center align-items-md-center">
+                <Link href="#">
+                    {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
+                    <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
+            </div>
+            <div className="vl me-3 d-none d-md-flex"></div>
+            <NavDropdown
+                title={ <NavItems text={ user.name } src="/img/person-circle.svg" justify="start"/> }
+                id="basic-nav-dropdown"
+                className="d-block d-md-flex justify-content-center align-items-center"
+            >
+                <NavDropdown.Item
+                    href={route('profile')}
+                >
+                    <NavItems text="Profil" src="/img/person-circle.svg" justify="start" />
+                </NavDropdown.Item>
                 <Link
                     href={route('wallet.index')}
                     className="dropdown-item"
                 >
-                    Mon Portefeuille
+                    <NavItems text="Portefeuille" src="/img/wallet2.svg" justify="start" />
+                </Link>
+                <Link
+                    href="#tickets"
+                    className="dropdown-item"
+                >
+                    <NavItems text="Tickets" src="/img/logo-paris.svg" justify="start" />
                 </Link>
                 <NavDropdown.Divider />
                 <Link
@@ -37,10 +61,10 @@ function Authenticate({ user }) {
                     method="post"
                     as="button"
                 >
-                    Déconnexion
+                    <NavItems text="Déconnexion" src="/img/logo-disconnect.svg" justify="start" />
                 </Link>
             </NavDropdown>
-        </>
+        </div>
     )
 }
 
@@ -66,7 +90,7 @@ export default function AppLayout({ auth, children }) {
     return (
         <>
             {/* Navbar */}
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow">
                 <Container>
                     <Link className="navbar-brand" href={route('home')}>
                         <ApplicationLogo width="36" height="36"/>
@@ -98,7 +122,7 @@ export default function AppLayout({ auth, children }) {
             </Navbar>
 
             {/* Content */}
-            <main className="pb-3">
+            <main className="pb-3 margin-main">
                 {children}
             </main>
         </>

@@ -1,8 +1,14 @@
 // Color system
+$blue-100:   #001540;
+$blue-200:   #001C57;
+$blue-300:   #00316E;
+$blue-400:   #00224B;
+$blue-500:   #001B3A;
 
 $primary:    #BB86FC;
-$secondary:  lighten($primary, 8%);
+$secondary:  darken($primary, 8%);
 $third:      #6d28d9;
+$fourth:     lighten($blue-200, 20%);
 
 $success:    #198754;
 $info:       #0dcaf0;
@@ -11,43 +17,18 @@ $danger:     #dc3545;
 
 $light:      #f8f9fa;
 $dark:       #121212;
-$dark-100:   lighten(#121212, 5%);
 
 $theme-colors: (
     "primary":    $primary,
     "secondary":  $secondary,
     "third":      $third,
+    "fourth":     $fourth,
     "success":    $success,
     "info":       $info,
     "warning":    $warning,
     "danger":     $danger,
     "light":      $light,
-    "dark":       $dark,
-    "dark-100":   $dark-100,
-);
-
-$counter-strike:    #6c9931;
-$dota-2:            #ff404e;
-$call-of-duty:      #1aa3a1;
-$league-of-legends: #42e0e4;
-$rainbow-6:         #aa80ff;
-$rocket-league:     #33CCFF;
-$valorant:          #fe4a6d;
-$hearthstone:       #bf4c9f;
-$starcraft-2:       #0084b2;
-$overwatch:         #b26100;
-
-$game-colors: (
-    "counter-strike":       $counter-strike,
-    "dota-2":               $dota-2,
-    "call-of-duty":         $call-of-duty,
-    "league-of-legends":    $league-of-legends,
-    "rainbow-6":            $rainbow-6,
-    "rocket-league":        $rocket-league,
-    "valorant":             $valorant,
-    "hearthstone":          $hearthstone,
-    "starcraft-2":          $starcraft-2,
-    "overwatch":            $overwatch,
+    "dark":       $dark
 );
 
 // Body

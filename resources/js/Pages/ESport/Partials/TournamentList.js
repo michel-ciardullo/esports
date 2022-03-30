@@ -3,16 +3,16 @@ import { Accordion } from 'react-bootstrap'
 
 import Tournament from './Tournament'
 
-export default function TournamentList({ gameSlug, tournaments, message }) {
+export default function TournamentList({ auth, gameSlug, tournaments, message }) {
     if (tournaments.length === 0) {
         return (
-            <p className="mb-0">{message}</p>
+            <p className="pb-5 text-center">{message}</p>
         )
     }
     return (
-        <Accordion defaultActiveKey={tournaments.map(tournament => tournament.id.toString())}>
+        <Accordion defaultActiveKey={tournaments.map(tournament => tournament.id.toString())} alwaysOpen>
             {tournaments.map((tournament, i) =>
-                <Tournament key={i} gameSlug={gameSlug} tournament={tournament} />
+                <Tournament key={i} auth={auth} gameSlug={gameSlug} tournament={tournament} />
             )}
         </Accordion>
     )

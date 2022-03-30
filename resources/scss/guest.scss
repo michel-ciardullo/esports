@@ -1,0 +1,65 @@
+.guest {
+    background-color: #121212;
+
+    display: flex;
+    height: 100%;
+    color: #fff;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active{
+        background-color: $card-bg !important;
+        border-color: #C4C4C4 !important;
+        color: #FFF;
+        font-family: 'YoutubeSansSemibold';
+        box-shadow: 0 0 0 30px #576D7B inset;
+        -webkit-box-shadow: 0 0 0 30px $card-bg inset;
+        -webkit-text-fill-color: azure;
+        background: $card-bg;
+    }
+}
+
+.guest-content {
+    margin: auto;
+    max-width: 450px;
+    padding: 15px;
+    width: 100%;
+}
+
+.guest .card {
+    background-color: $card-bg !important;
+    border-radius: 24px !important;
+}
+
+.guest input,
+.guest input:focus {
+    background-color: $card-bg !important;
+    border-color: #C4C4C4 !important;
+    color: #FFF;
+    font-family: 'YoutubeSansSemibold';
+}
+
+
+.guest label {
+    color: #fff;
+}
+
+.guest {
+    button {
+        font-family: 'YoutubeSansSemibold';
+    }
+}
+
+.forgot-text {
+    p {
+        font-family: YoutubeSansMedium;
+        color: #fff !important;
+    }
+}
+
+.card {
+    h1 {
+        font-family: 'YoutubeSansBold';
+    }
+}

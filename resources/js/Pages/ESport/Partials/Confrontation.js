@@ -1,42 +1,64 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from '@inertiajs/inertia-react'
+import {Button} from 'react-bootstrap'
 
-export default function Confrontation({ gameSlug, tournamentSlug, confrontation }) {
-    const color = confrontation.status === 'live' && confrontation.stream_link !== null ? 'success' : 'warning'
+import BetPopUp from './BetPopUp'
+import Sprites from '@/Components/Sprites';
+
+export default function Confrontation({ auth, gameSlug, tournamentSlug, confrontation }) {
+    const [modalShow1, setModalShow1] = useState(false);
+    const [modalShow2, setModalShow2] = useState(false);
 
     return (
-        <div className="d-flex align-items-center confrontation-item">
-
-            <div className="bg-dark-100 d-flex justify-content-between flex-grow-1">
-                <button className="confrontation-team right-facing-competitor border-0">
-                    <div>
-                        {confrontation.teams[0].name}
-                    </div>
-                    <div>
-                        <span className="bg-dark text-light rounded-2 p-1">
-                            {confrontation.teams[0].pivot.rating}
-                        </span>
-                    </div>
-                </button>
-                <span className="p-3">VS</span>
-                <button className="confrontation-team left-facing-competitor border-0">
-                    <div>
-                        {confrontation.teams[1].name}
-                    </div>
-                    <div>
-                        <span className="bg-dark text-light rounded-2 p-1">
-                            {confrontation.teams[1].pivot.rating}
-                        </span>
-                    </div>
-                </button>
+        <div className="row tourney-content-main mb-1">
+            <div className="d-flex flex-row justify-content-center align-items-center col-2 col-md-1">
+                    {(() => {
+                        if (confrontation.status === 'live' && confrontation.stream_link !== null) {
+                            return (
+                                <>
+                                    <span className="rounded-circle circle-animation me-1 shadow" />
+                                    <span className="d-none text-primary d-md-flex justify-content-center">live</span>
+                                </>
+                            )
+                        } else {
+                            return (
+                                <span className="text-primary d-flex justify-content-center">{confrontation.time}</span>
+                            )
+                        }
+                    })()}
             </div>
-
-            <div className="btn-group dropend d-none d-lg-block">
-                <Link href={route('esports.confrontation', [gameSlug, tournamentSlug, confrontation.id])} className={`p-3 rounded-0 border-0 btn btn-${color}`}>
-                    <strong className="me-1">{confrontation.date}</strong>{confrontation.time} {confrontation.timezone}
-                </Link>
-                <Link href={route('esports.confrontation', [gameSlug, tournamentSlug, confrontation.id])} className={`p-3 border-0 btn btn-${color} dropdown-toggle dropdown-toggle-split`} data-bs-toggle="dropdown" aria-expanded="false">
-                    <span className="visually-hidden">Toggle Dropdown</span>
+            <div className="d-flex flex-column justify-content-center col-4 col-md-5">
+                <div className="team-name">
+                    <Sprites height="15px" width="15px" sprite={gameSlug} fill='gray' className="me-1" />
+                    {confrontation.teams[0].name}
+                </div>
+                <div className="team-name">
+                    <Sprites height="15px" width="15px" sprite={gameSlug} fill='gray' className="me-1" />
+                    {confrontation.teams[1].name}
+                </div>
+            </div>
+            <div className="d-flex flex-row justify-content-between col-5">
+                <Button className="text-primary w-50 me-2" variant="dark" onClick={() => setModalShow1(true)}>{confrontation.teams[0].pivot.rating}</Button>
+                <BetPopUp
+                    user={auth.user}
+                    team={confrontation.teams[0].name}
+                    rating={confrontation.teams[0].pivot.rating}
+                    show={modalShow1}
+                    onHide={() => setModalShow1(false)}
+                />
+                <Button className="text-primary w-50" variant="dark" onClick={() => setModalShow2(true)}>{confrontation.teams[1].pivot.rating}</Button>
+                <BetPopUp
+                    user={auth.user}
+                    team={confrontation.teams[1].name}
+                    rating={confrontation.teams[1].pivot.rating}
+                    show={modalShow2}
+                    onHide={() => setModalShow2(false)}
+                />
+            </div>
+            <div className="d-flex flex-column justify-content-center align-items-center col-1">
+                <Link className="arrow" href={route('esports.confrontation', [gameSlug, tournamentSlug, confrontation.id])}>
+                    <div className="arrow-top"></div>
+                    <div className="arrow-bottom"></div>
                 </Link>
             </div>
         </div>

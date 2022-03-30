@@ -4,6 +4,7 @@ import { Container, Breadcrumb } from 'react-bootstrap'
 
 import AppLayout from '@/Layouts/AppLayout'
 import Game from './Partials/Game'
+import GameScroller from './Partials/GameScroller'
 
 export default function ESportsShow({ auth, esport }) {
     const tournamentName = (esport.tournaments.yesterday.length > 0 ? esport.tournaments.yesterday[0].name : null)
@@ -31,7 +32,9 @@ export default function ESportsShow({ auth, esport }) {
                 </Breadcrumb>
                 <hr className="my-4"/>
 
-                <Game game={esport}/>
+                {/*<GameScroller games={esport}/>*/}
+
+                <Game auth={auth} game={esport}/>
 
             </Container>
         </AppLayout>

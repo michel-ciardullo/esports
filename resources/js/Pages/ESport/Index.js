@@ -4,6 +4,7 @@ import { Breadcrumb, Container } from 'react-bootstrap'
 
 import AppLayout from '@/Layouts/AppLayout'
 import GameList from '@/Pages/ESport/Partials/GameList'
+import GameScroller from './Partials/GameScroller'
 
 export default function ESportsIndex({ auth, esports }) {
 
@@ -21,7 +22,9 @@ export default function ESportsIndex({ auth, esports }) {
                 </Breadcrumb>
                 <hr className="my-4"/>
 
-                <GameList games={esports}/>
+                <GameScroller games={esports}/>
+
+                <GameList auth={auth} games={esports}/>
 
             </Container>
         </AppLayout>
