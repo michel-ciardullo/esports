@@ -1,37 +1,36 @@
 import React from 'react';
+import { Link } from '@inertiajs/inertia-react'
 import Sprites from "@/Components/Sprites";
 
-function Logo ({ height, width, gameId, lives, games }) {
-    let tab= [];
-    lives['games'].forEach((gameIdx)=> {
-        tab[gameIdx] = 0
-        lives['tournaments'][gameIdx].forEach((tournamentIdx) => {
-            lives.confrontations[tournamentIdx].forEach(() =>
-                tab[gameIdx]++
-            )
+function Logo ({ height, width, game }) {
+    let counter = 0;
+    if(game.tournaments.now.length != 0) {
+        game.tournaments.now.forEach((tournament)=> {
+            counter = 0
+            tournament.confrontations.forEach(() => {
+                counter++
+            })
         })
-    })
+    }
 
     return (
-        <a className="game-scroller-element me-3" href={`#${games[gameId].slug}`}>
-            <Sprites className={games[gameId].slug} height={height} width={width} sprite={games[gameId].slug} />
-            <div className="match-number bg-secondary rounded text-white text-center money">{tab[gameId]}</div>
-        </a>
+        <Link className="game-scroller-element me-3" href={route('esports.game', game.slug)}>
+            <Sprites className={game.slug} height={height} width={width} sprite={game.slug} />
+            <div className="match-number bg-secondary rounded text-white text-center money">{counter}</div>
+        </Link>
     )
 }
 
-export default function GameScroller({ lives, games }) {
+export default function GameScroller({games}) {
 
     return (
         <div className="game-scroller d-flex py-2 px-2 w-100 mb-3">
-            {lives['games'].map((id, i) =>
+            {games.map((game, i) =>
             <Logo
                 key={i}
                 height="80"
                 width="80"
-                gameId={id}
-                lives={lives}
-                games={games}
+                game={game}
             />
             )}
         </div>

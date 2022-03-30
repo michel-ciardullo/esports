@@ -21,6 +21,9 @@ return new class extends Migration
             $table->time('time');
             $table->string('timezone');
             $table->string('status');
+            $table->string('format');
+            $table->string('streamer')->nullable();
+            $table->string('stream_link')->nullable();
             $table->timestamps();
         });
     }

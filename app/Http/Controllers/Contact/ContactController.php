@@ -20,7 +20,7 @@ class ContactController extends Controller
      */
     public function index() : Response
     {
-        return Inertia::render('Contact/Index');
+        return Inertia::render('Contact');
     }
 
     /**
