@@ -69,23 +69,13 @@ class ESportCommand extends Command
      */
     private function fetchApi(array $tournaments = []) : array
     {
-        $token = config('services.e_sport.token');
-        $endpoint = config('services.e_sport.endpoint');
-
-        if($token == null) {
-            throw new \Exception('Invalid token');
-        }
-        if($endpoint == null) {
-            throw new \Exception('Invalid token');
-        }
-
         // Build url with query params
         $queryParams = array_merge([
-            'token' => $token
+            'token' => config('services.e_sport.token')
         ], $tournaments);
 
         $query  = http_build_query($queryParams);
-        $url    = sprintf('%s?%s', $endpoint, $query);
+        $url    = sprintf('%s?%s', config('services.e_sport.endpoint'), $query);
         $this->comment($url);
 
         // fetch request with curl
@@ -139,7 +129,7 @@ class ESportCommand extends Command
                 $this->comment($tournament->toJson());
 
                 // Confrontation
-                $confrontation = $this->GetOrCreateConfrontationIfNotExist($game->id, [
+                $confrontation = $this->GetOrCreateConfrontationIfNotExist([
                     'external_id'   => $data->id,
                     'tournament_id' => $tournament->id,
                     'date'          => $data->date,
@@ -151,15 +141,6 @@ class ESportCommand extends Command
                     'stream_link'   => $data->streamlink ?? null,
                 ]);
                 $this->comment($confrontation->toJson());
-
-                // Live
-                if ($confrontation->status === 'live')
-                {
-                    $this->createLiveOrUpdateIfNotExist($game->id, $confrontation->id, [
-                        'streamer'          => $data->streamer ?? null,
-                        'streamer_link'     => $data->streamlink ?? null,
-                    ]);
-                }
 
                 // Team 1
                 $tournamentTeam1 = $this->GetOrCreateTeam($confrontation, $data->opponent1, $data->bet1, $data->result1, 1);
@@ -202,7 +183,7 @@ class ESportCommand extends Command
         return $tournament;
     }
 
-    private function GetOrCreateConfrontationIfNotExist(int $gameId, array $data)
+    private function GetOrCreateConfrontationIfNotExist(array $data)
     {
         $confrontation = Confrontation::where('external_id' , '=', $data['external_id'])->first();
         if (!$confrontation)

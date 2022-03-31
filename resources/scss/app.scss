@@ -31,7 +31,7 @@
 }
 
 .margin-main {
-    margin-top: 70px;
+    margin-top: 69px;
 }
 .margin-children {
     margin-top: 100px;
@@ -98,12 +98,22 @@
 
 .vl {
     border-left: 1px solid rgb(212, 212, 212);
-    height: 55px;
+    height: 45px;
 }
 
 .money {
     font-size: 1em;
     font-family: YoutubeSansMedium;
+}
+
+.money-container {
+    position: relative;
+    top:25px;
+}
+@media (min-width: 576px){
+    .money-container {
+        top:0px;
+    }
 }
 
 .list-group-item {
@@ -117,8 +127,6 @@
 
 .navbar {
     background-color: lighten($dark, 5%) !important;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
 
     .navbar-toggler {
         margin: 0.5rem 0 0.5rem 0.5rem;

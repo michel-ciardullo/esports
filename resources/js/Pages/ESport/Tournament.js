@@ -16,7 +16,7 @@ export default function ESportsShow({ auth, esport }) {
         <AppLayout auth={auth}>
             <Head title="ESports" />
 
-            <Container className="mt-4">
+            <Container className="margin-children">
 
                 <Breadcrumb>
                     <li className="breadcrumb-item">

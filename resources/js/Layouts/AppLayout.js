@@ -24,10 +24,9 @@ function NavItems ({ text, src , justify}) {
 
 function Authenticate({ user }) {
     return (
-        <div className="authentificate d-flex flex-md-row flex-row-reverse justify-content-between">
-            <div className="nav-item d-flex justify-content-center align-items-md-center">
+        <div className="authentificate d-block d-md-flex flex-md-row flex-row-reverse justify-content-between">
+            <div className="nav-item d-flex justify-content-end justify-content-md-center align-items-md-center money-container">
                 <Link href="#">
-                    {/* <Badge bg="secondary" className="text-white me-4">0€</Badge> */}
                     <div className="bg-secondary pe-2 ps-2 pt-1 pb-1 rounded text-white me-sm-4 me-0 money">{user.wallet.balance}€</div>
                 </Link>
             </div>
@@ -90,7 +89,7 @@ export default function AppLayout({ auth, children }) {
     return (
         <>
             {/* Navbar */}
-            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow">
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="shadow pb-3 pb-md-2">
                 <Container>
                     <Link className="navbar-brand" href={route('home')}>
                         <ApplicationLogo height="36px" className="me-3"/>

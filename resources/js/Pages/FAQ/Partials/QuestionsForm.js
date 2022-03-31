@@ -60,7 +60,7 @@ export default function QuestionsForm(props) {
                     </Form.FloatingLabel>
 
                     <div>
-                        <Button variant="outline-primary" type="submit">
+                        <Button variant="primary" type="submit">
                             Envoyer
                         </Button>
                     </div>

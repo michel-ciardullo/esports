@@ -28,7 +28,7 @@ export default function ContactIndex(props) {
         <AppLayout {...props}>
             <Head title="Contact" />
 
-            <Container className="mt-4">
+            <Container className="margin-children">
 
                 <Breadcrumb>
                     <li className="breadcrumb-item">
@@ -122,7 +122,7 @@ export default function ContactIndex(props) {
                     </Form.FloatingLabel>
 
                     <div>
-                        <Button variant="fourth" type="submit">
+                        <Button variant="primary" type="submit">
                             Envoyer
                         </Button>
                     </div>

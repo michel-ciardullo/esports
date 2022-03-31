@@ -10,7 +10,7 @@ export default function About(props) {
         <AppLayout {...props}>
             <Head title="À propos" />
 
-            <Container className="mt-4">
+            <Container className="margin-children">
 
                 <Breadcrumb>
                     <li className="breadcrumb-item">

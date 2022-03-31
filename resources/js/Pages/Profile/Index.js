@@ -14,7 +14,7 @@ export default function ProfileIndex(props) {
         <AppLayout {...props}>
             <Head title="Profile" />
 
-            <Container className="mt-4">
+            <Container className="margin-children">
 
                 <h1 className="mb-0">Profile page</h1>
                 <hr className="my-4"/>
