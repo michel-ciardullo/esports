@@ -35,4 +35,17 @@ return [
         'token' => env('E_SPORT_SECRET_ACCESS_TOKEN'),
     ],
 
+    'riotgames' => [
+        'token' => env('RIOT_GAMES_SECRET_ACCESS_TOKEN'),
+    ],
+
+    'val' => [
+        'endpoint' => env('VAL_ESPORTS_ENDPOINT'),
+        'token' => env('VAL_ESPORTS_SECRET_ACCESS_TOKEN'),
+    ],
+
+    'lol' => [
+        'endpoint' => env('LOL_ESPORTS_ENDPOINT'),
+        'token' => env('LOL_ESPORTS_SECRET_ACCESS_TOKEN'),
+    ],
 ];

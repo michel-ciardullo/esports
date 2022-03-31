@@ -20,7 +20,7 @@ class ContactController extends Controller
      */
     public function index() : Response
     {
-        return Inertia::render('Contact/Index');
+        return Inertia::render('Contact');
     }
 
     /**
@@ -36,7 +36,7 @@ class ContactController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
-        // get all fiels for the message
+        // get all fields for the message
         $subject = $request->input('subject');
         $message = $request->input('message');
 

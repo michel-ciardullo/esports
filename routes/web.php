@@ -22,14 +22,8 @@ Route::get('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@index
 Route::post('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@send')->name('contact.send');
 
 Route::get('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@index')->name('faq');
+Route::post('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@store')->name('faq.store');
 
-Route::resource('/esports', 'App\\Http\\Controllers\\ESport\\ESportController');
 
+require __DIR__.'/esports.php';
 require __DIR__.'/auth.php';
-
-Route::group([
-    'middleware' => ['auth', 'verified']
-], function () {
-    require __DIR__.'/profile.php';
-    require __DIR__.'/wallet.php';
-});

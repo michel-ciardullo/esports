@@ -93,53 +93,19 @@ svg{
     justify-content: space-between;
 }
 
-// .underline-animation a {
-//     color: $light;
-//     position: relative;
-//     text-decoration: none;
-//     padding-bottom: 8px;
-
-//     &:before,
-//     &:after {
-//       content: '';
-//       position: absolute;
-//       bottom: 2px;
-//       left: 0; right: 0;
-//       height: 2px;
-//       background-color: $primary;
-//     }
-//     &:before {
-//       opacity: 0;
-//       transform: translateY(- $distance);
-//       transition: transform 0s $easeOutBack, opacity 0s;
-//     }
-//     &:after {
-//       opacity: 0;
-//       transform: translateY($distance/2);
-//       transition: transform $duration $easeOutBack, opacity $duration;
-//     }
-//     &:hover,
-//     &:focus {
-//         outline: none !important;
-//       &:before,
-//       &:after {
-//         color: $primary !important;
-//         opacity: 1;
-//         transform: translateY(0);
-//       }
-//       &:before {
-//         transition: transform $duration $easeOutBack, opacity $duration;
-//       }
-//       &:after {
-//         transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
-//       }
-//     }
-// }
-
 ul.nav-tabs {
     position: relative;
     top:-42px;
     border-bottom: 0px transparent;
+    &.nav{
+        display: -webkit-box;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
     .nav-link {
         color:#fff;
         &.active, &:hover {
@@ -150,7 +116,17 @@ ul.nav-tabs {
     }
 }
 
+.nav-tabs .nav-link {
+    margin-bottom: -1px;
+    background: none;
+    border: 2px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
 .arrow {
+    position: relative;
+    top: 8px;
     cursor: pointer;
     height: 20px;
     transform: translateX(-50%) translateY(-50%);
@@ -228,3 +204,14 @@ ul.nav-tabs {
         border-top: 0px;
     }
 }
+
+.team-name {
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
