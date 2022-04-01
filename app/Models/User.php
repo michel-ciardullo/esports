@@ -15,6 +15,9 @@ class User extends AuthUserModel implements MustVerifyEmail
         HasFactory,
         Notifiable;
 
+    const ROLE_ADMIN = 1;
+    const ROLE_MEMBER = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +27,7 @@ class User extends AuthUserModel implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**

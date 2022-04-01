@@ -18,11 +18,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory()
-            ->count(3)
+            ->count(4)
             ->state(new Sequence(
-                ['name' => 'toto', 'email' => 'toto@local.dev'],
-                ['name' => 'vince', 'email' => 'vince@local.dev'],
-                ['name' => 'slava', 'email' => 'slava@local.dev'],
+                ['name' => 'toto', 'email' => 'toto@local.dev', 'role' => 1],
+                ['name' => 'vince', 'email' => 'vince@local.dev', 'role' => 1],
+                ['name' => 'slava', 'email' => 'slava@local.dev', 'role' => 1],
+                ['name' => 'user', 'email' => 'user@local.dev'],
             ))
             ->create();
     }

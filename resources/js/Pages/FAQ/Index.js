@@ -9,6 +9,15 @@ import FlashStatus from "@/Components/FlashStatus";
 
 export default function FAQIndex(props) {
 
+    let admin = false
+    if(props.auth.user) {
+        if(props.auth.user.role === 1){
+            admin = true
+        }else if(props.auth.user.role === 0){
+            admin = false
+        }
+    }else if (props.auth.user == null) admin = false
+
     return (
         <AppLayout auth={props.auth}>
             <Head title="FAQ" />
@@ -27,11 +36,11 @@ export default function FAQIndex(props) {
 
                 <Accordion defaultActiveKey="1">
                     {props.faq.map((data,i)=>
-                        <QnA key={i} data={data}/>
+                        <QnA key={i} data={data} admin={admin}/>
                     )}
                 </Accordion>
 
-                <QuestionsForm />
+                {admin ? <QuestionsForm /> : null}
 
             </Container>
         </AppLayout>

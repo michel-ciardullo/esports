@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\FAQ;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,8 @@ class FAQRequest extends FormRequest
      */
     public function authorize() : bool
     {
-        return Auth::guard('web')->check();
+        $guard = Auth::guard('web');
+        return $guard->check() && $guard->user()->role === User::ROLE_ADMIN;
     }
 
     /**

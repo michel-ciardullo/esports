@@ -40,4 +40,17 @@ class FAQController extends Controller
                 'message' => 'Le message à bien été envoyé ;).'
             ]);
     }
+
+    public function destroy(int $id) : RedirectResponse
+    {
+        $idToDelete = FAQ::findOrFail($id);
+        $idToDelete->delete();
+
+        // redirect back page method 'GET'.
+        return back(303)
+            ->with('flash', [
+                'status' => 'success',
+                'message' => 'le faq a bien ete supprime.'
+            ]);
+    }
 }

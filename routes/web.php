@@ -23,6 +23,7 @@ Route::post('/contact', 'App\\Http\\Controllers\\Contact\\ContactController@send
 
 Route::get('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@index')->name('faq');
 Route::post('/faq', 'App\\Http\\Controllers\\FAQ\\FAQController@store')->name('faq.store');
+Route::delete('/faq/delete/{id}', 'App\\Http\\Controllers\\FAQ\\FAQController@destroy')->name('faq.destroy');
 
 
 require __DIR__.'/esports.php';
