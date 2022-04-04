@@ -57,8 +57,12 @@ svg{
 .game-scroller {
     background-color: $card-bg;
     border-radius: 10px;
+}
+
+.game-slider {
     overflow-x: auto;
 }
+
 
 .game-scroller-element {
     position: relative;

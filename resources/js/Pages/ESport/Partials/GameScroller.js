@@ -24,15 +24,21 @@ function Logo ({ height, width, game }) {
 export default function GameScroller({games}) {
 
     return (
-        <div className="game-scroller d-flex py-2 px-2 w-100 mb-3">
-            {games.map((game, i) =>
-            <Logo
-                key={i}
-                height="80"
-                width="80"
-                game={game}
-            />
-            )}
+        <div className="game-scroller flex-column d-flex py-2 px-2 w-100 mb-3">
+            <div>
+                En cours
+                <hr className="my-1"/>
+            </div>
+            <div className='game-slider d-flex'>
+                {games.map((game, i) =>
+                    <Logo
+                        key={i}
+                        height="80"
+                        width="80"
+                        game={game}
+                    />
+                )}
+            </div>
         </div>
     )
 }
