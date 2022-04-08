@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('confrontation_id');
             $table->foreignId('team_id');
             $table->unsignedInteger('position');
-            $table->string('rating');
+            $table->unsignedDecimal('rating');
             $table->string('result');
             $table->timestamps();
 

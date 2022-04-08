@@ -1,12 +1,8 @@
 import { createContext } from 'react'
 
-export const modalTickets = {
-    show: false,
-    name: ''
-}
+const offcanvas = false
 
 export const GlobalContext = createContext({
-    modalTickets,
-
-    handleShow: (modalTickets) => {},
+    offcanvas,
+    handleShow: () => {},
 })

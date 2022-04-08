@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as AuthUserModel;
 use Illuminate\Notifications\Notifiable;
@@ -50,7 +51,7 @@ class User extends AuthUserModel implements MustVerifyEmail
      *
      * @var array
      */
-    protected $with = ['wallet'];
+    protected $with = ['wallet', 'tickets'];
 
     public static function booted()
     {
@@ -69,5 +70,11 @@ class User extends AuthUserModel implements MustVerifyEmail
     public function wallet() : HasOne
     {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function tickets() : HasMany
+    {
+        return $this->hasMany(Ticket::class)
+            ->where('status', '=', Ticket::STATUS_ACTIVE);
     }
 }

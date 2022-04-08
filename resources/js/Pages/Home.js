@@ -164,5 +164,5 @@ export default function Home(props) {
                 </Container>
             </div>
         </AppLayout>
-    );
+    )
 }

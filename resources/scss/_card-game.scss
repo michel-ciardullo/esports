@@ -31,6 +31,10 @@
 @each $slug, $color in $game-colors {
     $linear-gradient: linear-gradient(90deg, $color 0, transparent 75%,transparent);
 
+    [data-linear-gradient=#{$slug}] {
+        background-image: $linear-gradient;
+    }
+
     .card-game[data-esport=#{$slug}] {
 
         // Header
@@ -70,19 +74,26 @@
     }
 }
 
-// confrontation-item
-.confrontation-item:not(:last-child) {
-    margin-bottom: .5rem;
-}
-.confrontation-team:hover {
-    background-color: lighten($dark, 75%);
-}
 .confrontation-item > div:first-child {
     white-space: nowrap;
-}
 
-.confrontation-team {
-    width: 0;
+    &:not(:last-child) {
+        margin-bottom: .5rem;
+    }
+
+    form {
+        flex-grow: 1;
+        display: flex;
+        width: 0;
+    }
+
+    form > .confrontation-team {
+        width: 0;
+
+        &:hover {
+            background-color: lighten($dark, 75%);
+        }
+    }
 }
 
 @media (max-width: 575.98px) {

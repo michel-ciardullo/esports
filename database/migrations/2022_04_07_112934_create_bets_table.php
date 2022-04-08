@@ -13,11 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('bets', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
+            $table->foreignId('ticket_id');
+            $table->foreignId('confrontation_id');
+            $table->foreignId('team_id');
+            $table->unsignedDecimal('rating');
+            $table->unsignedInteger('amount');
             $table->timestamps();
+
+            $table->index(['confrontation_id', 'ticket_id', 'team_id']);
         });
     }
 
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('bets');
     }
 };

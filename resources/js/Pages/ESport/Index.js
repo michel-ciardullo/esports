@@ -6,7 +6,6 @@ import AppLayout from '@/Layouts/AppLayout'
 import GameList from '@/Pages/ESport/Partials/GameList'
 
 export default function ESportsIndex({ auth, esports }) {
-
     return (
         <AppLayout auth={auth}>
             <Head title="ESports" />
@@ -25,5 +24,5 @@ export default function ESportsIndex({ auth, esports }) {
 
             </Container>
         </AppLayout>
-    );
+    )
 }

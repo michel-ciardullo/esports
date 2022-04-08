@@ -4,7 +4,7 @@ import { Card, Tab, Nav } from 'react-bootstrap'
 
 import TournamentList from './TournamentList'
 
-export default function Game({ game }) {
+export default function GameItem({ game }) {
     return (
         <Card className={`card-game border-dark mb-4`} data-esport={game.slug}>
 

@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('tournament_id');
-            $table->unsignedInteger('credits');
+            $table->unsignedDecimal('total_rating');
+            $table->unsignedInteger('total_amount');
+            $table->enum('status', ['winner', 'loser', 'cancel', 'withdraw', 'active']);
+            $table->enum('type', ['simple', 'combined']);
             $table->timestamps();
 
-            $table->index(['user_id', 'tournament_id']);
+            $table->index(['user_id']);
         });
     }
 

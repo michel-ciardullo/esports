@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion } from 'react-bootstrap'
 
-import Tournament from './Tournament'
+import TournamentItem from './TournamentItem'
 
 export default function TournamentList({ game, tournaments, message }) {
     if (tournaments.length === 0) {
@@ -12,7 +12,7 @@ export default function TournamentList({ game, tournaments, message }) {
     return (
         <Accordion defaultActiveKey={tournaments.map(tournament => tournament.id.toString())}>
             {tournaments.map((tournament, i) =>
-                <Tournament key={i} game={game} tournament={tournament} />
+                <TournamentItem key={i} game={game} tournament={tournament} />
             )}
         </Accordion>
     )

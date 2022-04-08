@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('timezone');
-            $table->string('status');
+            $table->enum('status', ['abandoned', 'cancelled', 'closed', 'ended', 'live', 'not_started']);
             $table->string('format');
             $table->string('streamer')->nullable();
             $table->string('stream_link')->nullable();

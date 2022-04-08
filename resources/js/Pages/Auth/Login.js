@@ -1,28 +1,28 @@
 import React from 'react';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
-import { Form } from 'react-bootstrap';
+import { Head, Link, useForm } from '@inertiajs/inertia-react'
+import { Form } from 'react-bootstrap'
 
-import Guest from '@/Layouts/Guest';
+import Guest from '@/Layouts/Guest'
 
 export default function Login() {
-    const { post, errors, data, setData } = useForm({
+    const { post, errors, data, setData, processing } = useForm({
         email: '',
         password: '',
         remember_me: '',
-    });
+    })
 
     const onHandleChange = event => {
-        setData(event.target.name, event.target.value);
-    };
+        setData(event.target.name, event.target.value)
+    }
 
     const onHandleChangeCheck = event => {
-        setData(event.target.name, event.target.value === 'on' ? 'off' : 'on');
-    };
+        setData(event.target.name, event.target.value === 'on' ? 'off' : 'on')
+    }
 
     const submit = e => {
-        e.preventDefault();
-        post(route('login'));
-    };
+        e.preventDefault()
+        post(route('login'))
+    }
 
     return (
         <Guest title="Connect-toi !">
@@ -85,10 +85,14 @@ export default function Login() {
                     Mot de passe oublié ?
                 </Link>
 
-                <button className="w-100 btn btn-lg btn-outline-primary" type="submit">
+                <button
+                    className="w-100 btn btn-lg btn-outline-primary"
+                    type="submit"
+                    disabled={processing}
+                >
                     Se connecter
                 </button>
             </form>
         </Guest>
-    );
+    )
 }

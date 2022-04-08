@@ -1,8 +1,8 @@
 import React from 'react'
-import Game from './Game'
+import GameItem from './GameItem'
 
 export default function GameList({ games }) {
     return games.map((game, i) =>
-        <Game key={i} game={game}/>
+        <GameItem key={i} game={game}/>
     )
 }

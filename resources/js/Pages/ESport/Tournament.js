@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/inertia-react'
 import { Container, Breadcrumb } from 'react-bootstrap'
 
 import AppLayout from '@/Layouts/AppLayout'
-import Game from './Partials/Game'
+import GameItem from './Partials/GameItem'
 
 export default function ESportsShow({ auth, esport }) {
     const tournamentName = (esport.tournaments.yesterday.length > 0 ? esport.tournaments.yesterday[0].name : null)
@@ -31,7 +31,7 @@ export default function ESportsShow({ auth, esport }) {
                 </Breadcrumb>
                 <hr className="my-4"/>
 
-                <Game game={esport}/>
+                <GameItem game={esport}/>
 
             </Container>
         </AppLayout>

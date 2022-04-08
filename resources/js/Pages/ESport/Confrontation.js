@@ -11,27 +11,27 @@ export default function ESportsConfrontation({ auth, esport }) {
         || (esport.tournaments.today.length > 0 ? esport.tournaments.today[0].name : null)
         || (esport.tournaments.tomorrow.length > 0 ? esport.tournaments.tomorrow[0].name : null)
 
-    let streamLink = esport.tournaments.now.length ? esport.tournaments.now[0].confrontations[0].stream_link : ''
-    let channel = ''
+    const hasLive = esport.tournaments.now.length
+    let streamLink = hasLive ? esport.tournaments.now[0].confrontations[0].stream_link : ''
 
     // https://twitch.tv/lcs
     // https://player.twitch.tv/?channel=cblol&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213
     // https://www.twitch.tv/esl_australia
 
-    if (/^https:\/\/twitch\.tv\/(.*?)$/.test(streamLink))
-    {
-        channel = /^https:\/\/twitch\.tv\/(.*?)$/.exec(streamLink)[1]
-    }
-    else if (/^https:\/\/www.twitch.tv\/(.*?)$/.test(streamLink))
-    {
-        channel = /^https:\/\/www.twitch.tv\/(.*?)$/.exec(streamLink)[1]
-    }
-    else if (/https:\/\/player.twitch.tv\/\?channel=(.*?)&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213/.test(streamLink))
-    {
-        channel = /https:\/\/player.twitch.tv\/\?channel=(.*?)&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213/.exec(streamLink)[1]
-    }
+    if (hasLive) {
+        const url = new URL(streamLink)
+        // console.log(url)
 
-    streamLink = `https://player.twitch.tv/?channel=${channel}&parent=localhost`
+        if (url.host === 'www.twitch.tv') {
+            streamLink = `https://player.twitch.tv${url.pathname}&parent=localhost`
+        }
+        else if (url.host === 'player.twitch.tv') {
+            const channel = url.searchParams.get('channel')
+            streamLink = `https://player.twitch.tv/${channel}&parent=localhost`
+        }
+
+        // console.log(streamLink)
+    }
 
     return (
         <AppLayout auth={auth}>
@@ -56,7 +56,7 @@ export default function ESportsConfrontation({ auth, esport }) {
                 </Breadcrumb>
                 <hr className="my-4"/>
 
-                {channel ? <div className="ratio ratio-16x9">
+                {hasLive ? <div className="ratio ratio-16x9">
                     <iframe
                         src={streamLink}
                         title="YouTube video"
@@ -68,5 +68,5 @@ export default function ESportsConfrontation({ auth, esport }) {
 
             </Container>
         </AppLayout>
-    );
+    )
 }

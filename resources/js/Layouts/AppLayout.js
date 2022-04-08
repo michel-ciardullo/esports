@@ -1,93 +1,60 @@
-import React, { useState } from 'react'
-import { Nav, Modal, Tab, Button } from 'react-bootstrap'
+import React, { Component } from 'react'
 
-import { GlobalContext, modalTickets } from '@/context'
+import { GlobalContext } from '@/context'
 import Navbar from './Partials/Navbar'
-import OffCanvas from "@/Layouts/Partials/OffCanvas";
+import OffCanvasTickets from '@/Layouts/Partials/Tickets/OffCanvas'
 
-export default function AppLayout({ auth, children }) {
-    // State also contains the updater function so it will
-    // be passed down into the context provider
+export default class AppLayout extends Component {
 
-    // State also contains the updater function so it will
-    // be passed down into the context provider
-    const [state, setState] = useState({
-        modalTickets
-    })
-
-    const handleShow = modalTickets => {
-        console.log(modalTickets)
-
-        setState({
-            modalTickets: {
-                ...modalTickets,
-                show: true
-            },
-        })
+    state = {
+        offcanvas: false
     }
 
-    const handleClose = () => {
-        setState({
-            modalTickets: { show: false },
-        })
+    constructor(props) {
+        super(props)
+
+        this.handleShow = this.handleShow.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
-    return (
-        <GlobalContext.Provider value={{...state, handleShow}}>
-            <Navbar auth={auth}/>
+    render() {
+        const { auth, children } = this.props
+        const { offcanvas } = this.state
 
-            <main className="pb-3">
-                {children}
-            </main>
+        return (
+            <GlobalContext.Provider value={{
+                offcanvas,
+                handleShow: this.handleShow
+            }}>
+                <Navbar auth={auth}/>
 
-            <OffCanvas placement="end" name='name' />
+                <main className="pb-3">
+                    {children}
+                </main>
 
-            <Modal show={state.modalTickets.show} onHide={handleClose} className="text-dark" centered>
+                {auth && auth.user
+                    ? <OffCanvasTickets
+                        auth={auth}
+                        show={offcanvas}
+                        handleShow={this.handleShow}
+                        onHide={this.handleClose}
+                    />
+                    : null
+                }
 
-                <Modal.Header className="border-bottom border-primary" closeButton>
-                    <Modal.Title>Ticket de paris ({state.modalTickets.name}}</Modal.Title>
-                </Modal.Header>
+            </GlobalContext.Provider>
+        )
+    }
 
-                <Tab.Container defaultActiveKey="simple">
+    handleShow() {
+        this.toggleOffcanvas(true)
+    }
 
-                    <Nav variant="sub" className="border-bottom border-primary">
-                        <Nav.Item>
-                            <Nav.Link eventKey="simple" className="d-flex flex-column p-0">
-                                <span className="p-3">Simple</span>
-                                <span />
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="combined" className="d-flex flex-column p-0">
-                                <span className="p-3">Combiné</span>
-                                <span />
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
+    handleClose() {
+        this.toggleOffcanvas(false)
+    }
 
-                    <Modal.Body>
-                        <Tab.Content>
-                            <Tab.Pane eventKey="simple">
-                                Simple
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="combined">
-                                Combiné
-                            </Tab.Pane>
-                        </Tab.Content>
-                    </Modal.Body>
-
-                </Tab.Container>
-
-                <Modal.Footer className="border-top border-primary">
-                    <Button variant="light" onClick={handleClose}>
-                        Annuler
-                    </Button>
-                    <Button variant="outline-primary">
-                        Jouer
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-        </GlobalContext.Provider>
-    )
+    toggleOffcanvas(value) {
+        this.setState({ offcanvas: value })
+    }
 }

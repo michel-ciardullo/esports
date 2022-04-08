@@ -4,7 +4,7 @@ import { Accordion } from 'react-bootstrap'
 
 import ConfrontationList from './ConfrontationList'
 
-export default function Tournament({ game, tournament }) {
+export default function TournamentItem({ game, tournament }) {
     return (
         <Accordion.Item eventKey={tournament.id.toString()}>
             <Accordion.Header>

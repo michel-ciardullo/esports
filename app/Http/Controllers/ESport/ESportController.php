@@ -5,7 +5,6 @@ namespace App\Http\Controllers\ESport;
 use App\Http\Controllers\Controller;
 use App\Models\{Confrontation, Game, Tournament};
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Inertia\{
     Inertia,
     Response
@@ -69,6 +68,7 @@ class ESportController extends Controller
             if (!array_key_exists($gameIndex, $esports))
             {
                 $esports[$gameIndex] = [
+                    'id'            => $confrontation->game_id,
                     'name'          => $confrontation->game_name,
                     'slug'          => $confrontation->game_slug,
 
@@ -104,7 +104,17 @@ class ESportController extends Controller
                 ];
             }
 
-            $esports[$gameIndex]['tournaments'][$tournamentDay][$tournamentIndex]['confrontations'][] = $confrontation;
+            $esports[$gameIndex]['tournaments'][$tournamentDay][$tournamentIndex]['confrontations'][] = [
+                'id' => $confrontation->id,
+                'status' => $confrontation->status,
+                'date' => $confrontation->date,
+                'timezone' => $confrontation->timezone,
+                'time' => $confrontation->time,
+                'stream_link' => $confrontation->stream_link,
+                'streamer' => $confrontation->streamer,
+                'format' => $confrontation->format,
+                'teams' => $confrontation->teams,
+            ];
         }
 
         return Inertia::render('ESport/Index', compact('esports'));
@@ -122,6 +132,7 @@ class ESportController extends Controller
         $confrontations = Confrontation::getForOneGame($game->id, $this->yesterdayDateTime, $this->tomorrowDateTime);
 
         $esport = [
+            'id'    => $game->id,
             'name'  => $game->name,
             'slug'  => $game->slug,
 
@@ -170,7 +181,17 @@ class ESportController extends Controller
                 ];
             }
 
-            $esport['tournaments'][$tournamentDay][$tournamentIndex]['confrontations'][] = $confrontation;
+            $esport['tournaments'][$tournamentDay][$tournamentIndex]['confrontations'][] = [
+                'id' => $confrontation->id,
+                'status' => $confrontation->status,
+                'date' => $confrontation->date,
+                'timezone' => $confrontation->timezone,
+                'time' => $confrontation->time,
+                'stream_link' => $confrontation->stream_link,
+                'streamer' => $confrontation->streamer,
+                'format' => $confrontation->format,
+                'teams' => $confrontation->teams,
+            ];
         }
 
         return Inertia::render('ESport/Game', compact('esport'));
@@ -190,6 +211,7 @@ class ESportController extends Controller
         $confrontations = Confrontation::getForOneTournament($tournament->id, $this->yesterdayDateTime, $this->tomorrowDateTime);
 
         $esport = [
+            'id'    => $game->id,
             'name'  => $game->name,
             'slug'  => $game->slug,
 
@@ -220,7 +242,17 @@ class ESportController extends Controller
                 ];
             }
 
-            $esport['tournaments'][$tournamentDay][0]['confrontations'][] = $confrontation;
+            $esport['tournaments'][$tournamentDay][0]['confrontations'][] = [
+                'id' => $confrontation->id,
+                'status' => $confrontation->status,
+                'date' => $confrontation->date,
+                'timezone' => $confrontation->timezone,
+                'time' => $confrontation->time,
+                'stream_link' => $confrontation->stream_link,
+                'streamer' => $confrontation->streamer,
+                'format' => $confrontation->format,
+                'teams' => $confrontation->teams,
+            ];
         }
 
         return Inertia::render('ESport/Tournament', compact('esport'));
@@ -261,7 +293,17 @@ class ESportController extends Controller
             'confrontations'    => []
         ];
 
-        $esport['tournaments'][$tournamentDay][0]['confrontations'][] = $confrontation;
+        $esport['tournaments'][$tournamentDay][0]['confrontations'][] = [
+            'id' => $confrontation->id,
+            'status' => $confrontation->status,
+            'date' => $confrontation->date,
+            'timezone' => $confrontation->timezone,
+            'time' => $confrontation->time,
+            'stream_link' => $confrontation->stream_link,
+            'streamer' => $confrontation->streamer,
+            'format' => $confrontation->format,
+            'teams' => $confrontation->teams,
+        ];
 
         return Inertia::render('ESport/Confrontation', compact('esport'));
     }
