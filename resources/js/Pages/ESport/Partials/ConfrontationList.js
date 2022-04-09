@@ -1,8 +1,8 @@
 import React from 'react'
 import ConfrontationItem from './ConfrontationItem'
 
-export default function ConfrontationList({ game, tournament, confrontations }) {
+export default function ConfrontationList({ confrontations }) {
     return confrontations.map((confrontation, i) =>
-        <ConfrontationItem key={i} confrontation={confrontation} game={game} tournament={tournament}/>
+        <ConfrontationItem key={i} confrontation={confrontation}/>
     )
 }

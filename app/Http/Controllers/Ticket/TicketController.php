@@ -10,36 +10,9 @@ class TicketController extends Controller
 {
     public function add(Request $request)
     {
-        $inputs     = $request->all();
-
-        $game           = $inputs['game'];
-        $tournament     = $inputs['tournament'];
-        $confrontation  = $inputs['confrontation'];
-
-        $selected   = $request->selected;
-
         $ticket = [
-            'title' => $confrontation['teams'][0]['name'] . ' vs ' . $confrontation['teams'][1]['name'],
-            'confrontation' => [
-                'id' => $confrontation['id'],
-                'link' => route('esports.confrontation', [
-                    $game['slug'],
-                    $tournament['slug'],
-                    $confrontation['id']
-                ]),
-                'status' => $confrontation['status'],
-            ],
-            'tournament' => [
-                'name' => $tournament['name']
-            ],
-            'team' => [
-                'id' => $confrontation['teams'][$selected]['id'],
-                'name' => $confrontation['teams'][$selected]['name'],
-                'rating' => $confrontation['teams'][$selected]['pivot']['rating'],
-            ],
-            'game' => [
-                'slug' => $game['slug']
-            ]
+            'confrontation_id' => $request->get('confrontation_id'),
+            'team_id' => $request->get('team_id'),
         ];
 
         $session        = $request->session();

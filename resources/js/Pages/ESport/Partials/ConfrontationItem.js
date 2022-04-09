@@ -2,19 +2,24 @@ import React from 'react'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import { GlobalContext } from '@/context'
 
-function OffCanvasTogglerButton({ handleShow, className, details, selected }) {
-    const { post } = useForm(details)
+function OffCanvasTogglerButton({ handleShow, className, confrontation, teamIndex }) {
+    const betTeam = confrontation.teams[teamIndex]
+
+    const { post } = useForm({
+        confrontation_id: confrontation.id,
+        team_id: betTeam.id
+    })
 
     const submit = (e) => {
         e.preventDefault()
 
-        post(route('tickets.add', [selected]), {
+        post(route('tickets.add'), {
             preserveScroll: true,
             onSuccess: () => handleShow(),
         })
     }
 
-    const { name, pivot } = details.confrontation.teams[selected]
+    const { name, pivot } = betTeam
 
     // The Theme Toggler Button receives not only the theme
     // but also a toggleTheme function from the context
@@ -35,7 +40,7 @@ function OffCanvasTogglerButton({ handleShow, className, details, selected }) {
     )
 }
 
-export default function ConfrontationItem({ game, tournament, confrontation }) {
+export default function ConfrontationItem({ confrontation }) {
     const color = confrontation.status === 'live' && confrontation.stream_link !== null ? 'success' : 'warning'
 
     return (
@@ -46,24 +51,24 @@ export default function ConfrontationItem({ game, tournament, confrontation }) {
                         <OffCanvasTogglerButton
                             handleShow={handleShow}
                             className="right-facing-competitor"
-                            details={{ game, tournament, confrontation }}
-                            selected={0}
+                            confrontation={confrontation}
+                            teamIndex={0}
                         />
                         <span className="p-3">VS</span>
                         <OffCanvasTogglerButton
                             handleShow={handleShow}
                             className="left-facing-competitor"
-                            details={{ game, tournament, confrontation }}
-                            selected={1}
+                            confrontation={confrontation}
+                            teamIndex={1}
                         />
                     </div>
                 )}
             </GlobalContext.Consumer>
             <div className="btn-group dropend d-none d-lg-block mb-2">
-                <Link href={route('esports.confrontation', [game.slug, tournament.slug, confrontation.id])} className={`p-3 rounded-0 border-0 btn btn-${color}`}>
+                <Link href={confrontation.link} className={`p-3 rounded-0 border-0 btn btn-${color}`}>
                     <strong className="me-1">{confrontation.date}</strong>{confrontation.time} {confrontation.timezone}
                 </Link>
-                <Link href={route('esports.confrontation', [game.slug, tournament.slug, confrontation.id])} className={`p-3 border-0 btn btn-${color} dropdown-toggle dropdown-toggle-split`} data-bs-toggle="dropdown" aria-expanded="false">
+                <Link href={confrontation.link} className={`p-3 border-0 btn btn-${color} dropdown-toggle dropdown-toggle-split`} data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="visually-hidden">Toggle Dropdown</span>
                 </Link>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Confrontation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,12 +37,42 @@ class HandleInertiaRequests extends Middleware
         $user   = $request->user();
 
         $flash              = session('flash', []);
-        $session_tickets    = session('auth.session_tickets', []);
+        $sessionTickets    = session('auth.session_tickets', []);
+
+        $confrontationsIds = [];
+        foreach ($sessionTickets as $sessionTicket)
+        {
+            $confrontationsIds[] = $sessionTicket['confrontation_id'];
+        }
+        $confrontations = Confrontation::with('teams')
+            ->whereIn('id', $confrontationsIds)->with('teams')
+            ->get()
+            ->keyBy('id');
+
+        $tickets = [];
+        foreach ($sessionTickets as $sessionTicket)
+        {
+            $confrontationId = $sessionTicket['confrontation_id'];
+            $confrontation = $confrontations[$confrontationId];
+
+            $teamId = $sessionTicket['team_id'];
+            $team_index = 0;
+            foreach ($confrontation->teams->all() as $index => $team)
+            {
+                if ($team->id === $teamId)
+                {
+                    $team_index = $index;
+                    break;
+                }
+            }
+
+            $tickets[] = compact('confrontation', 'team_index');
+        }
 
         return array_merge(parent::share($request), [
             'auth'  => [
                 'user' => $user,
-                'session_tickets' => $session_tickets
+                'session_tickets' => $tickets
             ],
             'flash' => $flash
         ]);

@@ -12,7 +12,7 @@ export default function GameItem({ game }) {
 
                 <div className="position-relative game-header">
                     <div className="game-header-title position-absolute top-0 p-3">
-                        <Link href={route('esports.game', game.slug)} className="text-light">
+                        <Link href={game.link} className="text-light">
                             <h2 className="mb-0">{game.name}</h2>
                         </Link>
                     </div>
