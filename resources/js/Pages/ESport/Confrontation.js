@@ -18,19 +18,21 @@ export default function ESportsConfrontation({ auth, esport }) {
     // https://player.twitch.tv/?channel=cblol&enableExtensions=true&muted=false&parent=twitch.tv&player=popout&quality=chunked&volume=0.1599999964237213
     // https://www.twitch.tv/esl_australia
 
+    // https://www.twitch.tv/epulzegaming
+
+    let channel = ''
     if (hasLive) {
         const url = new URL(streamLink)
-        // console.log(url)
 
         if (url.host === 'www.twitch.tv') {
-            streamLink = `https://player.twitch.tv${url.pathname}&parent=localhost`
+            channel = url.pathname.substr(1, url.pathname.length)
         }
         else if (url.host === 'player.twitch.tv') {
-            const channel = url.searchParams.get('channel')
-            streamLink = `https://player.twitch.tv/${channel}&parent=localhost`
+            channel = url.searchParams.get('channel')
         }
 
-        // console.log(streamLink)
+        streamLink = `https://player.twitch.tv/?channel=${channel}&parent=localhost`
+        console.log(streamLink)
     }
 
     return (
@@ -56,7 +58,7 @@ export default function ESportsConfrontation({ auth, esport }) {
                 </Breadcrumb>
                 <hr className="my-4"/>
 
-                {hasLive ? <div className="ratio ratio-16x9">
+                {hasLive && channel !== '' ? <div className="ratio ratio-16x9">
                     <iframe
                         src={streamLink}
                         title="YouTube video"

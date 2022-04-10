@@ -79,7 +79,7 @@ class EADataApiListener
     private function handleConfrontation(array $data)
     {
         $confrontation = Confrontation::where('external_id' , '=', $data['external_id'])->first();
-        if (!$confrontation)
+        if ($confrontation === null)
         {
             $confrontation = Confrontation::create($data);
         }
@@ -107,14 +107,26 @@ class EADataApiListener
                 'slug' => Str::slug($name),
             ]);
 
-        ConfrontationTeam::where('confrontation_id', '=', $confrontation->id)
+        $confrontationTeam = ConfrontationTeam::where('confrontation_id', '=', $confrontation->id)
             ->where('team_id', '=', $team->id)
-            ->firstOrCreate([
+            ->first();
+
+        if ($confrontationTeam === null)
+        {
+            ConfrontationTeam::forceCreate([
                 'confrontation_id' => $confrontation->id,
                 'team_id' => $team->id,
                 'position' => $position,
                 'rating' => $bet,
                 'result' => $result
             ]);
+        }
+        else
+        {
+            $confrontationTeam->update([
+                'rating' => $bet,
+                'result' => $result,
+            ]);
+        }
     }
 }

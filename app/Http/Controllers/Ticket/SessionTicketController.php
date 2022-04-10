@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Ticket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class SessionTicketController extends Controller
 {
@@ -46,11 +45,28 @@ class SessionTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  int $index
+     * @param  Request $request
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(Request $request, int $index) : RedirectResponse
     {
-        //
+        // Récupère l'objet session dans l'objet request.
+        $session = $request->session();
+
+        // Récupère le ticket stocké dans la session.
+        $ticket = $session->get('auth.ticket');
+
+        $confrontationId = $ticket['ids'][$index];
+        unset($ticket['ids'][$index]);
+
+        unset($ticket['items'][$confrontationId]);
+
+        sort($ticket['ids']);
+
+        // Écrire le nouveau ou mai à jour le ticket.
+        $session->put('auth.ticket', $ticket);
+
+        return back();
     }
 }

@@ -20,6 +20,8 @@ export default function BettingCouponCombined({ items }) {
     let totalRating = 0
     items.forEach(item => totalRating += item.rating)
 
+    const displayForm = items.length > 0 ? '' : 'd-none'
+
     return (
         <form
             onSubmit={submit}
@@ -49,7 +51,7 @@ export default function BettingCouponCombined({ items }) {
                     </div>
                 ) : null}
             </div>
-            <div className="position-absolute bottom-0 start-0 end-0">
+            <div className={`position-absolute bottom-0 start-0 end-0 ${displayForm}`}>
                 <div className="bg-dark border-top border-primary p-3">
                     <div className="mb-3">
                         <Form.FloatingLabel
@@ -64,6 +66,8 @@ export default function BettingCouponCombined({ items }) {
                                 onChange={onHandleChange}
                                 placeholder="0"
                                 isInvalid={'amount' in errors}
+                                min={1}
+                                max={10}
                                 required
                             />
                             <Form.Control.Feedback type="invalid" children={errors.amount} />

@@ -8,6 +8,12 @@ class Bet extends Model
 {
     use HasFactory;
 
+    const STATUS_ACTIVE     = 'active';
+    const STATUS_CANCELLED  = 'cancelled';
+    const STATUS_WON        = 'won';
+    const STATUS_LOST       = 'lost';
+    const STATUS_PAID       = 'paid';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +37,17 @@ class Bet extends Model
         'confrontation',
         'team',
     ];
+
+    public static function getStatusList() : array
+    {
+        return [
+            self::STATUS_ACTIVE     => 'Active',
+            self::STATUS_CANCELLED  => 'Annulé',
+            self::STATUS_WON        => 'Gagné',
+            self::STATUS_LOST       => 'Perdu',
+            self::STATUS_PAID       => 'Réglé',
+        ];
+    }
 
     public function ticket() : BelongsTo
     {

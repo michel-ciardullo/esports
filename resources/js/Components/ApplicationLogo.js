@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default function ApplicationLogo({ className, width, height }) {
     return (
@@ -70,5 +70,5 @@ export default function ApplicationLogo({ className, width, height }) {
                 </linearGradient>
             </defs>
         </svg>
-    );
+    )
 }

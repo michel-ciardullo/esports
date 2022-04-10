@@ -22,7 +22,7 @@ export default function OffCanvas({ show, handleShow, onHide, ticket, tickets })
                 onHide={onHide}
             >
                 <BOffcanvas.Header closeButton>
-                    <BOffcanvas.Title>Ticket de paris</BOffcanvas.Title>
+                    <BOffcanvas.Title>Paris</BOffcanvas.Title>
                 </BOffcanvas.Header>
                 <Tab.Container defaultActiveKey="betting-coupon">
 

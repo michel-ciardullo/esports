@@ -20,10 +20,10 @@ return new class extends Migration
             $table->foreignId('team_id');
             $table->unsignedDecimal('rating');
             $table->unsignedInteger('amount');
-            $table->enum('status', ['winner', 'loser', 'cancel', 'withdraw', 'active']);
+            $table->enum('status', ['active', 'cancelled', 'won', 'lost', 'paid'])->default('active');
             $table->timestamps();
 
-            $table->index(['confrontation_id', 'ticket_id', 'team_id']);
+            $table->index(['ticket_id', 'confrontation_id', 'team_id']);
         });
     }
 

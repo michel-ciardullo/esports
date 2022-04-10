@@ -8,7 +8,7 @@ export default function BettingCouponSimple({ items }) {
         amounts: items.map(() => 1)
     })
 
-    const { post: remove } = useForm()
+    const { delete: remove } = useForm()
 
     const [state, setState] = useState({
         totalAmount: 0,
@@ -49,6 +49,8 @@ export default function BettingCouponSimple({ items }) {
 
         return () => {}
     }, [data.amounts])
+
+    const displayForm = items.length > 0 ? '' : 'd-none'
 
     return (
         <form
@@ -112,7 +114,7 @@ export default function BettingCouponSimple({ items }) {
                     </div>
                 ) : null}
             </div>
-            <div className="position-absolute bottom-0 start-0 end-0">
+            <div className={`position-absolute bottom-0 start-0 end-0 ${displayForm}`}>
                 <div className="bg-dark border-top border-primary p-3">
                     <div className="d-flex justify-content-between mb-3">
                         <span>Mise total</span>

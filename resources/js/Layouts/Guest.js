@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import React from 'react'
+import { Link } from '@inertiajs/inertia-react'
 
-import ApplicationLogo from '@/Components/ApplicationLogo';
+import ApplicationLogo from '@/Components/ApplicationLogo'
 
 export default function Guest({ title, children }) {
     return (
@@ -19,5 +19,5 @@ export default function Guest({ title, children }) {
                 </div>
             </div>
         </main>
-    );
+    )
 }

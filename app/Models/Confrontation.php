@@ -160,6 +160,10 @@ class Confrontation extends Model
 
         if ($confrontationDateTime === $yesterdayDateTime->format('Y-m-d'))
         {
+            if ($this->isTheConfrontationWithTheLiveStatus($yesterdayDateTime))
+            {
+                return 'now';
+            }
             return 'yesterday';
         }
         else if ($confrontationDateTime === $todayDateTime->format('Y-m-d'))
@@ -168,7 +172,6 @@ class Confrontation extends Model
             {
                 return 'now';
             }
-
             return 'today';
         }
         else if ($confrontationDateTime === $tomorrowDateTime->format('Y-m-d'))
@@ -182,16 +185,16 @@ class Confrontation extends Model
     /**
      * Is the confrontation with the live status
      *
-     * @param Carbon $todayDateTime
+     * @param Carbon $dateTime
      * @return string
      */
-    private function isTheConfrontationWithTheLiveStatus(Carbon $todayDateTime) : string
+    private function isTheConfrontationWithTheLiveStatus(Carbon $dateTime) : string
     {
         if ($this->status === 'live')
         {
             $confrontationTime = Carbon::createFromTimeString($this->time);
 
-            return $confrontationTime->timestamp <= $todayDateTime->timestamp
+            return $confrontationTime->timestamp <= $dateTime->timestamp
                 && !empty($this->streamer) && !empty($this->stream_link);
         }
 

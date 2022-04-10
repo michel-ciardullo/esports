@@ -10,15 +10,10 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    const STATUS_WINNER     = 'winner';
-    const STATUS_LOSER      = 'loser';
-    const STATUS_CANCEL     = 'cancel';
-    const STATUS_WITHDRAW   = 'withdraw';
     const STATUS_ACTIVE     = 'active';
-
-    const STATUS_TORN       = 'torn';
-    const STATUS_AVAILABLE  = 'available';
-    const STATUS_EXCHANGED  = 'exchanged';
+    const STATUS_CANCELLED  = 'cancelled';
+    const STATUS_RIPPED     = 'ripped';
+    const STATUS_PAID       = 'paid';
 
     /**
      * The attributes that are mass assignable.
@@ -36,22 +31,26 @@ class Ticket extends Model
      *
      * @var array
      */
-    protected $with = ['bets'];
+    protected $with = ['activeBets'];
 
     public static function getStatusList() : array
     {
         return [
-            self::STATUS_WINNER => 'Winner',
-            self::STATUS_LOSER => 'Loser',
-            self::STATUS_CANCEL => 'Cancel',
-            self::STATUS_WITHDRAW => 'Withdraw',
-            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_ACTIVE     => 'Active',
+            self::STATUS_CANCELLED  => 'Annulé',
+            self::STATUS_RIPPED     => 'Déchiré',
+            self::STATUS_PAID       => 'Réglé',
         ];
     }
 
     public function bets() : HasMany
     {
         return $this->hasMany(Bet::class);
+    }
+
+    public function activeBets()
+    {
+        return $this->bets()->where('status', '=', 'active');
     }
 
 }
