@@ -2,24 +2,23 @@ import React from 'react'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import { GlobalContext } from '@/context'
 
-function OffCanvasTogglerButton({ handleShow, className, confrontation, teamIndex }) {
-    const betTeam = confrontation.teams[teamIndex]
-
+function OffCanvasTogglerButton({ handleShow, className, confrontation, result }) {
     const { post } = useForm({
-        confrontation_id: confrontation.id,
-        team_id: betTeam.id
+        confrontationId: confrontation.id,
+        result,
+        redirect: route().current()
     })
 
     const submit = (e) => {
         e.preventDefault()
 
-        post(route('tickets.add'), {
+        post(route('ticket.add'), {
             preserveScroll: true,
             onSuccess: () => handleShow(),
         })
     }
 
-    const { name, pivot } = betTeam
+    const { name, pivot } = confrontation.teams[result]
 
     // The Theme Toggler Button receives not only the theme
     // but also a toggleTheme function from the context
@@ -52,14 +51,14 @@ export default function ConfrontationItem({ confrontation }) {
                             handleShow={handleShow}
                             className="right-facing-competitor"
                             confrontation={confrontation}
-                            teamIndex={0}
+                            result={0}
                         />
                         <span className="p-3">VS</span>
                         <OffCanvasTogglerButton
                             handleShow={handleShow}
                             className="left-facing-competitor"
                             confrontation={confrontation}
-                            teamIndex={1}
+                            result={1}
                         />
                     </div>
                 )}

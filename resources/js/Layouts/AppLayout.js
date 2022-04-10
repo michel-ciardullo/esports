@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { GlobalContext } from '@/context'
 import Navbar from './Partials/Navbar'
-import OffCanvasTickets from '@/Layouts/Partials/Tickets/OffCanvas'
+import OffCanvasTickets from '@/Layouts/Partials/Ticket/OffCanvas'
 
 export default class AppLayout extends Component {
 
@@ -34,7 +34,8 @@ export default class AppLayout extends Component {
 
                 {auth && auth.user
                     ? <OffCanvasTickets
-                        auth={auth}
+                        tickets={auth.user.tickets}
+                        ticket={auth.ticket}
                         show={offcanvas}
                         handleShow={this.handleShow}
                         onHide={this.handleClose}

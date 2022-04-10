@@ -133,6 +133,20 @@ class Confrontation extends Model
     }
 
     /**
+     * @param int[] $confrontationIds
+     * @return Collection
+     */
+    public static function getForTicket(array $confrontationIds) : Collection
+    {
+        return static::with('teams')
+            ->select(array_merge(static::gameSelect(), static::tournamentSelect(), static::confrontationSelect()))
+            ->leftJoin('tournaments', 'tournaments.id', '=', 'confrontations.tournament_id')
+            ->leftJoin('games', 'games.id', '=', 'tournaments.game_id')
+            ->whereIn('confrontations.id', $confrontationIds)
+            ->get();
+    }
+
+    /**
      * Get confrontation day.
      *
      * @param Carbon $yesterdayDateTime

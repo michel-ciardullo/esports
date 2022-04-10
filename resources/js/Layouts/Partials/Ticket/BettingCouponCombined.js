@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import { Form } from 'react-bootstrap'
 
-export default function BettingCouponCombined({ tickets }) {
+export default function BettingCouponCombined({ items }) {
     const { post, errors, data, setData, processing } = useForm({
         type: 'combined',
-        amount: 0
+        amount: items.length ? 1 : 0
     })
 
     const onHandleChange = event => {
@@ -17,6 +17,9 @@ export default function BettingCouponCombined({ tickets }) {
         post(route('tickets.store'))
     }
 
+    let totalRating = 0
+    items.forEach(item => totalRating += item.rating)
+
     return (
         <form
             onSubmit={submit}
@@ -24,21 +27,22 @@ export default function BettingCouponCombined({ tickets }) {
             noValidate
         >
             <div className="overflow-auto px-3 pt-3" style={{ height: 'calc(100vh - 422px)' }}>
-                {tickets ? tickets.map((ticket, i) =>
+                {items ? items.map((item, i) =>
                     <div className="mb-3" key={i}>
                         <div className="card bg-dark rounded">
-                            <div className="p-3 mb-3" data-linear-gradient={'counter-strike'}>
-                                <Link className="text-light" href={ticket.confrontation.link}>
-                                    <span>{ticket.title}</span>
+                            <div className="p-3 mb-3" data-linear-gradient={item.header}>
+                                <Link className="text-light" href={item.link}>
+                                    <span>{item.title}</span>
                                 </Link>
                             </div>
                             <div className="mx-3 mb-3">
-                                <div className="mb-3">
-                                    {ticket.tournament.name}
+                                <div className="d-flex justify-content-between mb-3">
+                                    <span>Résultat du match</span>
+                                    <span>{item.result}</span>
                                 </div>
                                 <div className="d-flex justify-content-between">
-                                    <span>{ticket.team.name}</span>
-                                    <span>{ticket.confrontation.status}</span>
+                                    <span>Cote</span>
+                                    <span>{item.rating}</span>
                                 </div>
                             </div>
                         </div>
@@ -67,11 +71,11 @@ export default function BettingCouponCombined({ tickets }) {
                     </div>
                     <div className="d-flex justify-content-between mb-3">
                         <span>Cote Globale</span>
-                        <span>0.00</span>
+                        <span>{totalRating}</span>
                     </div>
                     <div className="d-flex justify-content-between mb-3">
                         <span>Gain estimé</span>
-                        <span>0.00</span>
+                        <span>{totalRating * data.amount}</span>
                     </div>
                     <button
                         disabled={processing}

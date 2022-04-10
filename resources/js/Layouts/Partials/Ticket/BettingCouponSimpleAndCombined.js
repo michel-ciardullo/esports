@@ -1,9 +1,10 @@
 import React from 'react'
 import { Nav, Tab } from 'react-bootstrap'
+
 import BettingCouponSimple from './BettingCouponSimple'
 import BettingCouponCombined from './BettingCouponCombined'
 
-export default function BettingCouponSimpleAndCombined({ tickets }) {
+export default function BettingCouponSimpleAndCombined({ ticket }) {
     return (
         <Tab.Container defaultActiveKey="simple" className="position-relative">
             <Nav variant="pills" className="m-3">
@@ -17,10 +18,10 @@ export default function BettingCouponSimpleAndCombined({ tickets }) {
             <hr className="mb-0"/>
             <Tab.Content>
                 <Tab.Pane eventKey="simple">
-                    <BettingCouponSimple tickets={tickets}/>
+                    <BettingCouponSimple items={ticket}/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="combined">
-                    <BettingCouponCombined tickets={tickets}/>
+                    <BettingCouponCombined items={ticket}/>
                 </Tab.Pane>
             </Tab.Content>
         </Tab.Container>

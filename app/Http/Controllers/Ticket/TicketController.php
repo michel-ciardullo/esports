@@ -3,49 +3,20 @@
 namespace App\Http\Controllers\Ticket;
 
 use App\Http\Controllers\Controller;
+use App\Models\Confrontation;
 use App\Models\Ticket;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function add(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request) : RedirectResponse
     {
-        $ticket = [
-            'confrontation_id' => $request->get('confrontation_id'),
-            'team_id' => $request->get('team_id'),
-        ];
-
-        $session        = $request->session();
-        $sessionTickets = $session->get('auth.session_tickets', []);
-
-        if (!in_array($ticket, $sessionTickets))
-        {
-            $sessionTickets[] = $ticket;
-            session()->put('auth.session_tickets', $sessionTickets);
-        }
-
-        return back();
-    }
-
-    public function remove(Request $request)
-    {
-        $session        = $request->session();
-        $sessionTickets = $session->get('auth.session_tickets', []);
-
-        if (array_key_exists($request->selected, $sessionTickets))
-        {
-            unset($sessionTickets[$request->selected]);
-            sort($sessionTickets);
-
-            session()->put('auth.session_tickets', $sessionTickets);
-        }
-
-        return back();
-    }
-
-    public function store(Request $request)
-    {
-        $sessionTickets = $request->session()->get('auth.session_tickets', []);
+        $ticket = $request->session()->get('auth.ticket', []);
         $rules = [
             'type' => ['required', 'string']
         ];
@@ -54,91 +25,97 @@ class TicketController extends Controller
         switch ($request->input('type'))
         {
             case 'simple':
-                $this->storeSimple($request, $sessionTickets, $rules, $amountRule);
+                $this->storeSimple($request, $ticket, $rules, $amountRule);
                 break;
 
             case 'combined':
-                $this->storeCombined($request, $sessionTickets, $rules, $amountRule);
+                $this->storeCombined($request, $ticket, $rules, $amountRule);
                 break;
         }
 
         return back();
     }
 
-    public function storeSimple(Request $request, $sessionTickets, $rules, $amountRule)
+    public function storeSimple(Request $request, $ticket, $rules, $amountRule) : void
     {
         // validation
+
         $messages = [];
-        foreach ($sessionTickets as $k => $v)
+        foreach ($ticket['ids'] as $k => $v)
         {
             $rules["amounts.$k"] = $amountRule;
         }
         $request->validate($rules, $messages);
 
         // ticket
-        $amounts = $request->get('amounts');
-        $totalAmount = .0;
-        $totalRating = .0;
-        $bets = [];
-        foreach ($sessionTickets as $k => $v)
-        {
-            $amount = $amounts[$k];
-            $totalAmount += $amount;
 
-            $rating = $v['team']['rating'];
-            $totalRating += $rating;
+        $amounts        = $request->get('amounts');
+
+        $bets           = [];
+
+        $index = 0;
+
+        $confrontations = Confrontation::whereIn('id', $ticket['ids'])->get()->keyBy('id');
+
+        foreach ($ticket['items'] as $confrontationId => $resultTeamIndex)
+        {
+            $amount         = $amounts[$index++];
+            $confrontation  = $confrontations[$confrontationId];
+            $teamPivot      = $confrontation->teams[$resultTeamIndex]->pivot;
 
             $bets[] = [
-                'confrontation_id' => $v['confrontation']['id'],
-                'team_id' => $v['team']['id'],
-                'rating' => $rating,
-                'amount' => $amount,
+                'confrontation_id'  => $confrontationId,
+                'team_id'           => $teamPivot->team_id,
+                'rating'            => $teamPivot->rating,
+                'amount'            => $amount,
+                'status'            => 'active',
             ];
         }
 
-        $this->createTicket($request,  $totalRating, $totalAmount, $bets);
+        $this->createTicket($request, 'simple', $bets);
     }
 
-    public function storeCombined(Request $request, $sessionTickets, $rules, $amountRule)
+    public function storeCombined(Request $request, $ticket, $rules, $amountRule) : void
     {
         $rules['amount'] = $amountRule;
         $request->validate($rules);
 
         $amount = $request->get('amount');
 
-        $totalAmount = .0;
-        $totalRating = .0;
-        $bets = [];
-        foreach ($sessionTickets as $v)
-        {
-            $totalAmount += $amount;
+        // ticket
 
-            $rating = $v['team']['rating'];
-            $totalRating += $rating;
+        $bets           = [];
+
+        $confrontations = Confrontation::whereIn('id', $ticket['ids'])->get()->keyBy('id');
+
+        foreach ($ticket['items'] as $confrontationId => $resultTeamIndex)
+        {
+            $confrontation  = $confrontations[$confrontationId];
+            $teamPivot      = $confrontation->teams[$resultTeamIndex]->pivot;
 
             $bets[] = [
-                'confrontation_id' => $v['confrontation']['id'],
-                'team_id' => $v['team']['id'],
-                'rating' => $rating,
-                'amount' => $amount,
+                'confrontation_id'  => $confrontationId,
+                'team_id'           => $teamPivot->team_id,
+                'rating'            => $teamPivot->rating,
+                'amount'            => $amount,
+                'status'            => 'active',
             ];
         }
 
-        $this->createTicket($request,  $totalRating, $totalAmount, $bets);
+        $this->createTicket($request, 'combined', $bets);
     }
 
-    private function createTicket(Request $request, float $totalRating, int $totalAmount, array &$bets) {
+    private function createTicket(Request $request, string $type, array &$bets)
+    {
         $ticket = Ticket::create([
             'user_id' => $request->user()->id,
-            'total_rating' => $totalRating,
-            'total_amount' => $totalAmount,
             'status' => 'active',
-            'type' => 'simple'
+            'type' => $type
         ]);
 
         $ticket->bets()->createMany($bets);
 
-        $request->session()->remove('auth.session_tickets');
+        $request->session()->remove('auth.ticket');
     }
 
 }

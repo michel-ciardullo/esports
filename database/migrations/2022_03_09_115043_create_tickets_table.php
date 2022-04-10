@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->unsignedDecimal('total_rating');
-            $table->unsignedInteger('total_amount');
             $table->enum('status', ['winner', 'loser', 'cancel', 'withdraw', 'active']);
             $table->enum('type', ['simple', 'combined']);
             $table->timestamps();

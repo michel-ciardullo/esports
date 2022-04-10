@@ -41,7 +41,7 @@ export default function Navbar({ auth }) {
                         </NavLink>
                     </Nav>
                     <Nav className="ms-auto nav-profile">
-                        {auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
+                        {auth && auth.user ? <Authenticate user={auth.user}/> : <NonAuthentication />}
                     </Nav>
                 </BNavbar.Collapse>
             </Container>

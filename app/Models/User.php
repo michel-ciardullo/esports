@@ -75,6 +75,7 @@ class User extends AuthUserModel implements MustVerifyEmail
     public function tickets() : HasMany
     {
         return $this->hasMany(Ticket::class)
-            ->where('status', '=', Ticket::STATUS_ACTIVE);
+            ->where('status', '=', Ticket::STATUS_ACTIVE)
+            ->orderByDesc('id');
     }
 }

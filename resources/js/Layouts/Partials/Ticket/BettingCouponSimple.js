@@ -1,18 +1,28 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import { Form } from 'react-bootstrap'
 
-export default function BettingCouponSimple({ tickets }) {
+export default function BettingCouponSimple({ items }) {
     const { post: store, data, setData, errors, processing } = useForm({
         type: 'simple',
-        amounts: tickets.map(() => 0)
+        amounts: items.map(() => 1)
     })
+
     const { post: remove } = useForm()
 
+    const [state, setState] = useState({
+        totalAmount: 0,
+        totalPossibleGains: 0,
+    })
+
     const onHandleChange = event => {
-        const amounts = [...data.amounts]
-        amounts[event.target.name] = parseInt(event.target.value)
-        setData('amounts', amounts)
+        const i         = parseInt(event.target.name)
+        const amount    = parseInt(event.target.value)
+
+        setData('amounts', {
+            ...data.amounts,
+            [i]: amount
+        })
     }
 
     const submit = event => {
@@ -20,10 +30,25 @@ export default function BettingCouponSimple({ tickets }) {
         store(route('tickets.store'), { preserveScroll: true })
     }
 
-    const onClick = (event, i) => {
+    const destroy = (event, i) => {
         event.preventDefault()
-        remove(route('tickets.remove', [i]), { preserveScroll: true })
+        remove(route('ticket.destroy', [i]), { preserveScroll: true })
     }
+
+    useEffect(() => {
+        let totalAmount           = 0
+        let totalPossibleGains    = 0
+
+        items.forEach((item, i) => {
+            const dataAmount    = data.amounts[i]
+            totalAmount         += dataAmount
+            totalPossibleGains  += (item.rating * dataAmount).round(2)
+        })
+
+        setState({ totalAmount, totalPossibleGains })
+
+        return () => {}
+    }, [data.amounts])
 
     return (
         <form
@@ -35,27 +60,28 @@ export default function BettingCouponSimple({ tickets }) {
                 className="overflow-auto px-3 pt-3"
                 style={{ height: 'calc(100vh - 346px)' }}
             >
-                {tickets ? tickets.map((ticket, i) =>
+                {items ? items.map((item, i) =>
                     <div className="mb-3" key={i}>
                         <div className="card bg-dark rounded" style={{ clipPath: 'polygon(0 0, 92% 0, 100% 8%, 100% 100%, 0 100%)'}}>
-                            <div className="d-flex align-items-center justify-content-between p-3 mb-3" data-linear-gradient={'counter-strike'}>
-                                <Link className="text-light" href={ticket.confrontation.link}>
-                                    <span>{ticket.title}</span>
+                            <div className="d-flex align-items-center justify-content-between p-3 mb-3" data-linear-gradient={item.header}>
+                                <Link className="text-light" href={item.link}>
+                                    <span>{item.title}</span>
                                 </Link>
                                 <button
                                     type="button"
                                     className="btn-close"
                                     aria-label="Close"
-                                    onClick={e => onClick(e, i)}
+                                    onClick={e => destroy(e, i)}
                                 />
                             </div>
                             <div className="mx-3">
-                                <div className="mb-3">
-                                    {ticket.tournament.name}
+                                <div className="d-flex justify-content-between mb-3">
+                                    <span>Résultat du match</span>
+                                    <span>{item.result}</span>
                                 </div>
                                 <div className="d-flex justify-content-between">
-                                    <span>{ticket.team.name}</span>
-                                    <span>{ticket.team.rating}</span>
+                                    <span>Cote</span>
+                                    <span>{item.rating}</span>
                                 </div>
                             </div>
                             <div className="p-3">
@@ -67,17 +93,19 @@ export default function BettingCouponSimple({ tickets }) {
                                     <Form.Control
                                         type="number"
                                         name={i}
-                                        value={data.amounts[i]}
+                                        value={i in data.amounts ? data.amounts[i] : 1}
                                         onChange={onHandleChange}
                                         isInvalid={`amounts.${i}` in errors}
                                         placeholder="0"
+                                        min={1}
+                                        max={10}
                                         required
                                     />
                                     <Form.Control.Feedback type="invalid" children={errors[`amounts.${i}`]} />
                                 </Form.FloatingLabel>
                                 <div className="d-flex justify-content-between">
                                     <span>Gain estimé</span>
-                                    <span>0</span>
+                                    <span>{item.rating * data.amounts[i]}</span>
                                 </div>
                             </div>
                         </div>
@@ -88,11 +116,11 @@ export default function BettingCouponSimple({ tickets }) {
                 <div className="bg-dark border-top border-primary p-3">
                     <div className="d-flex justify-content-between mb-3">
                         <span>Mise total</span>
-                        <span>0</span>
+                        <span>{state.totalAmount}</span>
                     </div>
                     <div className="d-flex justify-content-between mb-3">
                         <span>Gain estimé</span>
-                        <span>0</span>
+                        <span>{state.totalPossibleGains}</span>
                     </div>
                     <button
                         disabled={processing}

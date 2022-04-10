@@ -14,11 +14,12 @@ class Bet extends Model
      * @var string[]
      */
     protected $fillable = [
-        'confrontation_id',
         'ticket_id',
+        'confrontation_id',
         'team_id',
         'rating',
         'amount',
+        'status',
     ];
 
     /**

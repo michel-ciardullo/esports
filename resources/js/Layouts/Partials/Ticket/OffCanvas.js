@@ -1,10 +1,11 @@
 import React from 'react'
 import { Button, Modal, Nav, Offcanvas as BOffcanvas, Tab } from 'react-bootstrap'
+
 import OffCanvasIcon from './OffCanvasIcon'
 import BettingCouponSimpleAndCombined from './BettingCouponSimpleAndCombined'
-import MyBets from "@/Layouts/Partials/Tickets/MyBets";
+import MyBets from '@/Layouts/Partials/Ticket/MyBets'
 
-export default function OffCanvas({ show, handleShow, onHide, auth }) {
+export default function OffCanvas({ show, handleShow, onHide, ticket, tickets }) {
     return (
         <>
             <Button
@@ -43,10 +44,10 @@ export default function OffCanvas({ show, handleShow, onHide, auth }) {
                     <Modal.Body className="p-0">
                         <Tab.Content>
                             <Tab.Pane eventKey="betting-coupon">
-                                <BettingCouponSimpleAndCombined tickets={auth.session_tickets}/>
+                                <BettingCouponSimpleAndCombined ticket={ticket}/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="my-bets">
-                                <MyBets tickets={auth.user.tickets}/>
+                                <MyBets tickets={tickets}/>
                             </Tab.Pane>
                         </Tab.Content>
                     </Modal.Body>

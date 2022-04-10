@@ -33,6 +33,11 @@ class EADataApiListener
     {
         foreach ($event->data as $data)
         {
+            if (empty($data->bet1) && empty($data->bet2))
+            {
+                continue;
+            }
+
             DB::transaction(function () use ($data)
             {
                 // Game

@@ -27,9 +27,8 @@ class Ticket extends Model
      */
     protected $fillable = [
         'user_id',
-        'total_amount',
-        'total_rating',
         'status',
+        'type',
     ];
 
     /**

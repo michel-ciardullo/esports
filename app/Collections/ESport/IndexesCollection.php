@@ -13,6 +13,8 @@ class IndexesCollection extends Collection
     // Stocke-les indexes des jeux.
     protected array $indexes = [];
 
+    protected int $index = 0;
+
     protected function hasIndexes($key) : bool
     {
         return array_key_exists($key, $this->indexes);
@@ -20,8 +22,8 @@ class IndexesCollection extends Collection
 
     protected function setIndexes($key) : void
     {
-        $index = count($this->indexes);
-        $this->indexes[$key] = $index;
+        $this->indexes[$key] = $this->index;
+        $this->index++;
     }
 
     protected function getIndexes($key) : int
