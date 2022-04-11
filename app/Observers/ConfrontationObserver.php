@@ -18,7 +18,7 @@ class ConfrontationObserver
      */
     public function updated(Confrontation $confrontation)
     {
-        if ($confrontation->status !== 'live' && $confrontation->status !== 'not_started')
+        if (!in_array($confrontation, [Confrontation::STATUS_LIVE, Confrontation::STATUS_NOT_STARTED]))
         {
             $bets = Bet::where('bets.confrontation_id', '=', $confrontation->id)
                 ->select([
@@ -76,7 +76,7 @@ class ConfrontationObserver
                 break;
 
             case 'combined':
-                $this->endedCombined($won, $bet, $confrontation);
+                $this->endedCombined($won, $bet);
                 break;
         }
     }

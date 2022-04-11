@@ -70,7 +70,7 @@ class HandleInertiaRequests extends Middleware
 
         $items      = [];
 
-        foreach ($confrontations as $k => $confrontation)
+        foreach ($confrontations as $confrontation)
         {
             $team1              = $confrontation->teams[0];
             $team2              = $confrontation->teams[1];

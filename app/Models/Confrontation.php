@@ -15,6 +15,14 @@ class Confrontation extends Model
 {
     use HasFactory;
 
+    // 'abandoned', 'cancelled', 'closed', 'ended', 'live', 'not_started'
+    const STATUS_ABANDONED      = 'abandoned';
+    const STATUS_CANCELLED      = 'cancelled';
+    const STATUS_CLOSED         = 'closed';
+    const STATUS_ENDED          = 'ended';
+    const STATUS_LIVE           = 'live';
+    const STATUS_NOT_STARTED    = 'not_started';
+
     /**
      * The attributes that are mass assignable.
      *
